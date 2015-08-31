@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: qilara
+        psr4_prefix: qilara
+        src_path: app

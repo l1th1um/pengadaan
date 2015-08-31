@@ -1,0 +1,1414 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"com",
+				"company_name"
+			],
+			[
+				"cont",
+				"contact_person"
+			],
+			[
+				"compa",
+				"company_phone	(create.blade.php)"
+			],
+			[
+				"comp",
+				"company_name	(create.blade.php)"
+			],
+			[
+				"company",
+				"company_address"
+			],
+			[
+				"cop",
+				"company_phone"
+			],
+			[
+				"proc",
+				"procurement_data	(create.blade.php)"
+			],
+			[
+				"num",
+				"number_format"
+			],
+			[
+				"error",
+				"error_reporting"
+			],
+			[
+				"nama",
+				"nama_file"
+			],
+			[
+				"q",
+				"query"
+			],
+			[
+				"id",
+				"IDSHIFT"
+			],
+			[
+				"we",
+				"write"
+			],
+			[
+				"preg",
+				"preg_match"
+			],
+			[
+				"s",
+				"style	Attr"
+			],
+			[
+				"print",
+				"print_r"
+			],
+			[
+				"prin",
+				"print_r"
+			],
+			[
+				"c",
+				"class	Attr"
+			],
+			[
+				"user",
+				"user_update"
+			],
+			[
+				"h",
+				"href"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"sett",
+				"settings"
+			],
+			[
+				"inpit",
+				"inputFileName"
+			],
+			[
+				"stat",
+				"status"
+			],
+			[
+				"el",
+				"else"
+			],
+			[
+				"style_bold_",
+				"style_bold_right"
+			],
+			[
+				"style_",
+				"style_bold_center"
+			],
+			[
+				"row",
+				"row_start"
+			],
+			[
+				"jml",
+				"jml_barang"
+			],
+			[
+				"member",
+				"member_type"
+			],
+			[
+				"mon",
+				"month_list"
+			],
+			[
+				"strto",
+				"strtotime"
+			],
+			[
+				"verbo",
+				"verboseDateRange"
+			],
+			[
+				"sta",
+				"start_date"
+			],
+			[
+				"save",
+				"save_excel_url"
+			],
+			[
+				"end",
+				"end_date"
+			],
+			[
+				"se",
+				"settings"
+			],
+			[
+				"var",
+				"var_dump"
+			],
+			[
+				"des",
+				"desc"
+			],
+			[
+				"ahadpos",
+				"ahadpos"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "resources/views/dashboard/default/partial/header.blade.php",
+			"settings":
+			{
+				"buffer_size": 1110,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/Http/Controllers/ProcurementController.php",
+			"settings":
+			{
+				"buffer_size": 4359,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "resources/views/dashboard/default/procurement/create.blade.php",
+			"settings":
+			{
+				"buffer_size": 11692,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/2015/ADAM/ModbusScanner_src/ModbusScanner/README.TXT",
+			"settings":
+			{
+				"buffer_size": 385,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/Models/User.php",
+			"settings":
+			{
+				"buffer_size": 878,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/Models/Role.php",
+			"settings":
+			{
+				"buffer_size": 141,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/Models/Permission.php",
+			"settings":
+			{
+				"buffer_size": 117,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 375.0,
+		"last_filter": "in",
+		"selected_items":
+		[
+			[
+				"in",
+				"Package Control: Install Package"
+			],
+			[
+				"i",
+				"Package Control: Install Package"
+			],
+			[
+				"Install",
+				"Package Control: Install Package"
+			],
+			[
+				"bracke",
+				"Preferences: Browse Packages"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"packa",
+				"Package Control: Install Package"
+			],
+			[
+				"",
+				"Package Control: Install Package"
+			],
+			[
+				"Pac",
+				"Package Control: Install Package"
+			],
+			[
+				"	",
+				"Package Control: Install Package"
+			],
+			[
+				"package con",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 450.0
+	},
+	"console":
+	{
+		"height": 378.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'eb2297e1a458f27d836c04bb0cbaf282' + 'd0e7a3098092775ccb37ca9d6b2e4b7d'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) ",
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404' + 'e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/E/htdocs/si_pengadaan",
+		"/E/htdocs/si_pengadaan/app",
+		"/E/htdocs/si_pengadaan/app/Http",
+		"/E/htdocs/si_pengadaan/app/Http/Controllers",
+		"/E/htdocs/si_pengadaan/app/Http/Middleware",
+		"/E/htdocs/si_pengadaan/app/Models",
+		"/E/htdocs/si_pengadaan/config",
+		"/E/htdocs/si_pengadaan/database",
+		"/E/htdocs/si_pengadaan/database/migrations",
+		"/E/htdocs/si_pengadaan/resources",
+		"/E/htdocs/si_pengadaan/resources/lang",
+		"/E/htdocs/si_pengadaan/resources/lang/en",
+		"/E/htdocs/si_pengadaan/resources/lang/id",
+		"/E/htdocs/si_pengadaan/resources/views",
+		"/E/htdocs/si_pengadaan/resources/views/dashboard",
+		"/E/htdocs/si_pengadaan/resources/views/dashboard/default",
+		"/E/htdocs/si_pengadaan/resources/views/dashboard/default/login",
+		"/E/htdocs/si_pengadaan/resources/views/dashboard/default/partial",
+		"/E/htdocs/si_pengadaan/resources/views/dashboard/default/procurement",
+		"/E/htdocs/si_pengadaan/resources/views/dashboard/default/users"
+	],
+	"file_history":
+	[
+		"/E/htdocs/si_pengadaan/resources/views/dashboard/default/partial/menu.blade.php",
+		"/E/htdocs/si_pengadaan/composer.json",
+		"/E/htdocs/si_pengadaan/config/app.php",
+		"/E/htdocs/si_pengadaan/resources/views/dashboard/default/index.blade.php",
+		"/E/htdocs/si_pengadaan/resources/lang/id/common.php",
+		"/E/htdocs/si_pengadaan/config/qilara.php",
+		"/E/htdocs/si_pengadaan/config/auth.php",
+		"/E/htdocs/si_pengadaan/config/services.php",
+		"/E/htdocs/si_pengadaan/app/Services/Registrar.php",
+		"/E/htdocs/intra-revo/app/Models/User.php",
+		"/E/htdocs/si_pengadaan/app/Http/routes.php",
+		"/E/htdocs/si_pengadaan/config/themes.php",
+		"/E/htdocs/intra-revo/app/Models/AccumulateAbsence.php",
+		"/D/FIFA 15/FIFA15MW - Readme - How to Install.txt",
+		"/E/htdocs/si_pengadaan/app/Http/Controllers/DashboardController.php",
+		"/D/FIFA 15/Readme.txt",
+		"/E/htdocs/si_pengadaan/public/backend/default/js/jquery.dataTables.min.js",
+		"/E/htdocs/intra-revo/app/Models/Absence.php",
+		"/E/htdocs/si_pengadaan/public/backend/default/css/font-awesome.min.css",
+		"/I/FIFA 15/GMT-MAX.ORG_FIFA_15_Update_1-4_and_Crack_v.3.0/Readme.txt",
+		"/D/vagrant/ubuntu-server-13.10/Vagrantfile",
+		"/E/htdocs/si_pengadaan/database/migrations/2015_08_19_140820_add_username_to_users_table.php",
+		"/E/htdocs/si_pengadaan/resources/views/dashboard/default/login/login.blade.php",
+		"/E/htdocs/si_pengadaan/app/Http/Middleware/Authenticate.php",
+		"/E/htdocs/intra-revo/config/qilara.php",
+		"/E/htdocs/si_pengadaan/.env",
+		"/D/Dropbox/link.txt",
+		"/D/xampp/apache/conf/extra/httpd-vhosts.conf",
+		"/E/htdocs/unidalogapi/index.php",
+		"/D/Documents/FIFA 15/fifasetup.ini",
+		"/D/Application/KMSpico 9.2.3 Final [ThumprDC]/KMSpico 9.2.3 Final [ThumprDC]/ReadMe KMSpico Install.txt",
+		"/E/htdocs/qilara/app/Http/routes.php",
+		"/E/htdocs/intra-revo/public/backend/default/js/custom.js",
+		"/E/htdocs/intra-revo/public/backend/default/css/custom.css",
+		"/E/htdocs/qilara/.env",
+		"/E/htdocs/qilara/config/database.php",
+		"/D/xampp/apache/conf/httpd.conf",
+		"/H/ISO/The Sims/3DMGAME-The.Sims.4.Update.1.incl.Crack/How to make it work.txt",
+		"/D/Video/Shaun the Sheep Movie (2015)WEB-DL XVID AC3 MURD3R/New Text Document.txt",
+		"/H/FIFA 15/GMT-MAX.ORG_FIFA_15_Update_1-4_and_Crack_v.3.0/Readme.txt",
+		"/D/Application/Visual Studio 2015 Enterprice ISO + Serial Keys - [Fullstuff]/Serials/Serial.txt",
+		"/D/FIFA 15/buttonData.ini",
+		"/G/WIndows Update/urutan",
+		"/D/Application/Visual Basic 6.0 Enterprise Edition Full/How to instal.txt",
+		"/H/ISO/Windows XP/Covers + Serial/Serial.txt",
+		"/E/htdocs/basisdata/index.html",
+		"/D/Application/FI-XV-MWM240AIO/FIFA15MW - Readme - How to Install.txt",
+		"/D/Application/FI-XV-MWM240AIO/FI-XV-MWMW240AIO/FIFA15MW - Readme - How to Install.txt",
+		"/D/Application/Mortal Kombat X Update/1. Mortal.Kombat.X.Update.v20150418-RELOADED/reloaded.nfo",
+		"/D/Application/Mortal Kombat X Update/5. Mortal.Kombat.X.Update.v20150709-RELOADED/reloaded.nfo",
+		"/E/htdocs/faker-id/grab_all.py",
+		"/E/htdocs/faker-id/nama_lengkap_all_lang_2.txt",
+		"/C/Program Files (x86)/Microsoft Visual Studio 10.0/Common7/IDE/devenv.exe.config",
+		"/D/Project/IntraKimia/New/daftar_rekening.csv",
+		"/D/Documents/Visual Studio 2010/Projects/Artesis/Artesis/reportBulanan.cs",
+		"/E/kobika.sql",
+		"/E/htdocs/utkorea/portal/helpers/common_helper.php",
+		"/E/htdocs/intra-revo/public/daftar_rekening.csv",
+		"/D/Application/Mortal Kombat X Update/Mortal.Kombat.X.Update.v20150722-RELOADED/reloaded.nfo",
+		"/C/Users/l1th1um/AppData/Local/Temp/scp25348/var/www/intra-revo/app/Http/Controllers/TukinController.php",
+		"/D/Video/Guardians.of.the.Galaxy.Origins.S01E01.Star-Lord.Part.1.720p.WEB-DL.x264.AAC/Guardians of the Galaxy- Origins - 01x01 - Star-Lord (part 1).WEB-DL.x264.AAC.English.HI.C.orig.Addic7ed.com.srt",
+		"/D/Snippets/C Sharp/GMap.NET.WindowsForms-April-2015/Release-NETv4.0/License.txt",
+		"/E/htdocs/odengrebus/application/views/order/items_order.php",
+		"/E/htdocs/odengrebus/assets/scripts/order.js",
+		"/E/htdocs/odengrebus/assets/scripts/autoNumeric.js",
+		"/E/htdocs/intra-revo/public/backend/default/js/autoNumeric.js",
+		"/E/htdocs/odengrebus/assets/scripts/dash_admin.js",
+		"/E/htdocs/odengrebus/application/views/order/new_order.php",
+		"/C/Users/l1th1um/AppData/Local/Temp/scp22811/var/www/intra-revo/.env",
+		"/D/Project/IntraKimia/New/nim_fungsional.csv",
+		"/D/Project/IntraKimia/New/daftar_fungsional.csv",
+		"/C/Users/l1th1um/AppData/Local/Temp/scp21659/var/www/intra-revo/config/debugbar.php",
+		"/H/Downloads/li.txt",
+		"/H/Downloads/dpb02_15_002/Readme.txt",
+		"/E/htdocs/integrasi-edukasi/wp-content/plugins/wp-downloadmanager/download-options.php",
+		"/C/AppServ/www/intra/daftarhadirbaru/tukin.php",
+		"/E/htdocs/integrasi-edukasi/wp-content/themes/flat-theme/page-frontpage.php",
+		"/E/htdocs/integrasi-edukasi/wp-config.php",
+		"/D/Project/IntraKimia/New/sql_akumulasi.txt",
+		"/D/Video/Phantom.Halo.2014.HDRip.XViD-ETRG/Phantom Halo-ETRG.nfo",
+		"/D/Dropbox/STT Mandala/Perancangan Basis Data 2015/readme.txt",
+		"/E/htdocs/integrasi-edukasi/wp-content/themes/flat-theme/footer.php",
+		"/E/htdocs/integrasi-edukasi/wp-content/plugins/mechanic-visitor-counter/wp-statsmechanic.php",
+		"/E/htdocs/integrasi-edukasi/wp-content/plugins/mechanic-visitor-counter/styles/css/default.css",
+		"/D/ApacheSparkMOOC/data/lab1_word_count_student.ipynb",
+		"/D/ApacheSparkMOOC/data/spark_tutorial_student.ipynb",
+		"/C/Users/l1th1um/AppData/Local/Temp/scp01230/var/www/intra-revo/config/debugbar.php",
+		"/C/Users/l1th1um/AppData/Local/Temp/scp01079/var/www/intra-revo/.env",
+		"/C/Users/l1th1um/AppData/Local/Temp/scp01295/var/www/intra-revo/config/app.php",
+		"/D/Video/Lecture - 28 Recovery Mechanisms II [English].srt",
+		"/H/Grand.Theft.Auto.V-RELOADED/reloaded.nfo",
+		"/H/Grand.Theft.Auto.V-RELOADED/Readme.txt",
+		"/E/htdocs/integrasi-edukasi/wp-content/themes/flat-theme/lib/widgets.php",
+		"/E/htdocs/integrasi-edukasi/wp-content/themes/flat-theme/index.php",
+		"/E/htdocs/integrasi-edukasi/wp-content/themes/flat-theme/page.php",
+		"/E/htdocs/integrasi-edukasi/wp-content/themes/flat-theme/style.css",
+		"/D/Application/Android/Driver Sky Vega/How to install.txt",
+		"/D/license_academic_20150704180056.txt",
+		"/C/Drivers/Touchpad Driver (Synaptics, Elan)/Readme-TouchPad.txt",
+		"/D/xampp/apache/logs/error.log",
+		"/D/xampp/apache/logs/access.log",
+		"/C/AppServ/www/intra/daftarhadirbaru/aksi.php",
+		"/C/AppServ/www/intra/daftarhadirbaru/proseshadir.php",
+		"/D/Video/Killjoys.S01E01.HDTV.x264-KILLERS[ettv]/killjoys.s01e01.hdtv.x264-killers.nfo",
+		"/D/Documents/Visual Studio 2010/Projects/Unidalog/Unidalog/bin/Debug/Unidalog.EXE.config",
+		"/D/Project/IntraKimia/New/tbi-tbs-mei.csv",
+		"/E/htdocs/integrasi-edukasi/wp-content/themes/flat-theme/assets/js/main.js",
+		"/E/htdocs/integrasi-edukasi/wp-content/themes/flat-theme/admin/css-color-classes.php",
+		"/E/htdocs/integrasi-edukasi/wp-includes/post-template.php",
+		"/E/htdocs/faker-id/grab_per_char.py",
+		"/E/htdocs/faker-id/grab_all_per_char.py",
+		"/E/htdocs/faker-id/nama_lengkap_A.txt",
+		"/E/htdocs/faker-id/nama_lengkap_Z.txt",
+		"/E/htdocs/faker-id/nama_lengkap_N.txt",
+		"/C/AppServ/www/intra/index.php",
+		"/C/AppServ/www/intra/header.inc",
+		"/C/AppServ/www/intra/daftarhadirbaru/proseslaporanbulanan.php",
+		"/D/Documents/Visual Studio 2010/Projects/Unidalog/Unidalog/unidalog.config",
+		"/C/Program Files (x86)/Pusat Penelitian Informatika LIPI/Unidalog/Unidalog.exe.config",
+		"/D/Project/IntraKimia/New/Tunkin Bulan April 2015 (1).csv",
+		"/E/htdocs/integrasi-edukasi/wp-content/themes/flat-theme/header.php",
+		"/E/htdocs/integrasi-edukasi/wp-settings.php",
+		"/C/Users/l1th1um/AppData/Local/Temp/scp28492/opt/lampp/htdocs/html/daftarhadirbaru/prosestidakhadir.php",
+		"/D/Project/IntraKimia/intra/proseshadir.php",
+		"/D/Project/IntraKimia/intra/prosestidakhadir.php",
+		"/C/AppServ/www/intra/index_.php",
+		"/C/AppServ/Apache2.2/logs/error.log",
+		"/C/Users/l1th1um/AppData/Local/Temp/scp56321/var/www/config/debugbar.php"
+	],
+	"find":
+	{
+		"height": 36.0
+	},
+	"find_in_files":
+	{
+		"height": 157.0,
+		"where_history":
+		[
+			"E:\\htdocs\\si_pengadaan",
+			"E:\\htdocs\\integrasi-edukasi\\wp-content\\themes\\flat-theme,E:\\htdocs\\odengrebus",
+			"E:\\htdocs\\integrasi-edukasi\\wp-content\\themes\\flat-theme",
+			"E:\\htdocs\\integrasi-edukasi",
+			"E:\\htdocs\\integrasi-edukasi\\wp-content\\themes\\flat-theme",
+			"E:\\htdocs\\integrasi-edukasi\\",
+			"E:\\htdocs\\integrasi-edukasi\\wp-content\\themes\\flat-theme",
+			"C:\\AppServ\\www\\intra\\daftarhadirbaru",
+			"E:\\htdocs\\intra-revo",
+			"E:\\htdocs\\intra",
+			"E:\\htdocs\\laravel5-acl\\vendor\\jacopo",
+			"E:\\htdocs\\qilara",
+			"E:\\htdocs\\integrasi-edukasi\\wp-content\\themes\\flat-theme",
+			"E:\\htdocs\\integrasi-edukasi\\",
+			"E:\\htdocs\\integrasi-edukasi\\wp-content\\themes\\flat-theme",
+			"E:\\htdocs\\qilara",
+			"E:\\htdocs\\cikopi",
+			"E:\\htdocs\\kobika",
+			"<open folders>"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"datatable",
+			"qilara\\User",
+			"\\qilara\\User",
+			"matrix",
+			"get_data_range",
+			"$total_user",
+			"autonumeric",
+			"autonu",
+			"foreign",
+			"mamah",
+			" ",
+			"zenmate",
+			"'",
+			"19871213",
+			"Peneliti Utama",
+			"1985",
+			"jabfung\",\"grade",
+			",",
+			"$totalpengunjung",
+			"bali",
+			"plugins",
+			"img",
+			"section id=\"bottom\"",
+			"underline",
+			"format",
+			"alizarin",
+			"videoWrapper",
+			"function the_content",
+			"the_content()",
+			"http://integrasi-edukasi.org",
+			"http://",
+			"git",
+			"insert",
+			"$th",
+			"insert",
+			"`",
+			"nares",
+			"\"\"",
+			"nahimana",
+			"\n\"); ",
+			"\"\")",
+			"\n\n\"",
+			"\"[A-z]*\"",
+			"insert",
+			"hadir",
+			".org/v2",
+			"borders",
+			"idlokasikantor",
+			"UPDATE",
+			"bidang",
+			"$style_table_header",
+			"border",
+			"git",
+			"$data",
+			"wrap",
+			"get_weekday_per_month()",
+			"rekapitulasi",
+			"\\\"([a-zA-Z0-9_]*)\\\"\\\"",
+			"\\\"([a-zA-Z0-9_])\\\"\\\"",
+			"\\\"[a-zA-Z0-9_]*\\\"\\\"",
+			"\\\"(\\w)+\\\"\\\"",
+			"\\\"[a-zA-Z0-9_]*\\\"\\\"",
+			"\\\"[a-zA-Z0-9_]*\\\"",
+			"\")",
+			"'",
+			"$assetPath",
+			"asset-path",
+			"session_is_registered(\"tingkats\")",
+			" session_is_registered(",
+			"session_is_registered(\"URLS\")",
+			"$SCRIPT_FILENAME",
+			"session_is_registered(\"namausers\")",
+			"session_is_registered(\"users\")",
+			"errlogin",
+			"err",
+			"getpanggilan",
+			"[JUDUL]",
+			"[ID]",
+			"[I]",
+			"[II]",
+			"III]",
+			"[IV]",
+			"[href]",
+			"[Judul]",
+			"short",
+			"tabellatar",
+			"error_reporting",
+			"phone num",
+			"phone number",
+			"phone nu",
+			",",
+			" ",
+			"SUNDAY",
+			"minute",
+			"gmdate",
+			"col-md-1 control-label",
+			"col-md-2",
+			".",
+			"can_see",
+			"statusdatang",
+			"statudatang",
+			"statusdatang",
+			"januari",
+			"menu",
+			"Robert John",
+			"auth/logout",
+			"RedirectIfAuthenticated",
+			"loginPath",
+			"width",
+			"Log Out",
+			"alizarin",
+			"alizarin col-md-4 front_side_left",
+			"the_post(",
+			"function the_post(",
+			"the_post(",
+			"tanggal",
+			"mainacti",
+			"error",
+			"description",
+			"caption",
+			"roles_management",
+			"section",
+			"8",
+			"save",
+			"model",
+			"attempt",
+			"Auth",
+			"favicon"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": true,
+		"regex": false,
+		"replace_history":
+		[
+			"",
+			"\"",
+			"jabfung,grade",
+			"\",\"",
+			"http://localhost/integrasi-edukasi",
+			"'",
+			"\");",
+			"\")",
+			"\"",
+			".org",
+			"\\'$1\\'\\\"",
+			"\\'$1\\'",
+			"\\'1\\'",
+			"\\'\\1*\\'",
+			"\\'[a-zA-Z0-9_]*\\'\\\"",
+			"\\'[a-zA-Z0-9_]*\\'",
+			"\");",
+			"",
+			"\\'",
+			"isset ($_SESSION['tingkats'])",
+			"isset ($_SESSION['URLS'])",
+			"$_SERVER['SCRIPT_FILENAME']",
+			"isset ($_SESSION['namausers'])",
+			"isset ($_SESSION['users'])",
+			"['JUDUL']",
+			"['ID']",
+			"['I']",
+			"['II']",
+			"'III']",
+			"['IV']",
+			"['href']",
+			"['Judul']",
+			" WHERE NIP=",
+			"",
+			"col-md-2 control-label",
+			"col-md-1",
+			"",
+			")",
+			"",
+			")",
+			"png)",
+			"themediastorage",
+			"`",
+			"\"",
+			"",
+			"thepiratebay.si",
+			"u",
+			"jumlah",
+			"jenis",
+			""
+		],
+		"reverse": false,
+		"show_context": false,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "resources/views/dashboard/default/partial/header.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1110,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1110,
+								1110
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
+							],
+							"syntax": "Packages/Laravel Blade Highlighter/laravel-blade.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app/Http/Controllers/ProcurementController.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4359,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "resources/views/dashboard/default/procurement/create.blade.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 11692,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
+							],
+							"syntax": "Packages/Laravel Blade Highlighter/laravel-blade.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/D/2015/ADAM/ModbusScanner_src/ModbusScanner/README.TXT",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 385,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/Models/User.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 878,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								504,
+								504
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "app/Models/Role.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 141,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								141,
+								141
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "app/Models/Permission.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 117,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								117,
+								117
+							]
+						],
+						"settings":
+						{
+							"BracketHighlighterBusy": false,
+							"bh_regions":
+							[
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content"
+							],
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 36.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "pengadaan.sublime-project",
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"route",
+				"app\\Http\\routes.php"
+			],
+			[
+				"lo",
+				"resources\\views\\dashboard\\default\\login\\login.blade.php"
+			],
+			[
+				"header_lo",
+				"resources\\views\\dashboard\\default\\login\\header_login.blade.php"
+			],
+			[
+				"login",
+				"resources\\views\\dashboard\\default\\login\\login.blade.php"
+			],
+			[
+				"home",
+				"resources\\views\\home.blade.php"
+			],
+			[
+				"ro",
+				"app\\Http\\routes.php"
+			],
+			[
+				"appser",
+				"app\\Providers\\AppServiceProvider.php"
+			],
+			[
+				"middleware",
+				"app\\Http\\Middleware\\RedirectIfAuthenticated.php"
+			],
+			[
+				"rou",
+				"app\\Http\\routes.php"
+			],
+			[
+				"dash",
+				"app\\Http\\Controllers\\DashboardController.php"
+			],
+			[
+				"main.cs",
+				"public\\backend\\default\\styles\\main.css"
+			],
+			[
+				"",
+				"resources\\views\\dashboard\\default\\partial\\top_bar.blade.php"
+			],
+			[
+				"authen",
+				"vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Auth\\AuthenticatesAndRegistersUsers.php"
+			],
+			[
+				"authenticates",
+				"vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Auth\\AuthenticatesAndRegistersUsers.php"
+			],
+			[
+				"aut",
+				"app\\Http\\Controllers\\Auth\\AuthController.php"
+			],
+			[
+				"regis",
+				"app\\Services\\Registrar.php"
+			],
+			[
+				"das",
+				"app\\Http\\Controllers\\DashboardController.php"
+			],
+			[
+				"passwordcon",
+				"app\\Http\\Controllers\\Auth\\PasswordController.php"
+			],
+			[
+				"authcon",
+				"app\\Http\\Controllers\\Auth\\AuthController.php"
+			],
+			[
+				"dashb",
+				"app\\Http\\Controllers\\DashboardController.php"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 257.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
