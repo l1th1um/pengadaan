@@ -25,9 +25,13 @@
                     </h2>
                     <div class="clearfix"></div>
                 </div>
-                <div class="x_content">                  
+                <div class="x_content">
                     <div class="col-lg-12">
-                        {!! Form::open(array('url' => Request::url(), 'class' => 'form-horizontal', 'method' => 'post', 'id' => 'add_procurement', 'files' => true)) !!}
+                        @if (Route::getCurrentRoute()->getName() == 'dashboard.procurement.edit')
+                            {!! Form::model($procurement, array('url' => action('ProcurementController@update', Request::segment(3)), 'class' => 'form-horizontal', 'method' => 'put', 'id' => 'add_procurement', 'files' => true)) !!}
+                        @else
+                            {!! Form::open(array('url' => action('ProcurementController@store'), 'class' => 'form-horizontal', 'method' => 'post', 'id' => 'add_procurement', 'files' => true)) !!}
+                        @endif
                         <div class="form-body">
                             <div class="form-group">
                                 <label for="inputName" class="col-md-2 control-label col-xs-2">
@@ -42,7 +46,7 @@
                                     {{ trans('common.offering_letter_date') }}
                                 </label>
                                 <div class="col-md-10 col-xs-10">
-                                    {!! Form::text('offering_letter_date',null, array('id' => 'inputName', 'class' => 'form-control', 'required' => true, 'autocomplete' => 'off')); !!}
+                                    {!! Form::text('offering_letter_date', $date, array('id' => 'inputName', 'class' => 'form-control', 'required' => true, 'autocomplete' => 'off')); !!}
                                 </div>
                             </div>
                             <div class="form-group">
@@ -95,13 +99,21 @@
                                         <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span><input type="file" name="offering_letter"></span>
                                         <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
                                     </div>
+                                    @if (Route::getCurrentRoute()->getName() == 'dashboard.procurement.edit')
+                                        <div class="col-md-3 col-xs-3">
+                                            <a href="#" class="thumbnail">
+                                                <img src="{{ asset("/uploads")."/".$procurement->offering_letter }}" >
+                                            </a>
+                                        </div>
+                                    @endif
+
                                 </div>
                             </div>
                             <div class="form-group">
                                 <hr />
                             </div>
                             <div class="form-group">
-                                <div class="col-md-offset-2 col-md-10">
+                                <div class="col-md-offset-2 col-xs-offset-2 col-md-10 col-xs-10">
                                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
                                         + Tambahkan Item
                                     </button>
@@ -111,6 +123,7 @@
                                     <table class="table table-striped responsive-utilities jambo_table" id="item_table">
                                         <thead>
                                             <tr>
+                                                <th>id</th>
                                                 <th>{{ trans('common.item_name') }}</th>
                                                 <th width="15%">{{ trans('common.amount') }}</th>
                                                 <th width="15%">{{ trans('common.unit') }}</th>
@@ -197,5 +210,63 @@
     {!! Theme::js('js/datatables/tools/js/dataTables.tableTools.js')!!}
     {!! Theme::js('js/bootstrap-datepicker.min.js')!!}
     {!! Theme::js('js/jasny-bootstrap.min.js')!!}
+
+    <script type="text/javascript">
+        var oTable;
+    </script>
+
+    @if (Route::getCurrentRoute()->getName() == 'dashboard.procurement.edit')
+        <script type="text/javascript">
+            var dataSet = {!! $items !!}
+            $(document).ready(function(){
+                oTable = $('#item_table').DataTable({
+                    data: dataSet,
+                    "paging":   false,
+                    "ordering": false,
+                    "info":     false,
+                    "searching" : false,
+                    "aoColumns": [
+                        { "sTitle": "ID"},
+                        { "sTitle": "Nama Barang"},
+                        { "sTitle": "Jumlah", "sClass": "right"},
+                        { "sTitle": "Satuan" },
+                        { "sTitle": "Harga Satuan", "sClass": "right"}
+                    ],
+                    "columnDefs": [
+                        {
+                            "targets": [ 0 ],
+                            "visible": false,
+                        }
+                    ]
+                } );
+            });
+        </script>
+    @else
+        <script type="text/javascript">
+            $(document).ready(function(){
+                oTable = $('#item_table').DataTable({
+                    "paging":   false,
+                    "ordering": false,
+                    "info":     false,
+                    "searching" : false,
+                    "aoColumns": [
+                        { "sTitle": "ID"},
+                        { "sTitle": "Nama Barang"},
+                        { "sTitle": "Jumlah", "sClass": "right"},
+                        { "sTitle": "Satuan" },
+                        { "sTitle": "Harga Satuan", "sClass": "right"}
+                    ],
+                    "columnDefs": [
+                        {
+                            "targets": [ 0 ],
+                            "visible": false,
+                        }
+                    ]
+                } );
+            });
+        </script>
+    @endif
+
     {!! Theme::js('js/modules/procurement.js')!!}
+
 @stop

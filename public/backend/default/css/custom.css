@@ -1375,6 +1375,7 @@ a.DTTT_button {
 
 table.jambo_table {
     border: 1px solid rgba(221, 221, 221, 0.78);
+    clear : both;
 }
 
 table.jambo_table thead {
@@ -6385,4 +6386,9 @@ ul.notifications {
 .table>tbody>tr.active>th,
 .table>tfoot>tr.active>th {
     background-color: #CCCCCC;
+}
+
+.padding_0
+{
+    padding: 0;
 }

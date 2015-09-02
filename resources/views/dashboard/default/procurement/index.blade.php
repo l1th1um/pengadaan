@@ -49,7 +49,10 @@
                                         <td>{{ localeDate($row->offering_letter_date) }}</td>
                                         <td>{{ trans('common.proc_status')[$row->proc_status] }}</td>
                                         <td class="center">
-                                            <a href="{{route('dashboard.procurement.destroy', $row->id)}}" data-method="delete" data-token="{{csrf_token()}}" data-confirm="{{ trans('common.are_you_sure') }}">
+                                            <a href="{{route('dashboard.procurement.edit', $row->id)}}">
+                                                <img src="{{Theme::url('images/edit.png')}}">
+                                            </a>
+                                            <a href="{{route('dashboard.procurement.destroy', $row->id)}}" data-method="delete" data-token="{{csrf_token()}}" data-confirm="{{ trans('common.are_you_sure') }}" style="padding-left : 10px">
                                                 <img src="{{Theme::url('images/delete.png')}}">
                                             </a>
                                         </td>
@@ -67,10 +70,7 @@
 
 @section('footer_js')
     {!! Theme::css('css/datatables/tools/css/dataTables.tableTools.css')!!}
-
-    {{--{!! Theme::js('js/datatables/js/jquery.dataTables.js')!!}--}}
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.8/js/jquery.dataTables.min.js"></script>
-    {!! Theme::js('js/datatables/tools/js/dataTables.tableTools.js')!!}
+    {!! Theme::js('js/datatables/js/jquery.dataTables.min.js')!!}
     {!! Theme::js('js/autoNumeric.js')!!}
     {!! Theme::js('js/laravel.js')!!}
     {!! Theme::css('css/bootstrap-datepicker.min.css')!!}

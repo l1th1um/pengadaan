@@ -20,9 +20,16 @@
         <div class="col-md-12 col-lg-12 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h2>
-                        {{ trans('common.procurement_data') }}
-                    </h2>
+                    <div class="col-md-8 col-xs-8 padding_0">
+                        <h2>
+                            {{ trans('common.procurement_data') }}
+                        </h2>
+                    </div>
+                    <div class="col-md-4 col-xs-4 right">
+                        <a href="{{route('dashboard.procurement.edit', Request::segment(3))}}">
+                            <i class="fa fa-edit fa-2x"></i>
+                        </a>
+                    </div>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
@@ -41,7 +48,7 @@
                             </label>
                         </div>
                         <div class="col-md-4 col-xs-4">
-                            {{ $data->offering_letter_no }}
+                            {{ localeDate($data->offering_letter_date) }}
                         </div>
                     </div>
                     <div class="row line_30">
@@ -95,7 +102,11 @@
                             </label>
                         </div>
                         <div class="col-md-4 col-xs-4">
-                            {{ $data->company_fax }}
+                            @if (! empty($data->offering_letter))
+                                <a href="{{ asset("/uploads")."/".$data->offering_letter }}" target="_blank">
+                                    <i class="fa fa-file-photo-o"></i>
+                                </a>
+                            @endif
                         </div>
                     </div>
                     <div class="row line_30">
@@ -105,7 +116,7 @@
                             </label>
                         </div>
                         <div class="col-md-4 col-xs-4">
-                            {{ $data->contact_person}}
+                            {{ $data->users->name }}
                         </div>
                         <div class="col-md-2 control-label col-xs-2">
                             <label for="inputName" class="control-label">
@@ -113,29 +124,74 @@
                             </label>
                         </div>
                         <div class="col-md-4 col-xs-4">
-                            {{ $data->company_fax }}
+                            {{ localeDate($data->created_at) }}
                         </div>
                     </div>
-                    <table class="table table-striped responsive-utilities jambo_table" id="show_item">
-                        <thead>
-                        <tr>
-                            <th>{{ trans('common.item_name') }}</th>
-                            <th width="15%">{{ trans('common.amount') }}</th>
-                            <th width="15%">{{ trans('common.unit') }}</th>
-                            <th width="20%">{{ trans('common.unit_price') }}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($items as $row)
+                    </div>
+
+                    <div class="x_title">
+                        <h2>
+                            {{ trans('common.invoice') }}
+                        </h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="row line_30">
+                            <div class="col-md-2 control-label col-xs-2">
+                                <label for="inputName" class="control-label">
+                                    {{ trans('common.status') }}
+                                </label>
+                            </div>
+                            <div class="col-md-4 col-xs-4">
+                                <a class="label label-success">
+                                    {{ trans('common.proc_status')[$data->proc_status] }}
+                                </a>
+                            </div>
+                            <div class="col-md-2 control-label col-xs-2">
+                                <label for="inputName" class="control-label">
+                                    {{ trans('common.invoice') }}
+                                </label>
+                            </div>
+                            <div class="col-md-4 col-xs-4">
+                                @if (! empty($data->invoice->path))
+                                    <a href="{{ asset("/uploads")."/".$data->invoice->path }}" target="_blank">
+                                        <i class="fa fa-file-photo-o"></i>
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="row line_30">
+                            <div class="col-md-2 control-label col-xs-2">
+                                <label for="inputName" class="control-label">
+                                    {{ trans('common.updated_by') }}
+                                </label>
+                            </div>
+                            <div class="col-md-4 col-xs-4">
+                                @if (! empty($data->invoice->users->name))
+                                    {{ $data->invoice->users->name }}
+                                @endif
+                            </div>
+                        </div>
+                        <table class="table table-striped responsive-utilities jambo_table" id="show_item">
+                            <thead>
                             <tr>
-                                <td>{{ $row->item_name }}</td>
-                                <td class="center">{{ number_format($row->amount) }}</td>
-                                <td>{{ $row->unit}}</td>
-                                <td class="right">{{ number_format($row->unit_price) }}</td>
+                                <th>{{ trans('common.item_name') }}</th>
+                                <th width="15%">{{ trans('common.amount') }}</th>
+                                <th width="15%">{{ trans('common.unit') }}</th>
+                                <th width="20%">{{ trans('common.unit_price') }}</th>
                             </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach($data->procurement_item as $row)
+                                    <tr>
+                                        <td>{{ $row->item_name }}</td>
+                                        <td class="center">{{ number_format($row->amount) }}</td>
+                                        <td>{{ $row->unit}}</td>
+                                        <td class="right">{{ number_format($row->unit_price) }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -150,14 +206,14 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
-                    {!! Form::open(array('url' => Request::url(), 'class' => 'form-horizontal', 'method' => 'post', 'id' => 'add_procurement', 'files' => true)) !!}
+                    {!! Form::open(array('url' => Request::url(), 'class' => 'form-horizontal', 'method' => 'post', 'id' => 'add_invoice', 'files' => true)) !!}
                     <div class="form-body">
                         <div class="form-group">
                             <label for="inputName" class="col-md-2 control-label col-xs-2">
                                 {{ trans('common.status') }}
                             </label>
                             <div class="col-md-10 col-xs-10">
-                                {!! Form::select('status',trans('common.proc_status'),'',array('class' => 'form-control')); !!}
+                                {!! Form::select('status',trans('common.proc_status'),$data->proc_status,array('class' => 'form-control')); !!}
                             </div>
                         </div>
                         <div class="form-group">
@@ -167,8 +223,16 @@
                             <div class="col-md-10 col-xs-10">
                                 <div class="fileinput fileinput-new input-group" data-provides="fileinput">
                                     <div class="form-control" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
-                                    <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span><input type="file" name="offering_letter"></span>
+                                    <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span><input type="file" name="invoice"></span>
                                     <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-actions pal">
+                            <div class="form-group mbn">
+                                <div class="col-md-2 col-xs-2 right">
+                                    <input type="hidden" name="items">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
                             </div>
                         </div>

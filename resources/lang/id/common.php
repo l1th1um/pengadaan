@@ -35,6 +35,7 @@ return [
     'unit' => 'Satuan',
     'unit_price' => 'Harga Satuan',
     'procurement_saved' => 'Data Penawaran telah Disimpan',
+    'procurement_updated' => 'Data Penawaran telah Diupdate',
     'procurement_list' => 'Daftar Pengadaan',
     'offering_letter' => 'Surat Penawaran',
     'offering_letter_no' => 'No. Surat Penawaran',
@@ -43,8 +44,11 @@ return [
     'proc_status' => array(1 => 'Belum Selesai', 2 => 'Sedang Proses', 3 => 'Sudah Selesai'),
     'are_you_sure' => 'Apakah Anda Yakin?',
     'input_by' => 'Diinput Oleh',
+    'updated_by' => 'Diupdate Oleh',
     'input_date' => 'Diinput Tanggal',
     'procurement_status' => 'Status Pengadaan',
     'status' => 'Status',
-    'upload_invoice' => 'Upload Invoice'
+    'upload_invoice' => 'Upload Invoice',
+    'status_saved' => 'Data Status telah Diupdate',
+    'invoice' => 'Invoice'
 ];

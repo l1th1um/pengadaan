@@ -13,17 +13,6 @@ $(document).ready(function () {
         }
     });
 
-    var oTable = $('#item_table').DataTable({
-        "paging":   false,
-        "ordering": false,
-        "info":     false,
-        "searching" : false
-    } );
-
-    $('#myModal').on('shown.bs.modal', function () {
-        $('#addItemModal input').val('');
-        $('input[name="item_name"]').focus();
-    });
 
     $('#item_table tbody').on( 'click', 'tr', function () {
         if ( $(this).hasClass('active') ) {
@@ -35,9 +24,17 @@ $(document).ready(function () {
         }
     } );
 
+    $('#myModal').on('shown.bs.modal', function () {
+        $('#addItemModal input').val('');
+        $('input[name="item_name"]').focus();
+    });
+
+
+
     $('#addItemModal').on('submit', function(){
         var  unit_price = $('input[name="unit_price"]').val();
         oTable.row.add([
+            0,
             $('input[name="item_name"]').val(),
             $('input[name="amount"]').val(),
             $('input[name="unit"]').val(),

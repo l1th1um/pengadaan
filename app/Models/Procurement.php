@@ -11,4 +11,14 @@ class Procurement extends Model {
         return $this->hasMany('qilara\Models\ProcurementItem','proc_id', 'id');
     }
 
+    public function users()
+    {
+        return $this->belongsTo('qilara\Models\User','created_by', 'id');
+    }
+
+    public function invoice()
+    {
+        return $this->hasOne('qilara\Models\Invoice', 'proc_id', 'id');
+    }
+
 }

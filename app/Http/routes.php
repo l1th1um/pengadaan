@@ -42,6 +42,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function()
     /*Route::get('settings', [ 'uses' => 'SettingController@index', 'as' => 'settings']);
     Route::post('settings', 'SettingController@update');*/
 
+    Route::post('procurement/{id}', ['uses' => 'ProcurementController@postInvoice']);
+
     Route::resource('procurement', 'ProcurementController');
 
     /*Route::group(['prefix' => 'procurement'], function()

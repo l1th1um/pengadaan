@@ -115,3 +115,11 @@ function localeDate($date, $display_time = true) {
         }
     }
 }
+
+
+function convertToDatepicker($date, $separator = '-', $return_separator = '/')
+{
+    $date = explode($separator,$date);
+
+    return $date[2].$return_separator.$date[1].$return_separator.$date[0];
+}

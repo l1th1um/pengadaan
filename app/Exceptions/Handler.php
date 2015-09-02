@@ -2,6 +2,8 @@
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Database\Eloquent\ModelNotFoundException as ModelNotFoundException;
+use Redirect;
 
 class Handler extends ExceptionHandler {
 
@@ -36,7 +38,15 @@ class Handler extends ExceptionHandler {
 	 */
 	public function render($request, Exception $e)
 	{
-		return parent::render($request, $e);
+        if ($e instanceof TokenMismatchException) {
+                return Redirect::route('dashboard_login')->with('message', 'Security token expired. Please, repeat your request.');
+        }
+
+        if ($e instanceof ModelNotFoundException) {
+            return Redirect::route('dashboard')->with('message', 'Page Not Found.');
+        }
+
+        return parent::render($request, $e);
 	}
 
 }

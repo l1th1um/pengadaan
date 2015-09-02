@@ -4,6 +4,7 @@ use qilara\Http\Requests;
 use qilara\Http\Controllers\Controller;
 
 //use Illuminate\Http\Request;
+use qilara\Models\Invoice;
 use Request;
 use qilara\Models\Procurement;
 use qilara\Models\ProcurementItem;
@@ -36,7 +37,8 @@ class ProcurementController extends Controller {
 	public function create()
 	{
 		return view('procurement.create', [
-            "title" => trans('common.add_procurement')
+            "title" => trans('common.add_procurement'),
+            'date' => null
         ]);
 	}
 
@@ -95,16 +97,16 @@ class ProcurementController extends Controller {
             foreach ($items as $keys => $val)
             {
                 $proc_item = new ProcurementItem();
-                $proc_item->item_name = $val[0];
-                $proc_item->amount = str_replace(",","",$val[1]);
-                $proc_item->unit = $val[2];
-                $proc_item->unit_price = str_replace(",","",$val[3]);
+                $proc_item->item_name = $val[1];
+                $proc_item->amount = str_replace(",","",$val[2]);
+                $proc_item->unit = $val[3];
+                $proc_item->unit_price = str_replace(",","",$val[4]);
 
                 $cur_proc->procurement_item()->save($proc_item);
             }
         }
 
-        return Redirect::route('procurement.create')
+        return Redirect::route('dashboard.procurement.index')
             ->with('message', trans('common.procurement_saved'));
 	}
 
@@ -116,13 +118,10 @@ class ProcurementController extends Controller {
 	 */
 	public function show($id)
 	{
-        $data = Procurement::find($id);
-        $items = ProcurementItem::where('proc_id','=',$id)->get();
-
+        $data = Procurement::findOrFail($id);
         return view('procurement.show', [
             "title" => trans('common.add_procurement'),
-            "data" => $data,
-            "items" => $items,
+            "data" => $data
         ]);
 
 	}
@@ -135,7 +134,16 @@ class ProcurementController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+        $procurement = Procurement::findOrFail($id);
+
+        $items = $this->jsArray($procurement->procurement_item);
+
+        return view('procurement.create', [
+            "title" => trans('common.add_procurement'),
+            "procurement" => $procurement,
+            "items" => $items,
+            'date' => convertToDatepicker($procurement->offering_letter_date)
+        ]);
 	}
 
 	/**
@@ -146,7 +154,66 @@ class ProcurementController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+        $date = explode("/", Request::input('offering_letter_date'));
+
+        $procurement = Procurement::find($id);
+        $procurement->company_name = Request::input('company_name');
+        $procurement->address = Request::input('address');
+        $procurement->phone = Request::input('phone');
+        $procurement->fax = Request::input('fax');
+        $procurement->contact_person = Request::input('contact_person');
+
+        $procurement->offering_letter_no = Request::input('offering_letter_no');
+        $procurement->offering_letter_date = sprintf("%04d-%02d-%02d", $date[2], $date[1], $date[0]);
+
+        if(Input::hasFile('offering_letter')) {
+            $file = array('image' => Input::file('offering_letter'));
+            $rules = array('image' => 'image');
+            $validator = Validator::make($file, $rules);
+
+            if ($validator->fails()) {
+                return Redirect::back()->withInput()->withErrors($validator);
+            }
+            else
+            {
+                if (Input::file('offering_letter')->isValid()) {
+                    $destinationPath = 'uploads';
+                    $extension = Input::file('offering_letter')->getClientOriginalExtension();
+                    $fileName = basename(Input::file('offering_letter')->getClientOriginalName(), ".".$extension)."_".rand(11111,99999).'.'.$extension;
+                    Input::file('offering_letter')->move($destinationPath, $fileName);
+
+                    $procurement->offering_letter   = $fileName;
+                }
+            }
+
+        }
+
+        $procurement->updated_by = Auth::user()->id;
+
+        $procurement->save();
+
+        $cur_proc = Procurement::find($id);
+
+        ProcurementItem::where("proc_id","=",$id)->delete();
+
+        if (! empty($_POST['items']))
+        {
+            $items = json_decode($_POST['items']);
+
+            foreach ($items as $keys => $val)
+            {
+                $proc_item = new ProcurementItem();
+                $proc_item->item_name = $val[1];
+                $proc_item->amount = str_replace(",","",$val[2]);
+                $proc_item->unit = $val[3];
+                $proc_item->unit_price = str_replace(",","",$val[4]);
+
+                $cur_proc->procurement_item()->save($proc_item);
+            }
+        }
+
+        return Redirect::route('dashboard.procurement.index')
+            ->with('message', trans('common.procurement_updated'));
 	}
 
 	/**
@@ -164,6 +231,53 @@ class ProcurementController extends Controller {
         $procurement->delete();
 
         return Redirect::back()->with('message', trans('common.offering_deleted'));
+    }
+
+    public function postInvoice($id)
+    {
+        //echo $id;
+        $file = array('image' => Input::file('invoice'));
+        $rules = array('image' => 'required|image');
+        $validator = Validator::make($file, $rules);
+
+        if ($validator->fails()) {
+            return Redirect::back()->withInput()->withErrors($validator);
+        }
+        else
+        {
+            if (Input::file('invoice')->isValid()) {
+                $destinationPath = 'uploads';
+                $extension = Input::file('invoice')->getClientOriginalExtension();
+                $fileName = basename(Input::file('invoice')->getClientOriginalName(), ".".$extension)."_".rand(11111,99999).'.'.$extension;
+                Input::file('invoice')->move($destinationPath, $fileName);
+
+                $procurement = Procurement::find($id);
+                $procurement->proc_status = Request::input('status');
+                $procurement->save();
+
+                $invoice = Invoice::where('proc_id', '=', $id)->firstOrFail();
+                $invoice->path = $fileName;
+                $invoice->user_id = Auth::user()->id;
+
+                $procurement->invoice()->save($invoice);
+
+                return Redirect::back()
+                    ->with('message', trans('common.status_saved'));
+            }
+        }
+    }
+
+    public function jsArray($data)
+    {
+        $str = '[';
+        foreach ($data as $val)
+        {
+            $str .= '["'.$val->id.'","'.$val->item_name.'", "'.number_format($val->amount).'", "'.$val->unit.'","'.number_format($val->unit_price).'"],';
+        }
+
+        $str = substr($str, 0, -1)."];";
+
+        return $str;
     }
 
 }

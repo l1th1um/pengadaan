@@ -34,4 +34,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	protected $hidden = ['password', 'remember_token'];
 
+    public function procurement()
+    {
+        return $this->hasMany('qilara\Models\Procurement','created_by', 'id');
+    }
+
+    public function invoice()
+    {
+        return $this->hasMany('qilara\Models\Invoice');
+    }
+
 }

@@ -6,7 +6,6 @@
 </h1>
 <div class="">
     <a class="hiddenanchor" id="tologin"></a>
-
     <div id="wrapper">
         <div id="login" class="animate form">
             @if (count($errors) > 0)

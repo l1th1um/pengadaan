@@ -48,7 +48,8 @@ return [
 		'dashboard_default' => [
 			'extends'	 	=> null,
 			'views-path' 	=> 'dashboard/default',
-			'asset-path' 	=> 'backend/default',
+			//'asset-path' 	=> asset("/").'backend/default',
+            'asset-path' 	=> 'backend/default',
 		],
 		
 
