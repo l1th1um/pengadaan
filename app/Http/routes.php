@@ -33,8 +33,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function()
 
 	Route::get('/', ['uses' => 'DashboardController@index', 'as' => 'dashboard']);
 
-    /*Route::get('change_password', ['uses' => 'UserController@changePassword', 'as' => 'change_password']);
-    Route::post('change_password', ['uses' => 'UserController@postChangePassword', 'as' => 'change_password']);*/
+    Route::get('change_password', ['uses' => 'UserController@changePassword', 'as' => 'change_password']);
+    Route::post('change_password', ['uses' => 'UserController@postChangePassword', 'as' => 'change_password']);
 
 	Route::get('logout', 'DashboardController@logout');
 
@@ -57,11 +57,11 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function()
 
     });*/
 
-	/*Route::group(['prefix' => 'users'], function()
+	Route::group(['prefix' => 'users'], function()
 	{
         Route::resource('roles', 'RoleController');
         Route::get('profile', ['uses' => 'UserController@profile']);
-    });*/
+    });
 });
 /*Route::group(['prefix' => 'roles', 'middleware' => 'role:kepegawaian'], function() {
     Route::get('/', ['uses' => 'RoleController@index', 'as' => 'role_index']);

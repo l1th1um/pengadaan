@@ -13,8 +13,6 @@
                         <span class=" fa fa-angle-down"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-usermenu animated fadeInDown pull-right">
-                        <li><a href="{{url('dashboard/users/profile')}}">  Profile</a>
-                        </li>
                         <li>
                             <a href="{{url('dashboard/change_password')}}">{{trans('common.change_password')}}</a>
                         </li>

@@ -116,7 +116,9 @@
                             </label>
                         </div>
                         <div class="col-md-4 col-xs-4">
-                            {{ $data->users->name }}
+                            @if (isset($data->users->name))
+                                {{ $data->users->name }}
+                            @endif
                         </div>
                         <div class="col-md-2 control-label col-xs-2">
                             <label for="inputName" class="control-label">

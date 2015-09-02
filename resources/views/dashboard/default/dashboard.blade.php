@@ -9,7 +9,7 @@
         </div>
     @endif
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 col-xs-6">
             <div class="x_panel tile fixed_height_320">
                 <div class="x_title">
                     <h2>Pengumuman</h2>
@@ -21,7 +21,7 @@
             </div>
         </div>
 
-        <div class="col-md-6">
+        <div class="col-md-6  col-xs-6">
             <div class="x_panel tile fixed_height_320">
                 <div class="x_title">
                     <h2>Agenda</h2>
