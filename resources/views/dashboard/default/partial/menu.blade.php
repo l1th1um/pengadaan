@@ -13,6 +13,15 @@
                 <li><a href="{{route('dashboard.procurement.create')}}">{{ trans('common.add_procurement') }}</a></li>
             </ul>
             </li>
+            @if (Entrust::hasRole('administrator'))
+                <li {!! parent_link('dashboard/users') !!}>
+                <a><i class="fa fa-server"></i> {{ trans('common.users') }}</span></a>
+                <ul class="nav child_menu">
+                    <li><a href="{{route('dashboard.users.index')}}">{{ trans('common.users_list') }}</a></li>
+                    <li><a href="{{route('dashboard.users.create')}}">{{ trans('common.add_user') }}</a></li>
+                </ul>
+                </li>
+            @endif
         </ul>
     </div>
 </div>

@@ -2,9 +2,15 @@
 
 use qilara\Http\Controllers\Controller;
 
+use qilara\Models\Role;
+use qilara\Models\RoleUser;
+use qilara\Models\User;
 use Request;
 use Hash;
 use Redirect;
+use Validator;
+use Auth;
+
 
 class UserController extends Controller {
 
@@ -15,7 +21,12 @@ class UserController extends Controller {
 	 */
 	public function index()
 	{
-		//
+        $data = User::with('userRole.roles')->orderBy('id', 'desc')->get();
+
+        return view('users.index', [
+            "title" => trans('common.users'),
+            "data" => $data
+        ]);
 	}
 
 	/**
@@ -25,7 +36,11 @@ class UserController extends Controller {
 	 */
 	public function create()
 	{
-		//
+        return view('users.create', [
+            "title" => trans('common.add_user'),
+            'role' => $this->listRole(),
+            'selected_role' => null
+        ]);
 	}
 
 	/**
@@ -35,7 +50,35 @@ class UserController extends Controller {
 	 */
 	public function store()
 	{
-		//
+        $rules = array(
+            'name' => 'required|min:4',
+            'username' => 'required|min:4',
+            'email' => 'email',
+            'password' => 'required|alphaNum||min:5|confirmed'
+        );
+        $validator = Validator::make(Request::all(),$rules);
+
+        if ($validator->fails()) {
+            return Redirect::back()->withInput()->withErrors($validator);
+        }
+        else
+        {
+            $user = new User();
+            $user->name = Request::input('name');
+            $user->username = Request::input('username');
+            $user->email = Request::input('email');
+            $user->password = Hash::make(Request::input('password'));
+            $user->save();
+
+            $user_role = User::find($user->id);
+            $role = new RoleUser();
+            $role->role_id = Request::input('role');
+
+            $user_role->userRole()->save($role);
+
+            return Redirect::route('dashboard.users.index')
+                ->with('message', trans('common.user_created'));
+        }
 	}
 
 	/**
@@ -57,7 +100,14 @@ class UserController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+        $user = User::findOrFail($id);
+
+        return view('users.create', [
+            "title" => trans('common.users'),
+            'user' => $user,
+            'role' => $this->listRole(),
+            'selected_role' => $user->userRole->role_id
+        ]);
 	}
 
 	/**
@@ -68,7 +118,37 @@ class UserController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+        $rules = array(
+            'name' => 'required|min:4',
+            'username' => 'required|min:4',
+            'email' => 'email',
+            'password' => 'confirmed'
+        );
+        $validator = Validator::make(Request::all(),$rules);
+
+        if ($validator->fails()) {
+            return Redirect::back()->withInput()->withErrors($validator);
+        }
+        else
+        {
+            $user = User::findorFail($id);
+            $user->name = Request::input('name');
+            $user->username = Request::input('username');
+            $user->email = Request::input('email');
+
+            if (Request::has('password'))
+                $user->password = Hash::make(Request::input('password'));
+
+            $user->save();
+
+            //$user_role = User::findorFail($id);
+            $role = RoleUser::where('user_id','=',$id)->first();
+            $role->role_id = Request::input('role');
+            $role->save();
+
+            return Redirect::route('dashboard.users.index')
+                ->with('message', trans('common.user_updated'));
+        }
 	}
 
 	/**
@@ -79,7 +159,10 @@ class UserController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+        $user = User::find($id);
+        $user->delete();
+
+        return Redirect::back()->with('message', trans('common.users_deleted'));
 	}
 
     public  function  changePassword()
@@ -123,5 +206,16 @@ class UserController extends Controller {
         return view('users.profile', [
             "title" => trans('common.profile')
         ]);
+    }
+
+    public function listRole()
+    {
+        $data = array();
+        foreach (Role::all() as $val)
+        {
+            $data[$val->id] = $val->display_name;
+        }
+
+        return $data;
     }
 }

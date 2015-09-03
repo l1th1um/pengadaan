@@ -44,4 +44,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany('qilara\Models\Invoice');
     }
 
+    function userRole()
+    {
+        return $this->hasOne('qilara\Models\RoleUser');
+    }
+
 }

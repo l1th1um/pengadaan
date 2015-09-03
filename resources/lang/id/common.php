@@ -50,5 +50,17 @@ return [
     'status' => 'Status',
     'upload_invoice' => 'Upload Invoice',
     'status_saved' => 'Data Status telah Diupdate',
-    'invoice' => 'Invoice'
+    'invoice' => 'Invoice',
+    'add_user' => 'Tambah User',
+    'name' => 'Nama',
+    'username' => 'Username',
+    'email' => 'Email',
+    'password' => 'Password',
+    'repeat_password' => 'Ulangi Password',
+    'role' => 'Role',
+    'users' => 'User',
+    'users_list' => 'Daftar User',
+    'users_deleted' => 'User telah Dihapus',
+    'user_created' => 'User telah Ditambahkan',
+    'user_updated' => 'User telah Diupdate'
 ];

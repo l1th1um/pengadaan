@@ -57,11 +57,15 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function()
 
     });*/
 
-	Route::group(['prefix' => 'users'], function()
+    Route::get('profile', ['uses' => 'UserController@profile']);
+    Route::resource('users', 'UserController');
+
+	/*Route::group(['prefix' => 'users'], function()
 	{
         Route::resource('roles', 'RoleController');
+        Route::resource('/', 'UserController');
         Route::get('profile', ['uses' => 'UserController@profile']);
-    });
+    });*/
 });
 /*Route::group(['prefix' => 'roles', 'middleware' => 'role:kepegawaian'], function() {
     Route::get('/', ['uses' => 'RoleController@index', 'as' => 'role_index']);
