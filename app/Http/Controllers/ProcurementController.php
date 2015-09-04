@@ -237,7 +237,7 @@ class ProcurementController extends Controller {
     {
         //echo $id;
         $file = array('image' => Input::file('invoice'));
-        $rules = array('image' => 'required|image');
+        $rules = array('image' => 'image');
         $validator = Validator::make($file, $rules);
 
         if ($validator->fails()) {
@@ -245,25 +245,25 @@ class ProcurementController extends Controller {
         }
         else
         {
-            if (Input::file('invoice')->isValid()) {
+            $procurement = Procurement::find($id);
+            $procurement->proc_status = Request::input('status');
+            $procurement->save();
+
+            if (Request::hasFile('invoice') && Request::file('invoice')->isValid()) {
                 $destinationPath = 'uploads';
-                $extension = Input::file('invoice')->getClientOriginalExtension();
-                $fileName = basename(Input::file('invoice')->getClientOriginalName(), ".".$extension)."_".rand(11111,99999).'.'.$extension;
-                Input::file('invoice')->move($destinationPath, $fileName);
+                $extension = Request::file('invoice')->getClientOriginalExtension();
+                $fileName = basename(Request::file('invoice')->getClientOriginalName(), ".".$extension)."_".rand(11111,99999).'.'.$extension;
+                Request::file('invoice')->move($destinationPath, $fileName);
 
-                $procurement = Procurement::find($id);
-                $procurement->proc_status = Request::input('status');
-                $procurement->save();
-
-                $invoice = Invoice::where('proc_id', '=', $id)->firstOrFail();
+                $invoice = Invoice::firstOrNew(['proc_id' => $id]);
                 $invoice->path = $fileName;
                 $invoice->user_id = Auth::user()->id;
 
                 $procurement->invoice()->save($invoice);
-
-                return Redirect::back()
-                    ->with('message', trans('common.status_saved'));
             }
+
+            return Redirect::back()
+                ->with('message', trans('common.status_saved'));
         }
     }
 
@@ -271,6 +271,8 @@ class ProcurementController extends Controller {
     {
         $str = '[';
         foreach ($data as $val)
+
+
         {
             $str .= '["'.$val->id.'","'.$val->item_name.'", "'.number_format($val->amount).'", "'.$val->unit.'","'.number_format($val->unit_price).'"],';
         }

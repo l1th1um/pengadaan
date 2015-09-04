@@ -3,7 +3,8 @@ function parent_link($url, $exact = false) {
     $class = '';
     if ($exact) {
         if (Request::is($url)) {
-            $class = ' class="active_menu"';
+            /*$class = ' class="active_menu"';*/
+            $class = ' ';
         }
     } else if (strpos(Request::url(), $url) != false) {
         $class = ' class="active"';

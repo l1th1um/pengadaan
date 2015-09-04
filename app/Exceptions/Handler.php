@@ -42,9 +42,9 @@ class Handler extends ExceptionHandler {
                 return Redirect::route('dashboard_login')->with('message', 'Security token expired. Please, repeat your request.');
         }
 
-        if ($e instanceof ModelNotFoundException) {
+        /*if ($e instanceof ModelNotFoundException) {
             return Redirect::route('dashboard')->with('message', 'Page Not Found.');
-        }
+        }*/
 
         return parent::render($request, $e);
 	}
