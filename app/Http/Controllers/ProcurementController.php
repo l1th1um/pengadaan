@@ -280,4 +280,13 @@ class ProcurementController extends Controller {
         return $str;
     }
 
+    public function purchaseOrder($id)
+    {
+        $data = Procurement::findOrFail($id);
+
+        return view('procurement.purchase_order', [
+            "data" => $data
+        ]);
+    }
+
 }

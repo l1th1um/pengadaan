@@ -100,21 +100,7 @@ class DashboardController extends Controller {
 
 	public function login()
 	{
-		return view('login.login');
-	}
-
-	public function generate_password()
-	{
-		$users = User::all();
-
-		foreach ($users as $val)
-		{
-			\DB::table('user')
-	            ->where('ID', $val->ID)
-	            ->update(['password2' => Hash::make($val->ID)]);			
-		}
-
-		echo "Sudah Beres diupdatenya kakak";
+        return view('login.login');
 	}
 
    public function postLogin(Request $request)

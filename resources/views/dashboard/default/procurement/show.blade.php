@@ -26,7 +26,11 @@
                         </h2>
                     </div>
                     <div class="col-md-4 col-xs-4 right">
-                        <a href="{{route('dashboard.procurement.edit', Request::segment(3))}}">
+                        <a href="{{route('dashboard.procurement.purchase_order', Request::segment(3))}}" target="_blank">
+                            <i class="fa fa-print fa-2x"></i>
+                        </a>
+
+                        <a href="{{route('dashboard.procurement.edit', Request::segment(3))}}" style="padding-left : 20px">
                             <i class="fa fa-edit fa-2x"></i>
                         </a>
                     </div>

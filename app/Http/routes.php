@@ -43,6 +43,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function()
     Route::post('settings', 'SettingController@update');*/
 
     Route::post('procurement/{id}', ['uses' => 'ProcurementController@postInvoice']);
+    Route::get('procurement/purchase_order/{id}', ['uses' => 'ProcurementController@purchaseOrder', 'as' => 'dashboard.procurement.purchase_order']);
 
     Route::resource('procurement', 'ProcurementController');
 
