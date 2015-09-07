@@ -1,6 +1,5 @@
 $(document).ready(function () {
-    $('input[name="offering_letter_date"]').datepicker({
-        format: "dd/mm/yyyy",
+    $('input[name="offering_letter_date"], input[name="po_letter_date"]').datepicker({ format: "dd/mm/yyyy",
         autoclose: true,
         todayHighlight: true
     });
@@ -76,6 +75,17 @@ $(document).ready(function () {
             { "orderable": false }
         ],
         "aaSorting": []
+    });
+
+    $('.editor').summernote({
+        height: 200,
+        tabsize: 2,
+        styleWithSpan: false,
+        toolbar: [
+            ['style', ['bold', 'italic', 'underline']],
+            ['font', ['strikethrough', 'superscript', 'subscript']],
+            ['para', ['ul', 'ol', 'paragraph']],
+        ]
     });
 
 });

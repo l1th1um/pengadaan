@@ -147,3 +147,10 @@ function terbilang($x)
     else
         return "Angka terlalu besar";
 }
+
+function link_new_window($url)
+{
+    $html = '<script type="text/javascript"> w = window.open( "'.$url.'" );w.print();w.close()</script>';
+
+    echo $html;
+}

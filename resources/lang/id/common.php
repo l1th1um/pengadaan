@@ -62,5 +62,10 @@ return [
     'users_list' => 'Daftar User',
     'users_deleted' => 'User telah Dihapus',
     'user_created' => 'User telah Ditambahkan',
-    'user_updated' => 'User telah Diupdate'
+    'user_updated' => 'User telah Diupdate',
+    'purchase_order' => 'Pesanan',
+    'purchase_order_no' => 'No. PO',
+    'tos' => 'Ketentuan',
+    'date' => 'Tanggal',
+    'purchase_order_saved' => 'Pesanan telah Disimpan'
 ];

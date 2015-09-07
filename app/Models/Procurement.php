@@ -21,4 +21,9 @@ class Procurement extends Model {
         return $this->hasOne('qilara\Models\Invoice', 'proc_id', 'id');
     }
 
+    public function purchase_order()
+    {
+        return $this->hasOne('qilara\Models\PurchaseOrder', 'proc_id', 'id');
+    }
+
 }

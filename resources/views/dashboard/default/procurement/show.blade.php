@@ -26,9 +26,9 @@
                         </h2>
                     </div>
                     <div class="col-md-4 col-xs-4 right">
-                        <a href="{{route('dashboard.procurement.purchase_order', Request::segment(3))}}" target="_blank">
+                        {{--<a href="{{route('dashboard.procurement.purchase_order', Request::segment(3))}}" target="_blank">
                             <i class="fa fa-print fa-2x"></i>
-                        </a>
+                        </a>--}}
 
                         <a href="{{route('dashboard.procurement.edit', Request::segment(3))}}" style="padding-left : 20px">
                             <i class="fa fa-edit fa-2x"></i>
@@ -207,6 +207,63 @@
             <div class="x_panel">
                 <div class="x_title">
                     <h2>
+                        {{ trans('common.purchase_order') }}
+                    </h2>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    {!! Form::open(array('url' => action('ProcurementController@printPO', Request::segment(3)), 'class' => 'form-horizontal', 'method' => 'post', 'id' => 'print_po')) !!}
+                    <div class="form-body">
+                        <div class="form-group">
+                            <label for="inputName" class="col-md-2 control-label col-xs-2">
+                                {{ trans('common.purchase_order_no') }}
+                            </label>
+                            <div class="col-md-10 col-xs-10">
+                                {!! Form::text('purchase_order_no',$letter_no, array('id' => 'inputName', 'class' => 'form-control')); !!}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputName" class="col-md-2 control-label col-xs-2">
+                                {{ trans('common.date') }}
+                            </label>
+                            <div class="col-md-10 col-xs-10">
+                                {!! Form::text('po_letter_date', $po_letter_date, array('id' => 'inputName', 'class' => 'form-control', 'required' => true, 'autocomplete' => 'off')); !!}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputName" class="col-md-2 control-label col-xs-2">
+                                {{ trans('common.tos') }}
+                            </label>
+                            <div class="col-md-10 col-xs-10">
+                                {!! Form::textarea('additional_info',$additional_info, array('id' => 'inputName', 'class' => 'form-control editor')); !!}
+                            </div>
+                        </div>
+                        <div class="form-actions pal">
+                            <div class="form-group mbn">
+                                <div class="col-md-2 col-xs-2 right">
+                                    <button type="submit" class="btn btn-success">Submit</button>
+                                </div>
+                                <div class="col-md-10 col-xs-10 right">
+                                    <a href="{{route('dashboard.procurement.purchase_order', Request::segment(3))}}" target="_blank" class="btn btn-info">
+                                        <i class="fa fa-print"></i> Print
+                                    </a>
+                                    {{--<a href="{{route('dashboard.procurement.purchase_order', Request::segment(3))}}" target="_blank">
+                            <i class="fa fa-print fa-2x"></i>
+                        </a>--}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {!! Form::close() !!}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>
                         {{ trans('common.procurement_status') }}
                     </h2>
                     <div class="clearfix"></div>
@@ -220,6 +277,14 @@
                             </label>
                             <div class="col-md-10 col-xs-10">
                                 {!! Form::select('status',trans('common.proc_status'),$data->proc_status,array('class' => 'form-control')); !!}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputName" class="col-md-2 control-label col-xs-2">
+                                {{ trans('common.purchase_order_no') }}
+                            </label>
+                            <div class="col-md-10 col-xs-10">
+                                {!! Form::text('purchase_order_no',null, array('id' => 'inputName', 'class' => 'form-control')); !!}
                             </div>
                         </div>
                         <div class="form-group">
@@ -257,9 +322,13 @@
     {!! Theme::css('css/datatables/tools/css/dataTables.tableTools.css')!!}
     {!! Theme::css('css/bootstrap-datepicker.min.css')!!}
     {!! Theme::css('css/jasny-bootstrap.css')!!}
+    {!! Theme::css('css/summernote.css')!!}
     {!! Theme::js('js/datatables/js/jquery.dataTables.min.js')!!}
     {!! Theme::js('js/datatables/tools/js/dataTables.tableTools.js')!!}
     {!! Theme::js('js/bootstrap-datepicker.min.js')!!}
     {!! Theme::js('js/jasny-bootstrap.min.js')!!}
+    <!-- richtext editor -->
+    {!! Theme::js('js/summernote.min.js')!!}
+
     {!! Theme::js('js/modules/procurement.js')!!}
 @stop

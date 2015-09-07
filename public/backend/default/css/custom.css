@@ -6392,3 +6392,9 @@ ul.notifications {
 {
     padding: 0;
 }
+
+#editor
+{
+    overflow: scroll;
+    max-height: 300px;
+}

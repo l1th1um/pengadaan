@@ -15,13 +15,13 @@
     </head>
     <body>
         <p style="text-align: right">
-            Serpong, {{ localeDate(date("Y-m-d")) }}
+            Serpong, {{ $data->purchase_order->letter_date }}
         </p>
         <table>
             <tr>
                 <td width="80px">Nomor</td>
                 <td style="width: 50px;text-align: center">:</td>
-                <td>/PP-BTPK/PO/{{numberToRoman(date("m"))}}/{{date("Y")}}</td>
+                <td>{{ $data->purchase_order->letter_no }}</td>
             </tr>
             <tr>
                 <td>Perihal</td>
@@ -101,11 +101,7 @@
             Terbilang : <strong>{{ terbilang($total + ($total * 0.1)) }} rupiah</strong>
         </p>
         <p style="margin-top: 30px;" class="paragraph">
-            Mohon segera untuk dilaksanakan dengan ketentuan:
-            <ul>
-                <li>Rincian barang sesuai Surat Penawaran</li>
-                <li>Pembayaran setelah ada surat tagihan pembayaran (invoice)</li>
-            </ul>
+            {!! $data->purchase_order->additional_info !!}
         </p>
         <p style="margin-top: 30px;" class="paragraph">
             Demikian atas perhatian dan kerjasamanya kami ucapkan terima kasih.
