@@ -1,4 +1,46 @@
+var oTable;
+var url = $('input[name="proc_url"]').val();
+var proc_id = $('input[name="proc_id"]').val()
+
 $(document).ready(function () {
+    //+ "/addItem/" + $('input[name="proc_id"]').val();
+    oTable = $('#item_table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: url + "/datatables/" + proc_id,
+        paging:   false,
+        ordering: false,
+        info:     false,
+        searching : false,
+        columnDefs: [
+            {
+                "targets": [ 0 ],
+                "visible": false,
+            }
+        ],
+        columns: [
+            { data: 'id', name: 'id' },
+            { data: 'item_name', name: 'item_name' },
+            { data: 'amount', name: 'amount' , sClass : 'right' },
+            { data: 'unit', name: 'unit' },
+            { data: 'unit_price', name: 'unit_price', sClass : 'right'}
+        ]
+    } );
+
+    $.fn.editable.defaults.mode = 'popup';
+    $.fn.editable.defaults.ajaxOptions = {type: "PUT"};
+
+    $(document).on('click', '.item_name', function(){
+        $('.item_name').editable(
+            {
+                type: 'text',
+                success: function(response, newValue) {
+                    $(this).val(newValue);
+                }
+            }
+        );
+    });
+
     $('input[name="offering_letter_date"], input[name="po_letter_date"]').datepicker({ format: "dd/mm/yyyy",
         autoclose: true,
         todayHighlight: true
@@ -32,60 +74,64 @@ $(document).ready(function () {
 
     $('#addItemModal').on('submit', function(){
         var  unit_price = $('input[name="unit_price"]').val();
-        oTable.row.add([
-            0,
-            $('input[name="item_name"]').val(),
-            $('input[name="amount"]').val(),
-            $('input[name="unit"]').val(),
-            number_format(unit_price)
-        ]).draw();
+
+        if($('input[name="proc_id"]').val())
+        {
+            ajaxUrl = url + "/addItem/" + proc_id;
+
+            $.post( ajaxUrl, {
+                item_name : $('input[name="item_name"]').val(),
+                amount : $('input[name="amount"]').val(),
+                unit : $('input[name="unit"]').val(),
+                unit_price : number_format(unit_price)
+            }, function(data){
+                oTable.row.add({
+                    "id" : data,
+                    "item_name" : $('input[name="item_name"]').val(),
+                    "amount" : $('input[name="amount"]').val(),
+                    "unit" : $('input[name="unit"]').val(),
+                    "unit_price" : number_format(unit_price)
+                }).draw();
+            });
+        }
+        else
+        {
+            oTable.row.add({
+                "id" : 1000,
+                "item_name" : $('input[name="item_name"]').val(),
+                "amount" : $('input[name="amount"]').val(),
+                "unit" : $('input[name="unit"]').val(),
+                "unit_price" : number_format(unit_price)
+            }).draw();
+        }
+
+
 
         $('#myModal').modal('hide');
 
         return false;
-    });
+    })
 
     $('#del_row').click( function () {
-        oTable.rows('.active').remove().draw( false );
-    } );
+        if($('input[name="proc_id"]').val()) {
+            ajaxUrl = url + "/removeItem/" + proc_id;
 
-    var items = {};
+            data = oTable.rows('.active').data();
 
-    $('#add_procurement').submit(function(e){
-        var i = 1;
-        oTable
-            .data()
-            .each( function ( value, index ) {
-                items[i] = value;
-                i = i + 1;
+            var items = {};
+
+            data.each(function (value, index ){
+                items[index] = value["id"];
             });
 
-        var json_data = JSON.stringify(items);
-
-        $('input[name="items"]').val(json_data);
-    });
-
-    /*Procurement List*/
-    $('#proc_list').DataTable({
-        "columns": [
-            null,
-            { "orderable": false },
-            null,
-            null,
-            { "orderable": false }
-        ],
-        "aaSorting": []
-    });
-
-    $('.editor').summernote({
-        height: 200,
-        tabsize: 2,
-        styleWithSpan: false,
-        toolbar: [
-            ['style', ['bold', 'italic', 'underline']],
-            ['font', ['strikethrough', 'superscript', 'subscript']],
-            ['para', ['ul', 'ol', 'paragraph']],
-        ]
+            $.post( ajaxUrl, { items : JSON.stringify(items) }, function(data) {
+                oTable.rows('.active').remove().draw( false );
+            });
+        }
+        else
+        {
+            oTable.rows('.active').remove().draw( false );
+        }
     });
 
 });

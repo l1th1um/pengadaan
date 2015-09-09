@@ -331,4 +331,19 @@
     {!! Theme::js('js/summernote.min.js')!!}
 
     {!! Theme::js('js/modules/procurement.js')!!}
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.editor').summernote({
+                height: 200,
+                tabsize: 2,
+                styleWithSpan: false,
+                toolbar: [
+                    ['style', ['bold', 'italic', 'underline']],
+                    ['font', ['strikethrough', 'superscript', 'subscript']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                ]
+            });
+        });
+    </script>
 @stop

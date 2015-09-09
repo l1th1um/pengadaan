@@ -5,6 +5,9 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as BaseVerifier;
 
 class VerifyCsrfToken extends BaseVerifier {
 
+    protected $except = [
+        'procurement/updateItem/*',
+    ];
 	/**
 	 * Handle an incoming request.
 	 *
@@ -14,7 +17,21 @@ class VerifyCsrfToken extends BaseVerifier {
 	 */
 	public function handle($request, Closure $next)
 	{
-		return parent::handle($request, $next);
+        $skip = array(
+            'dashboard/procurement/updateItem/*',
+            'dashboard/procurement/addItem/*',
+            'dashboard/procurement/removeItem/*',
+        );
+
+        foreach ($skip as $key => $route) {
+            //skip csrf check on route
+            if($request->is($route)){
+                //return parent::addCookieToResponse($request, $next($request));
+                return $next($request);
+            }
+        }
+
+        return parent::handle($request, $next);
 	}
 
 }

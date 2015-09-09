@@ -148,6 +148,7 @@ return [
 		'Zizaco\Entrust\EntrustServiceProvider',
 		'Barryvdh\Debugbar\ServiceProvider',
 		'Illuminate\Html\HtmlServiceProvider',
+		'yajra\Datatables\DatatablesServiceProvider'
 	],
 
 	/*
@@ -200,6 +201,7 @@ return [
 		'Entrust'   => 'Zizaco\Entrust\EntrustFacade',
 		'Html'      => 'Illuminate\Html\HtmlFacade',
   		'Form'      => 'Illuminate\Html\FormFacade',
+  		'Datatables' => 'yajra\Datatables\Datatables',
 	],
 
 ];

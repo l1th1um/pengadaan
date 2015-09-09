@@ -45,6 +45,12 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function()
     Route::post('procurement/{id}', ['uses' => 'ProcurementController@postInvoice']);
     Route::get('procurement/purchase_order/{id}', ['uses' => 'ProcurementController@purchaseOrder', 'as' => 'dashboard.procurement.purchase_order']);
 
+    Route::get('procurement/datatables/{id}', ['uses' => 'ProcurementController@datatables', 'as' => 'procurement.datatables']);
+    Route::put('procurement/updateItem/{id}', ['uses' => 'ProcurementController@updateItem', 'as' => 'procurement.datatables.edit']);
+    Route::post('procurement/addItem/{id}', ['uses' => 'ProcurementController@addItem', 'as' => 'procurement.datatables.add']);
+    Route::post('procurement/removeItem/{id}', ['uses' => 'ProcurementController@removeItem', 'as' => 'procurement.datatables.remove']);
+
+
     Route::post('procurement/printPO/{id}', ['uses' => 'ProcurementController@printPO']);
     Route::resource('procurement', 'ProcurementController');
 

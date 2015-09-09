@@ -29,8 +29,6 @@
                     <div class="col-lg-12">
                         @if (Route::getCurrentRoute()->getName() == 'dashboard.procurement.edit')
                             {!! Form::model($procurement, array('url' => action('ProcurementController@update', Request::segment(3)), 'class' => 'form-horizontal', 'method' => 'put', 'id' => 'add_procurement', 'files' => true)) !!}
-                            <input type="hidden" name="proc_id" value="{{  Request::segment(3) }}"/>
-                            <input type="hidden" name="proc_url" value="{{  Route('dashboard.procurement.index') }}"/>
                         @else
                             {!! Form::open(array('url' => action('ProcurementController@store'), 'class' => 'form-horizontal', 'method' => 'post', 'id' => 'add_procurement', 'files' => true)) !!}
                         @endif
@@ -101,7 +99,7 @@
                                         <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span><input type="file" name="offering_letter"></span>
                                         <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
                                     </div>
-                                    @if (Route::getCurrentRoute()->getName() == 'dashboard.procurement.edit' && ! empty($procurement->offering_letter) )
+                                    @if (Route::getCurrentRoute()->getName() == 'dashboard.procurement.edit')
                                         <div class="col-md-3 col-xs-3">
                                             <a href="#" class="thumbnail">
                                                 <img src="{{ asset("/uploads")."/".$procurement->offering_letter }}" >
@@ -111,8 +109,6 @@
 
                                 </div>
                             </div>
-
-                            @if (Route::getCurrentRoute()->getName() == 'dashboard.procurement.edit')
                             <div class="form-group">
                                 <hr />
                             </div>
@@ -126,18 +122,17 @@
                                     </button>
                                     <table class="table table-striped responsive-utilities jambo_table" id="item_table">
                                         <thead>
-                                            <tr>
-                                                <th>id</th>
-                                                <th>{{ trans('common.item_name') }}</th>
-                                                <th width="15%">{{ trans('common.amount') }}</th>
-                                                <th width="15%">{{ trans('common.unit') }}</th>
-                                                <th width="20%">{{ trans('common.unit_price') }}</th>
-                                            </tr>
+                                        <tr>
+                                            <th>id</th>
+                                            <th>{{ trans('common.item_name') }}</th>
+                                            <th width="15%">{{ trans('common.amount') }}</th>
+                                            <th width="15%">{{ trans('common.unit') }}</th>
+                                            <th width="20%">{{ trans('common.unit_price') }}</th>
+                                        </tr>
                                         </thead>
                                     </table>
                                 </div>
                             </div>
-                            @endif
                             <div class="form-actions pal">
                                 <div class="form-group mbn">
                                     <div class="col-md-2 col-xs-2 right">
@@ -215,8 +210,87 @@
     {!! Theme::js('js/datatables/tools/js/dataTables.tableTools.js')!!}
     {!! Theme::js('js/bootstrap-datepicker.min.js')!!}
     {!! Theme::js('js/jasny-bootstrap.min.js')!!}
-    {!! Theme::js('js/bootstrap-editable.min.js')!!}
-    {!! Theme::css('css/bootstrap-editable.css')!!}
+
+    <script type="text/javascript">
+        var oTable;
+    </script>
+
+    @if (Route::getCurrentRoute()->getName() == 'dashboard.procurement.edit')
+        {!! Theme::js('js/bootstrap-editable.min.js')!!}
+        {!! Theme::css('css/bootstrap-editable.css')!!}
+        <script type="text/javascript">
+            var dataSet = {!! $items !!}
+            $(document).ready(function(){
+                oTable = $('#item_table').DataTable({
+                    data: dataSet,
+                    "paging":   false,
+                    "ordering": false,
+                    "info":     false,
+                    "searching" : false,
+                    "columnDefs": [
+                        {
+                            "targets": [ 0 ],
+                            "visible": false
+                        },
+                        {
+                            "targets" : [1,2,3,4],
+                            "render": function ( data, type, row,meta ) {
+                                return '<a href="#" class="item_name" data-type="text" data-pk="'+row[0]+'" name="'">' + data + '</a>';
+                            }
+                        }
+                    ]
+                } );
+
+                $.fn.editable.defaults.mode = 'popup';
+
+                $(document).on('click', '.item_name', function(){
+
+                    $('.item_name').editable(                            {
+                                type: 'text',
+                                success: function(response, newValue) {
+                                    $(this).val(newValue);
+                                    console.log(dataSet);
+                                }
+                            }
+                    );
+                });
+
+                /*$('#item_table tbody td').editable( function( sValue ) {
+                    var aPos = oTable.fnGetPosition( this );
+
+                    var aData = oTable.fnGetData( aPos[0] );
+
+                    aData[ aPos[1] ] = sValue;
+                    return sValue;
+                }, { "onblur": 'submit' } );*/
+            });
+        </script>
+    @else
+        <script type="text/javascript">
+            $(document).ready(function(){
+                oTable = $('#item_table').DataTable({
+                    "paging":   false,
+                    "ordering": false,
+                    "info":     false,
+                    "searching" : false,
+                    "aoColumns": [
+                        { "sTitle": "ID"},
+                        { "sTitle": "Nama Barang"},
+                        { "sTitle": "Jumlah", "sClass": "right"},
+                        { "sTitle": "Satuan" },
+                        { "sTitle": "Harga Satuan", "sClass": "right"}
+                    ],
+                    "columnDefs": [
+                        {
+                            "targets": [ 0 ],
+                            "visible": false,
+                        }
+                    ]
+                } );
+            });
+        </script>
+    @endif
+
     {!! Theme::js('js/modules/procurement.js')!!}
 
 @stop

@@ -13,6 +13,8 @@ use Redirect;
 use Input;
 use Validator;
 use Auth;
+use yajra\Datatables\Datatables;
+use Response;
 
 class ProcurementController extends Controller
 {
@@ -88,7 +90,7 @@ class ProcurementController extends Controller
 
         $procurement->save();
 
-        $cur_proc = Procurement::find($procurement->id);
+        /*$cur_proc = Procurement::find($procurement->id);
 
         if (!empty($_POST['items'])) {
             $items = json_decode($_POST['items']);
@@ -102,9 +104,9 @@ class ProcurementController extends Controller
 
                 $cur_proc->procurement_item()->save($proc_item);
             }
-        }
+        }*/
 
-        return Redirect::route('dashboard.procurement.index')
+        return Redirect::route('dashboard.procurement.edit', $procurement->id)
             ->with('message', trans('common.procurement_saved'));
     }
 
@@ -124,7 +126,7 @@ class ProcurementController extends Controller
         if ($po)
         {
             $order['letter_no'] = $po->letter_no;
-            $order['date'] = $po->letter_date;
+            $order['date'] = convertToDatepicker($po->letter_date);
             $order['info'] = $po->additional_info;
         }
 
@@ -132,7 +134,7 @@ class ProcurementController extends Controller
             "title" => trans('common.add_procurement'),
             "data" => $data,
             'letter_no' => $order['letter_no'],
-            'po_letter_date' => convertToDatepicker($order['date']),
+            'po_letter_date' => $order['date'],
             'additional_info' => $order['info']
         ]);
 
@@ -202,7 +204,7 @@ class ProcurementController extends Controller
 
         $procurement->save();
 
-        $cur_proc = Procurement::find($id);
+       /* $cur_proc = Procurement::find($id);
 
         ProcurementItem::where("proc_id", "=", $id)->delete();
 
@@ -218,7 +220,7 @@ class ProcurementController extends Controller
 
                 $cur_proc->procurement_item()->save($proc_item);
             }
-        }
+        }*/
 
         return Redirect::route('dashboard.procurement.index')
             ->with('message', trans('common.procurement_updated'));
@@ -277,7 +279,8 @@ class ProcurementController extends Controller
     {
         $str = '[';
         foreach ($data as $val) {
-            $str .= '["' . $val->id . '","' . $val->item_name . '", "' . number_format($val->amount) . '", "' . $val->unit . '","' . number_format($val->unit_price) . '"],';
+            //$str .= '["' . $val->id . '","' . $val->item_name . '", "' . number_format($val->amount) . '", "' . $val->unit . '","' . number_format($val->unit_price) . '"],';
+            $str .= '["' . $val->id . '","' . $val->item_name . '", "' . number_format($val->amount) . '", "' . $val->unit . '","' . $val->unit_price . '"],';
         }
 
         $str = substr($str, 0, -1) . "];";
@@ -330,6 +333,54 @@ class ProcurementController extends Controller
 
         return Redirect::route('dashboard.procurement.show', $id)
             ->with('message', trans('common.purchase_order_saved'));
+    }
+
+    public function datatables($id)
+    {
+        $items = ProcurementItem::select('id','proc_id','item_name','amount','unit','unit_price')->where('proc_id','=',$id)->get();
+
+        foreach ($items as $key => &$val)
+        {
+            //$val->item_name = '<a href="javascript://" class="item_name" data-type="text" data-pk="'.$val->id.'" data-url="'.route('procurement.datatables.edit', array($id, $val->id)).'">'.$val->item_name.'</a>';
+            $val->item_name = '<a href="javascript://" class="item_name" data-type="text" data-pk="'.$val->id.'" id="item_name" data-url="'.route('procurement.datatables.edit', $id).'">'.$val->item_name.'</a>';
+            $val->amount = '<a href="javascript://" class="item_name" data-type="text" data-pk="'.$val->id.'" id="amount" data-url="'.route('procurement.datatables.edit', $id).'">'.$val->amount.'</a>';
+            $val->unit = '<a href="javascript://" class="item_name" data-type="text" data-pk="'.$val->id.'" id="unit" data-url="'.route('procurement.datatables.edit', $id).'">'.$val->unit.'</a>';
+            $val->unit_price = '<a href="javascript://" class="item_name" data-type="text" data-pk="'.$val->id.'" id="unit_price" data-url="'.route('procurement.datatables.edit', $id).'">'.$val->unit_price.'</a>';
+        }
+
+        return Datatables::of($items)->make(true);
+    }
+
+    public function updateItem($id)
+    {
+        $item_id = Request::input('pk');
+        $name = Request::input('name');
+        $value = Request::input('value');
+
+        $item = ProcurementItem::where("id","=",$item_id)->where("proc_id","=",$id)->first();
+        $item->$name = $value;
+        $item->save();
+
+        return Response::make("", 200);
+    }
+
+    public function addItem($id)
+    {
+        $item = new ProcurementItem();
+        $item->proc_id = $id;
+        $item->item_name = Request::input('item_name');
+        $item->amount = str_replace(",", "", Request::input('amount'));;
+        $item->unit = Request::input('unit');
+        $item->unit_price = str_replace(",", "", Request::input('unit_price'));;
+        $item->save();
+
+        return $item->id;
+    }
+
+    public function removeItem($id)
+    {
+        ProcurementItem::destroy(json_decode(Request::input('items'), true));
+        return 0;
     }
 
 }

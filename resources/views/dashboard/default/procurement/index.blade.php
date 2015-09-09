@@ -75,5 +75,20 @@
     {!! Theme::js('js/laravel.js')!!}
     {!! Theme::css('css/bootstrap-datepicker.min.css')!!}
     {!! Theme::js('js/bootstrap-datepicker.min.js')!!}
-    {!! Theme::js('js/modules/procurement.js')!!}
+    <script type="text/javascript">
+        $(document).ready(function()
+        {
+            /*Procurement List*/
+            $('#proc_list').DataTable({
+                "columns": [
+                    null,
+                    { "orderable": false },
+                    null,
+                    null,
+                    { "orderable": false }
+                ],
+                "aaSorting": []
+            });
+        })
+    </script>
 @stop
