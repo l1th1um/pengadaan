@@ -244,9 +244,11 @@
                                     <button type="submit" class="btn btn-success">Submit</button>
                                 </div>
                                 <div class="col-md-10 col-xs-10 right">
+                                    @if ($po_letter_date)
                                     <a href="{{route('dashboard.procurement.purchase_order', Request::segment(3))}}" target="_blank" class="btn btn-info">
                                         <i class="fa fa-print"></i> Print
                                     </a>
+                                    @endif
                                     {{--<a href="{{route('dashboard.procurement.purchase_order', Request::segment(3))}}" target="_blank">
                             <i class="fa fa-print fa-2x"></i>
                         </a>--}}
@@ -329,7 +331,7 @@
     {!! Theme::js('js/jasny-bootstrap.min.js')!!}
     <!-- richtext editor -->
     {!! Theme::js('js/summernote.min.js')!!}
-
+    {!! Theme::js('js/bootstrap-editable.min.js')!!}
     {!! Theme::js('js/modules/procurement.js')!!}
 
     <script type="text/javascript">

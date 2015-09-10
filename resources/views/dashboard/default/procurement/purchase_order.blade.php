@@ -15,7 +15,7 @@
     </head>
     <body>
         <p style="text-align: right">
-            Serpong, {{ $data->purchase_order->letter_date }}
+            Serpong, {{ localeDate($data->purchase_order->letter_date) }}
         </p>
         <table>
             <tr>

@@ -317,10 +317,10 @@ class ProcurementController extends Controller
 
     public function printPO($id)
     {
-        $po = PurchaseOrder::where("proc_id","=",$id)->first();
+        $po = PurchaseOrder::firstOrNew(array("proc_id" => $id));
         $date = explode("/", Request::input('po_letter_date'));
 
-        $po->proc_id = $id;
+        //$po->proc_id = $id;
         $po->letter_no = Request::input('purchase_order_no');
         $po->letter_date = sprintf("%04d-%02d-%02d", $date[2], $date[1], $date[0]);
 
