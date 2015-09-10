@@ -57,7 +57,7 @@ class ProcurementController extends Controller
 
         if (Input::hasFile('offering_letter')) {
             $file = array('image' => Input::file('offering_letter'));
-            $rules = array('image' => 'image');
+            $rules = array('image' => 'mimes:jpeg,png,bmp,doc,docx,pdf,xls,xlsx');
             $validator = Validator::make($file, $rules);
 
             if ($validator->fails()) {
@@ -182,7 +182,7 @@ class ProcurementController extends Controller
 
         if (Input::hasFile('offering_letter')) {
             $file = array('image' => Input::file('offering_letter'));
-            $rules = array('image' => 'image');
+            $rules = array('image' => 'mimes:jpeg,png,bmp,doc,docx,pdf,xls,xlsx');
             $validator = Validator::make($file, $rules);
 
             if ($validator->fails()) {
@@ -247,7 +247,7 @@ class ProcurementController extends Controller
     {
         //echo $id;
         $file = array('image' => Input::file('invoice'));
-        $rules = array('image' => 'image');
+        $rules = array('image' => 'mimes:jpeg,png,bmp,doc,docx,pdf,xls,xlsx');
         $validator = Validator::make($file, $rules);
 
         if ($validator->fails()) {

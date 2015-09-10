@@ -103,8 +103,8 @@
                                     </div>
                                     @if (Route::getCurrentRoute()->getName() == 'dashboard.procurement.edit' && ! empty($procurement->offering_letter) )
                                         <div class="col-md-3 col-xs-3">
-                                            <a href="#" class="thumbnail">
-                                                <img src="{{ asset("/uploads")."/".$procurement->offering_letter }}" >
+                                            <a href="{{ asset("/uploads")."/".$procurement->offering_letter }}" target="_blank">
+                                                <i class="fa fa-file-photo-o"></i>
                                             </a>
                                         </div>
                                     @endif

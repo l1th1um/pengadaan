@@ -283,14 +283,6 @@
                         </div>
                         <div class="form-group">
                             <label for="inputName" class="col-md-2 control-label col-xs-2">
-                                {{ trans('common.purchase_order_no') }}
-                            </label>
-                            <div class="col-md-10 col-xs-10">
-                                {!! Form::text('purchase_order_no',null, array('id' => 'inputName', 'class' => 'form-control')); !!}
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputName" class="col-md-2 control-label col-xs-2">
                                 {{ trans('common.upload_invoice') }}
                             </label>
                             <div class="col-md-10 col-xs-10">
