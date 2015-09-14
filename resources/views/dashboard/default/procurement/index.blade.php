@@ -30,6 +30,7 @@
                         <table class="table table-striped responsive-utilities jambo_table" id="proc_list">
                             <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>{{ trans('common.company_name') }}</th>
                                 <th width="25%">{{ trans('common.offering_letter_no') }}</th>
                                 <th width="20%">{{ trans('common.offering_letter_date') }}</th>
@@ -40,6 +41,11 @@
                             <tbody>
                                 @foreach($data as $row)
                                     <tr>
+                                        <td>
+                                            @foreach($row->procurement_item as $item)
+                                                {{ $item->item_name }}
+                                            @endforeach
+                                        </td>
                                         <td>{{ $row->company_name }}</td>
                                         <td>
                                             <a href="{{route('dashboard.procurement.show', $row->id)}}" class="label label-info">
@@ -81,6 +87,7 @@
             /*Procurement List*/
             $('#proc_list').DataTable({
                 "columns": [
+                    { "bSearchable": true, "bVisible": false},
                     null,
                     { "orderable": false },
                     null,

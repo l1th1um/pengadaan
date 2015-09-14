@@ -42,7 +42,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function()
     /*Route::get('settings', [ 'uses' => 'SettingController@index', 'as' => 'settings']);
     Route::post('settings', 'SettingController@update');*/
 
-    Route::post('procurement/{id}', ['uses' => 'ProcurementController@postInvoice']);
+    Route::post('procurement/{id}', ['uses' => 'ProcurementController@changeStatus']);
     Route::get('procurement/purchase_order/{id}', ['uses' => 'ProcurementController@purchaseOrder', 'as' => 'dashboard.procurement.purchase_order']);
 
     Route::get('procurement/datatables/{id}', ['uses' => 'ProcurementController@datatables', 'as' => 'procurement.datatables']);
@@ -52,6 +52,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function()
 
 
     Route::post('procurement/printPO/{id}', ['uses' => 'ProcurementController@printPO']);
+    Route::post('procurement/uploadInvoice/{id}', ['uses' => 'ProcurementController@uploadInvoice']);
     Route::resource('procurement', 'ProcurementController');
 
     /*Route::group(['prefix' => 'procurement'], function()
@@ -78,4 +79,10 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function()
 /*Route::group(['prefix' => 'roles', 'middleware' => 'role:kepegawaian'], function() {
     Route::get('/', ['uses' => 'RoleController@index', 'as' => 'role_index']);
     Route::post('/', ['uses' => 'RoleController@store']);
+});*/
+
+
+/*Event::listen('illuminate.query', function($query)
+{
+    var_dump($query);
 });*/

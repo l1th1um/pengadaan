@@ -153,6 +153,18 @@
                                     {{ trans('common.proc_status')[$data->proc_status] }}
                                 </a>
                             </div>
+                            {{--<div class="col-md-2 control-label col-xs-2">
+                                <label for="inputName" class="control-label">
+                                    {{ trans('common.updated_by') }}
+                                </label>
+                            </div>
+                            <div class="col-md-4 col-xs-4">
+                                @if (! empty($data->invoice->users->name))
+                                    {{ $data->invoice->users->name }}
+                                @endif
+                            </div>--}}
+                        </div>
+                        <div class="row line_30">
                             <div class="col-md-2 control-label col-xs-2">
                                 <label for="inputName" class="control-label">
                                     {{ trans('common.invoice') }}
@@ -165,16 +177,16 @@
                                     </a>
                                 @endif
                             </div>
-                        </div>
-                        <div class="row line_30">
                             <div class="col-md-2 control-label col-xs-2">
                                 <label for="inputName" class="control-label">
-                                    {{ trans('common.updated_by') }}
+                                    {{ trans('common.payment_proof') }}
                                 </label>
                             </div>
                             <div class="col-md-4 col-xs-4">
-                                @if (! empty($data->invoice->users->name))
-                                    {{ $data->invoice->users->name }}
+                                @if (! empty($data->payment_proof) )
+                                    <a href="{{ asset("/uploads")."/".$data->payment_proof }}" target="_blank">
+                                        <i class="fa fa-file-photo-o"></i>
+                                    </a>
                                 @endif
                             </div>
                         </div>
@@ -199,6 +211,30 @@
                             </tbody>
                         </table>
                     </div>
+                {!! Form::open(array('url' => action('ProcurementController@uploadInvoice', Request::segment(3)), 'class' => 'form-horizontal', 'method' => 'post', 'id' => 'upload_invoice', 'files' => true)) !!}
+                <div class="form-body">
+                    <div class="form-group">
+                        <label for="inputName" class="col-md-2 control-label col-xs-2">
+                            {{ trans('common.upload_invoice') }}
+                        </label>
+                        <div class="col-md-10 col-xs-10">
+                            <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                <div class="form-control" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+                                <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span><input type="file" name="invoice"></span>
+                                <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions pal">
+                        <div class="form-group mbn">
+                            <div class="col-md-2 col-xs-2 right">
+                                <input type="hidden" name="items">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {!! Form::close() !!}
                 </div>
             </div>
         </div>
@@ -283,12 +319,12 @@
                         </div>
                         <div class="form-group">
                             <label for="inputName" class="col-md-2 control-label col-xs-2">
-                                {{ trans('common.upload_invoice') }}
+                                {{ trans('common.upload_payment_proof') }}
                             </label>
                             <div class="col-md-10 col-xs-10">
                                 <div class="fileinput fileinput-new input-group" data-provides="fileinput">
                                     <div class="form-control" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
-                                    <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span><input type="file" name="invoice"></span>
+                                    <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span><input type="file" name="payment_proof"></span>
                                     <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
                                 </div>
                             </div>
@@ -336,6 +372,7 @@
                     ['style', ['bold', 'italic', 'underline']],
                     ['font', ['strikethrough', 'superscript', 'subscript']],
                     ['para', ['ul', 'ol', 'paragraph']],
+                    ['mics',['codeview']]
                 ]
             });
         });

@@ -49,6 +49,8 @@ return [
     'procurement_status' => 'Status Pengadaan',
     'status' => 'Status',
     'upload_invoice' => 'Upload Invoice',
+    'upload_payment_proof' => 'Upload Bukti Pembayaran',
+    'payment_proof' => 'Bukti Pembayaran',
     'status_saved' => 'Data Status telah Diupdate',
     'invoice' => 'Invoice',
     'add_user' => 'Tambah User',
@@ -67,5 +69,7 @@ return [
     'purchase_order_no' => 'No. PO',
     'tos' => 'Ketentuan',
     'date' => 'Tanggal',
-    'purchase_order_saved' => 'Pesanan telah Disimpan'
+    'purchase_order_saved' => 'Pesanan telah Disimpan',
+    'invoice_saved' => 'Data Invoice telah Disimpan',
+    'error_occured' => 'Ada Kesalahan, Ulangi Beberapa Saat'
 ];
