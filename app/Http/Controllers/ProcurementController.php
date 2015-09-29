@@ -255,7 +255,6 @@ class ProcurementController extends Controller
         } else {
 
             if (Request::hasFile('invoice') && Request::file('invoice')->isValid()) {
-                echo "2";
                 $destinationPath = 'uploads';
                 $extension = Request::file('invoice')->getClientOriginalExtension();
                 $fileName = basename(Request::file('invoice')->getClientOriginalName(), "." . $extension) . "_" . rand(11111, 99999) . '.' . $extension;
@@ -267,6 +266,7 @@ class ProcurementController extends Controller
                 $invoice->user_id = Auth::user()->id;
 
                 $invoice->save();
+                return Redirect::back()->with('message', trans('common.invoice_saved'));
             }
             else
             {
@@ -518,7 +518,15 @@ class ProcurementController extends Controller
         $textrun->addText(terbilang($total)." rupiah",'bold');
 
         if (! empty($data->purchase_order->additional_info)) {
-            \PhpOffice\PhpWord\Shared\Html::addHtml($section, $data->purchase_order->additional_info);
+            try {
+                \PhpOffice\PhpWord\Shared\Html::addHtml($section, $data->purchase_order->additional_info);    
+            }
+            catch (\Exception $e)
+            {
+                echo "<h1><Error Occured, Contact System Administrator/h1>";
+                exit;
+            }
+            
         }
 
         $section->addText("Demikian atas perhatian dan kerjasamanya kami ucapkan terima kasih.", null, 'styleContent2');
