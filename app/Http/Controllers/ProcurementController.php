@@ -90,22 +90,6 @@ class ProcurementController extends Controller
 
         $procurement->save();
 
-        /*$cur_proc = Procurement::find($procurement->id);
-
-        if (!empty($_POST['items'])) {
-            $items = json_decode($_POST['items']);
-
-            foreach ($items as $keys => $val) {
-                $proc_item = new ProcurementItem();
-                $proc_item->item_name = $val[1];
-                $proc_item->amount = str_replace(",", "", $val[2]);
-                $proc_item->unit = $val[3];
-                $proc_item->unit_price = str_replace(",", "", $val[4]);
-
-                $cur_proc->procurement_item()->save($proc_item);
-            }
-        }*/
-
         return Redirect::route('dashboard.procurement.edit', $procurement->id)
             ->with('message', trans('common.procurement_saved'));
     }

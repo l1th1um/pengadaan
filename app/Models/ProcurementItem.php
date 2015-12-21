@@ -11,5 +11,4 @@ class ProcurementItem extends Model {
     {
         return $this->belongsTo('qilara\Models\Procurement','proc_id', 'id');
     }
-
 }

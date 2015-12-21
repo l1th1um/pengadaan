@@ -4,6 +4,86 @@
 		"selected_items":
 		[
 			[
+				"num",
+				"num_array"
+			],
+			[
+				"for",
+				"foreach	foreach …"
+			],
+			[
+				"imap",
+				"imapObj	statement"
+			],
+			[
+				"s",
+				"style	Attr"
+			],
+			[
+				"sty",
+				"style"
+			],
+			[
+				"max",
+				"max_width"
+			],
+			[
+				"decode",
+				"decode('utf8"
+			],
+			[
+				"message",
+				"message_mail"
+			],
+			[
+				"fon",
+				"font-size"
+			],
+			[
+				"min",
+				"min-height"
+			],
+			[
+				"line",
+				"line-height"
+			],
+			[
+				"padding",
+				"padding-left"
+			],
+			[
+				"lis",
+				"list-style"
+			],
+			[
+				"text-",
+				"text-transform"
+			],
+			[
+				"font",
+				"font-weight"
+			],
+			[
+				"font-",
+				"font-size"
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"w",
+				"width	(ProcurementController.php)"
+			],
+			[
+				"floa",
+				"floatleft	(single.php)"
+			],
+			[
+				"tex",
+				"text	(rozibid1_kist.sql)"
+			],
+			[
 				"ke",
 				"kecepatan"
 			],
@@ -36,10 +116,6 @@
 				"procurement_data	(create.blade.php)"
 			],
 			[
-				"num",
-				"number_format"
-			],
-			[
 				"error",
 				"error_reporting"
 			],
@@ -62,10 +138,6 @@
 			[
 				"preg",
 				"preg_match"
-			],
-			[
-				"s",
-				"style	Attr"
 			],
 			[
 				"print",
@@ -172,67 +244,10 @@
 	"buffers":
 	[
 		{
-			"file": "config/app.php",
+			"file": "resources/views/dashboard/default/procurement/create.blade.php",
 			"settings":
 			{
-				"buffer_size": 7633,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "public/backend/default/js/bootstrap-editable.min.js",
-			"settings":
-			{
-				"buffer_size": 74169,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/E/htdocs/unidalogapi/index.php",
-			"settings":
-			{
-				"buffer_size": 7549,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "vendor/phpoffice/phpword/samples/Sample_09_Tables.php",
-			"settings":
-			{
-				"buffer_size": 4083,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/D/Course/Introduction to Cloud Computing/Week 1/Assignment/output.txt",
-			"settings":
-			{
-				"buffer_size": 128,
-				"line_ending": "Windows",
-				"name": "list"
-			}
-		},
-		{
-			"contents": "using System;\nusing System.Collections.Generic;\nusing System.ComponentModel;\nusing System.Data;\nusing System.Drawing;\nusing System.Linq;\nusing System.Text;\nusing System.Windows.Forms;\nusing System.Data.SQLite;\nusing Excel = Microsoft.Office.Interop.Excel;\nusing System.Reflection;\n\nnamespace Artesis\n{\n    public partial class reportPelanggan : Form\n    {\n        Dictionary<string, string> bulanDic = new Dictionary<string, string>();\n        List<int> yearList = new List<int>();\n\n        public reportPelanggan()\n        {\n            InitializeComponent();            \n            this.getYear();\n            this.prepareComboBoxMember();\n\n            bulanDic.Add(\"01\", \"Januari\");\n            bulanDic.Add(\"02\", \"Februari\");\n            bulanDic.Add(\"03\", \"Maret\");\n            bulanDic.Add(\"04\", \"April\");\n            bulanDic.Add(\"05\", \"Mei\");\n            bulanDic.Add(\"06\", \"Juni\");\n            bulanDic.Add(\"07\", \"Juli\");\n            bulanDic.Add(\"08\", \"Agustus\");\n            bulanDic.Add(\"09\", \"September\");\n            bulanDic.Add(\"10\", \"Oktober\");\n            bulanDic.Add(\"11\", \"November\");\n            bulanDic.Add(\"12\", \"Desember\");\n        }\n\n        \n        private void getYear()\n        {\n            using (SQLiteConnection conn = new SQLiteConnection(@\"Data Source =\" + Program.path_db))\n            {\n                conn.Open();\n\n                SQLiteCommand cmd = new SQLiteCommand(\"SELECT DISTINCT(strftime('%Y', tanggal)) as tahun FROM meteran\", conn);\n                SQLiteDataReader reader = cmd.ExecuteReader();\n\n                DateTime now = DateTime.Now;\n\n                if (reader.HasRows)\n                {\n                    int nextYear = 0;\n\n                    while (reader.Read())\n                    {\n                        CBTahun.Items.Add(reader.GetString(0));\n                        nextYear = Int32.Parse(reader.GetValue(0).ToString()) + 1;\n                    }\n\n                    CBTahun.Items.Add(nextYear.ToString());\n                }\n                else\n                {\n                    CBTahun.Items.Add(now.Year.ToString());                    \n                }\n\n                CBTahun.SelectedItem = now.Year.ToString();\n                conn.Close();\n            }\n        }\n\n        private void reportMonthBtn_Click(object sender, EventArgs e)\n        {\n            if (cbAnggota.SelectedValue.ToString() != \"0\")\n            {\n                String memberID = cbAnggota.SelectedValue.ToString();\n                String nama = this.getMember(Int32.Parse(memberID));\n\n                SaveFileDialog sfd = new SaveFileDialog();\n                                \n                String tahun = CBTahun.SelectedItem.ToString();\n\n                sfd.FileName = \"Laporan \" + nama + \"  Tahun  \" + tahun + \".xlsx\";\n                sfd.Filter = \"Excel files |*.xlsx\";\n                sfd.RestoreDirectory = true;\n\n                try\n                {\n                    if (sfd.ShowDialog() != System.Windows.Forms.DialogResult.OK)\n                    {\n                        return;\n                    }\n                    else\n                    {\n                        Excel.Application oXL;\n                        Excel._Workbook oWB;\n                        Excel._Worksheet oSheet;\n                        //Excel.Range oRng;\n\n                        Form1 frmUtama = new Form1();\n\n                        try\n                        {\n                            //Start Excel and get Application object.\n                            oXL = new Excel.Application();\n                            oXL.Visible = true;\n\n                            //Get a new workbook.\n                            oWB = (Excel._Workbook)(oXL.Workbooks.Add(Missing.Value));\n                            oSheet = (Excel._Worksheet)oWB.ActiveSheet;\n\n                            oSheet.Cells[1, 1] = \"Laporan Tahun \"  + tahun;\n                            oSheet.Cells[1, 1].Font.Bold = true;\n                            oSheet.Range[oSheet.Cells[1, 1], oSheet.Cells[1, 5]].Merge();\n                            oSheet.Cells[1, 1].Style.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;\n\n                            oSheet.Cells[3, 1] = \"No Pelanggan\";\n                            oSheet.Cells[4, 1] = \"Nama\";\n                            oSheet.Cells[5, 1] = \"Alamat\";\n                            oSheet.Cells[6, 1] = \"No Telepon\";\n                            oSheet.Range[oSheet.Cells[3, 1], oSheet.Cells[3, 2]].Merge();\n                            oSheet.Range[oSheet.Cells[4, 1], oSheet.Cells[4, 2]].Merge();\n                            oSheet.Range[oSheet.Cells[5, 1], oSheet.Cells[5, 2]].Merge();\n                            oSheet.Range[oSheet.Cells[6, 1], oSheet.Cells[6, 2]].Merge();                            \n\n                            using (SQLiteConnection conn = new SQLiteConnection(@\"Data Source =\" + Program.path_db))\n                            {\n                                conn.Open();\n\n                                String query = \"SELECT * FROM members WHERE id = \" + memberID;                                \n\n                                using (SQLiteCommand cmd = new SQLiteCommand(query, conn))\n                                {\n                                    using (SQLiteDataReader reader = cmd.ExecuteReader())\n                                    {                             \n                                        if (reader.Read())\n                                        {\n                                            String alamat = \"Blok \" + reader.GetValue(4) + \" No. \" + reader.GetValue(5);\n                                            alamat += \" RT \" + reader.GetValue(6) + \"/09\";\n\n                                            oSheet.Cells[3, 3] = \"'\" + string.Format(\"{0:00}\", reader.GetValue(1)) + \".\" + reader.GetValue(6);\n                                            oSheet.Cells[4, 3] = reader.GetValue(2);\n                                            oSheet.Cells[5, 3] = alamat;\n                                            oSheet.Cells[6, 3] = reader.GetValue(3);\n                                        }\n                                    }\n                                }\n                                conn.Close();\n                            }\n                            //bulanDic[cbAnggota.SelectedValue.ToString()];\n\n                            int init_row = 9;\n                            oSheet.Cells[1, 1].ColumnWidth = 4;\n                            oSheet.Cells[1, 2].ColumnWidth = 28;\n                            oSheet.Cells[1, 3].ColumnWidth = 28;\n                            oSheet.Cells[1, 4].ColumnWidth = 22;\n                            oSheet.Cells[1, 5].ColumnWidth = 12;\n                            oSheet.Cells[1, 6].ColumnWidth = 14;\n                            oSheet.Cells[1, 7].ColumnWidth = 13;\n                            \n\n                            //Add table headers going cell by cell.\n                            oSheet.Cells[init_row, 1] = \"No.\";\n                            oSheet.Cells[init_row, 2] = \"Bulan\";\n                            oSheet.Cells[init_row, 3] = \"No. Kuitansi\";\n                            oSheet.Cells[init_row, 4] = \"Tanggal Pembayaran\";\n                            oSheet.Cells[init_row, 5] = \"Pemakaian\";\n                            oSheet.Cells[init_row, 6] = \"Lunas\";\n                            oSheet.Cells[init_row, 7] = \"Belum Lunas\";\n                            \n                            oSheet.Range[oSheet.Cells[init_row, 1], oSheet.Cells[init_row, 7]].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.LightGray);\n                            oSheet.Range[oSheet.Cells[init_row, 1], oSheet.Cells[init_row, 7]].Style.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;\n                            oSheet.Range[oSheet.Cells[init_row, 1], oSheet.Cells[init_row, 7]].Style.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;\n                            oSheet.Range[oSheet.Cells[init_row, 1], oSheet.Cells[init_row, 7]].WrapText = true;\n\n                            oSheet.Cells[init_row, 1].EntireRow.Font.Bold = true;\n                            oSheet.Cells[init_row, 1].RowHeight = 18;\n\n                            init_row++;\n\n                            using (SQLiteConnection conn = new SQLiteConnection(@\"Data Source =\" + Program.path_db))\n                            {\n                                conn.Open();\n\n                                String query = \"SELECT strftime('%m', tanggal) as bln, no_invoice, invoice_suffix, tgl_bayar, jumlah, awal, akhir \";\n                                query += \"FROM  meteran m \";\n                                query += \"LEFT JOIN pembayaran p ON m.id = p.meteran_id \";                                \n                                query += \"WHERE strftime('%Y', m.tanggal) = '\" + tahun + \"' \";\n                                query += \"AND member_id  = \" + memberID + \" \";\n                                query += \"ORDER BY bln\";\n                                \n                                //System.Diagnostics.Debug.WriteLine(query);\n\n                                using (SQLiteCommand cmd = new SQLiteCommand(query, conn))\n                                {\n                                    using (SQLiteDataReader reader = cmd.ExecuteReader())\n                                    {\n                                        int no = 1;\n                                        while (reader.Read())\n                                        {\n                                            double pemakaian = reader.GetDouble(6) - reader.GetDouble(5);\n\n                                            string tgl_pembayaran = \"\";\n                                            //string keterangan = \"\";                                            \n                                            Int32 lunas = 0;\n                                            Int32 blm_lunas = 0;\n                                            \n                                            if (!DBNull.Value.Equals(reader[\"jumlah\"]))\n                                            {\n                                                lunas = reader.GetInt32(4);\n                                                //keterangan = \"Lunas\";\n                                                tgl_pembayaran = String.Format(new System.Globalization.CultureInfo(\"id-ID\"), \"{0:dd MMMM yyyy HH:mm}\", reader.GetDateTime(3).ToLocalTime());\n                                            }\n                                            else\n                                            {\n                                                //keterangan = \"Belum Dibayar\";\n                                                blm_lunas = Convert.ToInt32(frmUtama.biayaPemakaian(Convert.ToDouble(pemakaian)));\n                                                oSheet.Range[oSheet.Cells[init_row, 1], oSheet.Cells[init_row, 7]].Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Orange);\n                                            }\n                                            \n\n                                            oSheet.Cells[init_row, 1] = no;\n                                            oSheet.Cells[init_row, 2] = bulanDic[reader.GetValue(0).ToString()];\n                                            oSheet.Cells[init_row, 3] = String.Format(\"{0:000}\", reader.GetValue(1)) + reader.GetValue(2).ToString();\n                                            oSheet.Cells[init_row, 4] = tgl_pembayaran;\n                                            oSheet.Cells[init_row, 5] = pemakaian;\n                                            oSheet.Cells[init_row, 6] = lunas;\n                                            oSheet.Cells[init_row, 7] = blm_lunas;\n\n                                            no++;\n                                            init_row++;\n                                        }\n                                    }\n                                }\n                            }\n\n                            oSheet.Cells[init_row, 1] = \"Jumlah\";\n                            oSheet.Cells[init_row, 5] = \"=sum(E10:E\" + (init_row - 1) + \")\";\n                            oSheet.Cells[init_row, 6] = \"=sum(F10:F\" + (init_row - 1) + \")\";\n                            oSheet.Cells[init_row, 7] = \"=sum(G10:G\" + (init_row - 1) + \")\";\n\n                            oSheet.Range[oSheet.Cells[init_row, 1], oSheet.Cells[init_row, 4]].Merge();\n                            oSheet.Cells[init_row, 1].Style.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;\n                            oSheet.Cells[init_row, 1].Font.Bold = true;\n                            oSheet.Cells[init_row, 5].Font.Bold = true;\n\n                            //oSheet.get_Range(\"E4\", \"E\" + init_row).Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft;\n                            oSheet.get_Range(\"A3\", \"C7\").Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft;\n                            oSheet.get_Range(\"A3\", \"C7\").Font.Bold = true;\n\n                            oSheet.get_Range(\"B10\", \"B\" + init_row).Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft;\n                            oSheet.get_Range(\"E10\", \"E\" + init_row).Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignRight;\n                            oSheet.get_Range(\"F10\", \"F\" + init_row).Cells.HorizontalAlignment = Excel.XlHAlign.xlHAlignRight;\n\n                            oSheet.get_Range(\"D10\", \"D\" + init_row).NumberFormat = \"dd/mm/yyyy hh:mm\";\n                            oSheet.get_Range(\"F10\", \"G\" + init_row).NumberFormat = \"#,###,###\";\n                            oSheet.get_Range(\"A9\", \"G\" + init_row).Borders.LineStyle = Excel.XlLineStyle.xlContinuous;\n\n                            //Make sure Excel is visible and give the user control\n                            //of Microsoft Excel's lifetime.\n                            oXL.Visible = true;\n                            oXL.UserControl = true;\n\n                            String filename = sfd.FileName;\n                            oWB.SaveAs(filename);\n                            //oWB.Close();\n\n                            MessageBox.Show(\"Laporan Telah Disimpan\");\n                        }\n                        catch (Exception theException)\n                        {\n                            String errorMessage;\n                            errorMessage = \"Error: \";\n                            errorMessage = String.Concat(errorMessage, theException.Message);\n                            errorMessage = String.Concat(errorMessage, \" Line: \");\n                            errorMessage = String.Concat(errorMessage, theException.Source);\n\n                            MessageBox.Show(errorMessage, \"Error\");\n                        }\n                    }\n                }\n                catch (Exception ex)\n                {\n                    MessageBox.Show(\"ERROR: \" + ex.Message);\n                }\n                this.Close();\n            }\n            else\n            {\n                MessageBox.Show(\"Pilih Anggota\");\n            }\n\n        }\n\n        private void releaseObject(object obj)\n        {\n            try\n            {\n                System.Runtime.InteropServices.Marshal.ReleaseComObject(obj);\n                obj = null;\n            }\n            catch (Exception ex)\n            {\n                obj = null;\n                MessageBox.Show(\"Exception Occured while releasing object \" + ex.ToString());\n            }\n            finally\n            {\n                GC.Collect();\n            }\n        }\n\n        private void prepareComboBoxMember()\n        {\n            using (SQLiteConnection conn = new SQLiteConnection(@\"Data Source =\" + Program.path_db))\n            {\n                conn.Open();\n\n                DataTable dt = new DataTable();\n                string command = \"SELECT id, nama || ' (' || (substr('00'||urut_rt, -2, 2) || '.' || rt) || ')' as nama_anggota FROM members WHERE active = 1 ORDER BY nama_anggota\";\n                using (SQLiteDataAdapter da = new SQLiteDataAdapter(command, conn))\n                {\n                    dt.Columns.Add(\"id\", typeof(string));\n                    dt.Columns.Add(\"nama_anggota\", typeof(string));\n\n                    DataRow row = dt.NewRow();\n                    row[\"Id\"] = 0;\n                    row[\"nama_anggota\"] = \"- Pilih Anggota - \";\n                    dt.Rows.Add(row);\n\n                    da.Fill(dt);\n\n                    cbAnggota.ValueMember = \"id\";\n                    cbAnggota.DisplayMember = \"nama_anggota\";\n                    cbAnggota.DataSource = dt;\n                }\n\n                conn.Close();\n            }\n        }\n\n        public string getMember(int id)\n        {\n            using (SQLiteConnection conn = new SQLiteConnection(@\"Data Source =\" + Program.path_db))\n            {\n                conn.Open();\n                string command = \"SELECT nama FROM members WHERE id = \" + id;\n                using (SQLiteCommand query = new SQLiteCommand(command, conn))\n                {\n                    using (SQLiteDataReader reader = query.ExecuteReader())\n                    {\n                        if (reader.Read())\n                        {\n                            return reader.GetValue(0).ToString();\n                        }\n                        else\n                        {\n                            return \"\";\n                        }\n                    }\n                }\n            }\n        }\n\n    }\n}\n",
-			"settings":
-			{
-				"buffer_size": 17536,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/D/Documents/Visual Studio 2010/Projects/Artesis/Artesis/Program.cs",
-			"settings":
-			{
-				"buffer_size": 1080,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/D/Dropbox/link.txt",
-			"settings":
-			{
-				"buffer_size": 23480,
+				"buffer_size": 13227,
 				"line_ending": "Windows"
 			}
 		}
@@ -245,9 +260,17 @@
 	"command_palette":
 	{
 		"height": 375.0,
-		"last_filter": "in",
+		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"Package",
+				"Package Control: Remove Package"
+			],
+			[
+				"I",
+				"Package Control: Install Package"
+			],
 			[
 				"in",
 				"Package Control: Install Package"
@@ -320,144 +343,149 @@
 	"expanded_folders":
 	[
 		"/E/htdocs/si_pengadaan",
-		"/E/htdocs/si_pengadaan/app",
-		"/E/htdocs/si_pengadaan/app/Commands",
-		"/E/htdocs/si_pengadaan/app/Http",
-		"/E/htdocs/si_pengadaan/app/Http/Controllers",
-		"/E/htdocs/si_pengadaan/app/Http/Middleware",
-		"/E/htdocs/si_pengadaan/app/Models",
-		"/E/htdocs/si_pengadaan/config"
+		"/E/htdocs/si_pengadaan/resources",
+		"/E/htdocs/si_pengadaan/resources/views",
+		"/E/htdocs/si_pengadaan/resources/views/dashboard",
+		"/E/htdocs/si_pengadaan/resources/views/dashboard/default",
+		"/E/htdocs/si_pengadaan/resources/views/dashboard/default/procurement",
+		"/E/htdocs/si_pengadaan/resources/views/vendor",
+		"/E/htdocs/si_pengadaan/vendor",
+		"/E/htdocs/si_pengadaan/vendor/doctrine",
+		"/E/htdocs/si_pengadaan/vendor/doctrine/instantiator",
+		"/E/htdocs/si_pengadaan/vendor/doctrine/instantiator/src",
+		"/E/htdocs/si_pengadaan/vendor/doctrine/instantiator/src/Doctrine",
+		"/E/htdocs/si_pengadaan/vendor/doctrine/instantiator/src/Doctrine/Instantiator"
 	],
 	"file_history":
 	[
-		"/E/htdocs/si_pengadaan/vendor/phpoffice/phpword/samples/Sample_26_Html.php",
-		"/E/htdocs/si_pengadaan/vendor/phpoffice/phpword/samples/Sample_02_TabStops.php",
-		"/E/htdocs/si_pengadaan/vendor/phpoffice/phpword/samples/Sample_08_ParagraphPagination.php",
-		"/E/htdocs/si_pengadaan/vendor/phpoffice/phpword/samples/Sample_01_SimpleText.php",
-		"/E/htdocs/si_pengadaan/vendor/phpoffice/phpword/samples/Sample_09_Tables.php",
-		"/D/Application/HotSpot Shield VPN v.4.15.3 + Elite Edition Activator [danhuk]/description.nfo",
-		"/D/Application/AnchorFree Hotspot Shield Elite 4.20.5-NEOSOFT/readme.txt",
-		"/C/Program Files (x86)/Hotspot Shield/bin/Crack.bat",
-		"/C/Program Files (x86)/Hotspot Shield/bin/start HSS Services.bat",
-		"/D/Application/AnchorFree Hotspot Shield Elite 4.20.5-NEOSOFT/crack/Block Host.bat",
-		"/C/Windows/System32/drivers/etc/hosts",
-		"/E/htdocs/si_pengadaan/public/backend/default/js/datatables/js/dataTables.editor.min.js",
-		"/E/htdocs/si_pengadaan/public/backend/default/css/bootstrap-editable.css",
-		"/E/htdocs/si_pengadaan/public/backend/default/js/bootstrap-editable.min.js",
-		"/E/htdocs/si_pengadaan/public/backend/default/js/datatables/tools/Readme.txt",
-		"/E/htdocs/si_pengadaan/public/backend/default/js/datatables/js/jquery.dataTables.min.js",
-		"/E/htdocs/si_pengadaan/public/backend/default/js/datatables/js/jquery.js",
-		"/E/htdocs/si_pengadaan/app/Models/Permission.php",
-		"/E/htdocs/si_pengadaan/app/Models/Role.php",
-		"/E/htdocs/si_pengadaan/app/Models/User.php",
-		"/D/2015/ADAM/ModbusScanner_src/ModbusScanner/README.TXT",
-		"/E/htdocs/si_pengadaan/resources/views/dashboard/default/procurement/create.blade.php",
-		"/E/htdocs/si_pengadaan/app/Http/Controllers/ProcurementController.php",
-		"/E/htdocs/temp/summernote-develop/examples/nativestyle.html",
-		"/E/htdocs/temp/summernote-develop/examples/codemirror.html",
-		"/D/Snippets/Bootstrap/steveathon-bootstrap-wysiwyg-fe268ae/examples/basic.html",
-		"/D/Snippets/Bootstrap/summernote-develop/examples/textarea.html",
+		"/D/Scrap-a-thon/Scrapathon Draft/Bagian Hukum/Data Produk Hukum Bandung.txt",
+		"/G/index (contoh).csv",
+		"/G/Scrapathon/Bagian Hukum/Data Produk Hukum Bandung.txt",
+		"/G/index.csv",
+		"/D/Scrap-a-thon/Scrapathon Draft/Bagian Hukum/Data Produk Hukum Bandung 2001.txt",
+		"/D/Dropbox/STT Mandala/Praktikum Basis Data 2015/Tugas 1",
+		"/E/python/imap_yahoo.py",
+		"/E/htdocs/kist/wp-content/plugins/wp-jquery-datatable/wp-jquery-datatable.php",
+		"/E/htdocs/kist/wp-config.php",
+		"/E/htdocs/kist/wp-content/themes/sunrain/comments.php",
+		"/E/htdocs/imap_tes.php",
+		"/E/htdocs/kist/wp-content/themes/sunrain/functions.php",
+		"/E/htdocs/kist/wp-content/themes/sunrain/front-page.php",
+		"/E/htdocs/kist/wp-content/themes/sunrain/footer.php",
+		"/D/Project/IntegrasiEdukasi/V3/pahala_webv3.sql",
+		"/E/htdocs/integrasi-edukasi-v3/wp-content/plugins/mechanic-visitor-counter/wp-statsmechanic.php",
+		"/E/htdocs/integrasi-edukasi-v3/wp-config.php",
+		"/D/Project/Irul/AEMPL/aempl_kist.sql",
+		"/D/Dropbox/STT Mandala/Praktikum Basis Data 2015/Soal Quiz 1.txt",
+		"/D/Application/wfp/wfp/tes_pascal.pp",
+		"/E/python/coding_challenge.py",
+		"/E/python/ytcaption.py",
+		"/D/Scrap-a-thon/Python/tableScrapper.py",
+		"/D/Scrap-a-thon/Contoh Data/Data Bidang Pengairan-Rekap Data Aset.csv",
+		"/D/Scrap-a-thon/Contoh Data/Data Bidang Pengairan-Daerah Irigasi Sederhana(4l).csv",
+		"/D/Scrap-a-thon/Contoh Data/Lampiran Tabel SUSEDA 2013-1.csv",
+		"/D/Scrap-a-thon/Scrapathon Dataset/Bagian Hukum/Data Produk Hukum Bandung.txt",
 		"/D/Dropbox/link.txt",
-		"/E/htdocs/si_pengadaan/resources/views/dashboard/default/partial/header.blade.php",
-		"/E/htdocs/intra-revo/resources/views/dashboard/default/partial/menu.blade.php",
-		"/E/htdocs/odengrebus/application/helpers/common_helper.php",
-		"/E/htdocs/kobika/application/helpers/common_helper.php",
-		"/D/Course/Introduction to Cloud Computing/Week 1/Assignment/cloudapp-mp1-master/cloudapp-mp1-master/MP1.java",
-		"/E/htdocs/si_pengadaan/composer.json",
-		"/E/htdocs/si_pengadaan/bootstrap/app.php",
-		"/E/htdocs/weather_sample.json",
-		"/E/htdocs/lipi/uljak/system/application/controllers/main.php",
-		"/E/htdocs/lipi/uljak/system/application/controllers/sample.php",
-		"/E/htdocs/lipi/uljak/system/application/models/sample_model.php",
-		"/C/Program Files (x86)/Cntlm/cntlm.ini",
-		"/D/xampp/apache/conf/extra/httpd-vhosts.conf",
-		"/E/htdocs/si_pengadaan/public/backend/default/js/editor/bootstrap-wysiwyg.js",
-		"/E/htdocs/neina/app/helpers.php",
-		"/E/htdocs/si_pengadaan/resources/views/dashboard/default/partial/menu.blade.php",
-		"/E/htdocs/si_pengadaan/config/app.php",
-		"/E/htdocs/si_pengadaan/resources/views/dashboard/default/index.blade.php",
-		"/E/htdocs/si_pengadaan/resources/lang/id/common.php",
-		"/E/htdocs/si_pengadaan/config/qilara.php",
-		"/E/htdocs/si_pengadaan/config/auth.php",
-		"/E/htdocs/si_pengadaan/config/services.php",
-		"/E/htdocs/si_pengadaan/app/Services/Registrar.php",
-		"/E/htdocs/intra-revo/app/Models/User.php",
+		"/E/output0.csv",
+		"/E/output.csv",
+		"/D/Scrap-a-thon/Contoh Data/Testing/Proposal Penawaran Biaya Ombilin-1.txt",
+		"/G/files.txt",
+		"/D/Scrap-a-thon/Contoh Data/Testing/Proposal Penawaran Biaya Ombilin-5.csv",
+		"/D/Scrap-a-thon/Contoh Data/Testing/Proposal Penawaran Biaya Ombilin-13.csv",
+		"/D/Scrapping/tabula/README.txt",
+		"/D/Scrap-a-thon/Contoh Data/Excel2013/Penawaran Bukit Asam-Rekap.csv",
+		"/D/Scrap-a-thon/Contoh Data/Testing/Proposal Penawaran Biaya Ombilin-1.csv",
+		"/C/Anaconda/Scripts/in2csv-script.py",
+		"/D/Scrap-a-thon/Contoh Data/Excel/Data Bidang Pengairan-Data Curah Hujan.csv",
+		"/D/Scrap-a-thon/Contoh Data/Excel/Data Bidang Pengairan-Rekap Data Aset.csv",
+		"/D/Scrap-a-thon/Contoh Data/Excel/Data Bidang Pengairan-Daerah Irigasi Sederhana(4l).csv",
+		"/D/Scrap-a-thon/Contoh Data/Excel/Data Bidang Pengairan-Sungai Propinsi.csv",
+		"/D/Scrap-a-thon/Contoh Data/index.csv",
+		"/D/Scrap-a-thon/Python/index.csv",
+		"/D/Scrap-a-thon/Contoh Dataindex.csv",
+		"/D/Scrap-a-thon/Python/mycsv.csv",
+		"/D/Scrap-a-thon/Contoh Data/Testing/Lampiran Tabel SUSEDA 2013-1.txt",
+		"/D/Scrap-a-thon/Contoh Data/Testing/Lampiran Tabel SUSEDA 2013-1.csv",
+		"/D/Scrap-a-thon/Contoh Data/Testing/Proposal Penawaran Biaya Ombilin-2.csv",
+		"/D/Scrap-a-thon/Contoh Data/Testing/Proposal Penawaran Biaya Ombilin-3.csv",
+		"/D/Scrap-a-thon/Contoh Data/Testing/Proposal Penawaran Biaya Ombilin-6.csv",
+		"/D/Scrap-a-thon/Contoh Data/Testing/Proposal Penawaran Biaya Ombilin-10.csv",
+		"/D/Scrap-a-thon/Contoh Data/Testing/Proposal Penawaran Biaya Ombilin-8.csv",
+		"/D/Scrap-a-thon/Contoh Data/Testing/Proposal Penawaran Biaya Ombilin-7.csv",
+		"/D/Scrap-a-thon/Contoh Data/Testing/Proposal Penawaran Biaya Ombilin-4.csv",
+		"/D/Scrap-a-thon/Contoh Data/Testing/Proposal Penawaran Biaya Ombilin-9.csv",
+		"/D/Scrap-a-thon/Contoh Data/Testing/Proposal Penawaran Biaya Ombilin-11.csv",
+		"/D/Scrap-a-thon/Contoh Data/Testing/Proposal Penawaran Biaya Ombilin-12.csv",
+		"/E/output_ombilin.csv",
+		"/E/python/udacity_course.txt",
+		"/D/Scrap-a-thon/Python/scrap.py",
+		"/E/python/python-youtube-library-master/youtube_library/user.py",
+		"/E/python/python-youtube-library-master/youtube_library/scraper.py",
+		"/E/python/python-youtube-library-master/youtube_library/feedpage.py",
+		"/E/python/python-youtube-library-master/youtube_library/video.py",
+		"/E/python/python-youtube-library-master/youtube_library/utils.py",
+		"/E/python/python-youtube-library-master/youtube_library/__init__.py",
+		"/E/python/python-youtube-library-master/youtube_library/playlist.py",
+		"/E/python/python-youtube-library-master/yt_lib/scraper.py",
+		"/E/python/python-youtube-library-master/yt.py",
+		"/E/python/python-youtube-library-master/get_udacity_course.py",
+		"/E/python/mapper.py",
+		"/E/python/convert_mongo.py",
+		"/E/python/grab_unidalog.py",
+		"/E/python/failed.txt",
+		"/D/Application/wfp/wfp/random.pp",
+		"/E/python/knn.py",
+		"/D/Project/Irul/AEMPL/RSC_.ris",
+		"/E/htdocs/kist/wp-content/plugins/nextgen-gallery/products/photocrati_nextgen/modules/ngglegacy/view/album-compact.php",
+		"/D/Project/Irul/AEMPL/aempl.bib",
+		"/E/htdocs/integrasi-edukasi/wp-content/themes/mesocolumn/header.php",
+		"/E/htdocs/kist/wp-content/themes/sunrain/nggallery/album-compact-sunrain.php",
+		"/E/htdocs/kist/wp-content/themes/sunrain/style.css",
+		"/D/Project/Irul/AEMPL/science1560f993.ris",
+		"/E/htdocs/kist/wp-content/themes/sunrain/header.php",
+		"/E/htdocs/kist/wp-includes/general-template.php",
+		"/C/Users/l1th1um/AppData/Local/Temp/Temp1_wfp.zip/wfp/readme.txt",
+		"/D/Foto/temp/adminer-4.2.2.php",
+		"/D/Application/Navicat Premium v11.0.18 x86 x64/Baca dulu.txt",
+		"/D/kuliah08102015.sql",
+		"/E/htdocs/integrasi-edukasi/wp-content/themes/mesocolumn/index.php",
+		"/C/Users/l1th1um/AppData/Local/Temp/fz3temp-1/album-compact.php",
+		"/E/htdocs/kist/wp-content/themes/sunrain/nggallery/gallery-sunrain.php",
+		"/E/htdocs/kist/wp-content/plugins/nextgen-gallery/products/photocrati_nextgen/modules/ngglegacy/view/gallery.php",
+		"/D/Project/Irul/AEMPL/science09807636.ris",
+		"/D/Dropbox/STT Mandala/Praktikum Basis Data 2015/Tugas 2.txt",
+		"/D/Application/Newspaper v4.6.1 - Themeforest Premium Wordpress Theme/Read ME First.txt",
+		"/D/Application/Newspaper v4.6.1 - Themeforest Premium Wordpress Theme/documentation/readme.txt",
+		"/F/README.diskdefines",
+		"/F/md5sum.txt",
+		"/D/Application/KMSpico 9.1.3 Final/ReadMe KMSpico Install.txt",
+		"/E/htdocs/kist/wp-content/themes/sunrain/page.php",
+		"/E/htdocs/kist/wp-content/themes/sunrain/single.php",
+		"/E/htdocs/si_pengadaan/app/Http/Controllers/ProcurementController.php",
 		"/E/htdocs/si_pengadaan/app/Http/routes.php",
-		"/E/htdocs/si_pengadaan/config/themes.php",
-		"/E/htdocs/intra-revo/app/Models/AccumulateAbsence.php",
-		"/D/FIFA 15/FIFA15MW - Readme - How to Install.txt",
-		"/E/htdocs/si_pengadaan/app/Http/Controllers/DashboardController.php",
-		"/D/FIFA 15/Readme.txt",
-		"/E/htdocs/si_pengadaan/public/backend/default/js/jquery.dataTables.min.js",
-		"/E/htdocs/intra-revo/app/Models/Absence.php",
-		"/E/htdocs/si_pengadaan/public/backend/default/css/font-awesome.min.css",
-		"/I/FIFA 15/GMT-MAX.ORG_FIFA_15_Update_1-4_and_Crack_v.3.0/Readme.txt",
-		"/D/vagrant/ubuntu-server-13.10/Vagrantfile",
-		"/E/htdocs/si_pengadaan/database/migrations/2015_08_19_140820_add_username_to_users_table.php",
-		"/E/htdocs/si_pengadaan/resources/views/dashboard/default/login/login.blade.php",
+		"/E/htdocs/intra-revo/app/Http/Controllers/AttendanceController.php",
+		"/E/htdocs/si_pengadaan/app/Http/Controllers/UserController.php",
 		"/E/htdocs/si_pengadaan/app/Http/Middleware/Authenticate.php",
-		"/E/htdocs/intra-revo/config/qilara.php",
-		"/E/htdocs/si_pengadaan/.env",
-		"/E/htdocs/unidalogapi/index.php",
-		"/D/Documents/FIFA 15/fifasetup.ini",
-		"/D/Application/KMSpico 9.2.3 Final [ThumprDC]/KMSpico 9.2.3 Final [ThumprDC]/ReadMe KMSpico Install.txt",
-		"/E/htdocs/qilara/app/Http/routes.php",
-		"/E/htdocs/intra-revo/public/backend/default/js/custom.js",
-		"/E/htdocs/intra-revo/public/backend/default/css/custom.css",
-		"/E/htdocs/qilara/.env",
-		"/E/htdocs/qilara/config/database.php",
-		"/D/xampp/apache/conf/httpd.conf",
-		"/H/ISO/The Sims/3DMGAME-The.Sims.4.Update.1.incl.Crack/How to make it work.txt",
-		"/D/Video/Shaun the Sheep Movie (2015)WEB-DL XVID AC3 MURD3R/New Text Document.txt",
-		"/H/FIFA 15/GMT-MAX.ORG_FIFA_15_Update_1-4_and_Crack_v.3.0/Readme.txt",
-		"/D/Application/Visual Studio 2015 Enterprice ISO + Serial Keys - [Fullstuff]/Serials/Serial.txt",
-		"/D/FIFA 15/buttonData.ini",
-		"/G/WIndows Update/urutan",
-		"/D/Application/Visual Basic 6.0 Enterprise Edition Full/How to instal.txt",
-		"/H/ISO/Windows XP/Covers + Serial/Serial.txt",
-		"/E/htdocs/basisdata/index.html",
-		"/D/Application/FI-XV-MWM240AIO/FIFA15MW - Readme - How to Install.txt",
-		"/D/Application/FI-XV-MWM240AIO/FI-XV-MWMW240AIO/FIFA15MW - Readme - How to Install.txt",
-		"/D/Application/Mortal Kombat X Update/1. Mortal.Kombat.X.Update.v20150418-RELOADED/reloaded.nfo",
-		"/D/Application/Mortal Kombat X Update/5. Mortal.Kombat.X.Update.v20150709-RELOADED/reloaded.nfo",
-		"/E/htdocs/faker-id/grab_all.py",
-		"/E/htdocs/faker-id/nama_lengkap_all_lang_2.txt",
-		"/C/Program Files (x86)/Microsoft Visual Studio 10.0/Common7/IDE/devenv.exe.config",
-		"/D/Project/IntraKimia/New/daftar_rekening.csv",
-		"/D/Documents/Visual Studio 2010/Projects/Artesis/Artesis/reportBulanan.cs",
-		"/E/kobika.sql",
-		"/E/htdocs/utkorea/portal/helpers/common_helper.php",
-		"/E/htdocs/intra-revo/public/daftar_rekening.csv",
-		"/D/Application/Mortal Kombat X Update/Mortal.Kombat.X.Update.v20150722-RELOADED/reloaded.nfo",
-		"/C/Users/l1th1um/AppData/Local/Temp/scp25348/var/www/intra-revo/app/Http/Controllers/TukinController.php",
-		"/D/Video/Guardians.of.the.Galaxy.Origins.S01E01.Star-Lord.Part.1.720p.WEB-DL.x264.AAC/Guardians of the Galaxy- Origins - 01x01 - Star-Lord (part 1).WEB-DL.x264.AAC.English.HI.C.orig.Addic7ed.com.srt",
-		"/D/Snippets/C Sharp/GMap.NET.WindowsForms-April-2015/Release-NETv4.0/License.txt",
-		"/E/htdocs/odengrebus/application/views/order/items_order.php",
-		"/E/htdocs/odengrebus/assets/scripts/order.js",
-		"/E/htdocs/odengrebus/assets/scripts/autoNumeric.js",
-		"/E/htdocs/intra-revo/public/backend/default/js/autoNumeric.js",
-		"/E/htdocs/odengrebus/assets/scripts/dash_admin.js",
-		"/E/htdocs/odengrebus/application/views/order/new_order.php",
-		"/C/Users/l1th1um/AppData/Local/Temp/scp22811/var/www/intra-revo/.env",
-		"/D/Project/IntraKimia/New/nim_fungsional.csv",
-		"/D/Project/IntraKimia/New/daftar_fungsional.csv",
-		"/C/Users/l1th1um/AppData/Local/Temp/scp21659/var/www/intra-revo/config/debugbar.php",
-		"/H/Downloads/li.txt",
-		"/H/Downloads/dpb02_15_002/Readme.txt",
-		"/E/htdocs/integrasi-edukasi/wp-content/plugins/wp-downloadmanager/download-options.php",
-		"/C/AppServ/www/intra/daftarhadirbaru/tukin.php",
-		"/E/htdocs/integrasi-edukasi/wp-content/themes/flat-theme/page-frontpage.php",
-		"/E/htdocs/integrasi-edukasi/wp-config.php",
-		"/D/Project/IntraKimia/New/sql_akumulasi.txt",
-		"/D/Video/Phantom.Halo.2014.HDRip.XViD-ETRG/Phantom Halo-ETRG.nfo",
-		"/D/Dropbox/STT Mandala/Perancangan Basis Data 2015/readme.txt",
-		"/E/htdocs/integrasi-edukasi/wp-content/themes/flat-theme/footer.php",
-		"/E/htdocs/integrasi-edukasi/wp-content/plugins/mechanic-visitor-counter/wp-statsmechanic.php",
-		"/E/htdocs/integrasi-edukasi/wp-content/plugins/mechanic-visitor-counter/styles/css/default.css",
-		"/D/ApacheSparkMOOC/data/lab1_word_count_student.ipynb",
-		"/D/ApacheSparkMOOC/data/spark_tutorial_student.ipynb",
-		"/C/Users/l1th1um/AppData/Local/Temp/scp01230/var/www/intra-revo/config/debugbar.php",
-		"/C/Users/l1th1um/AppData/Local/Temp/scp01079/var/www/intra-revo/.env"
+		"/E/htdocs/si_pengadaan/vendor/doctrine/instantiator/src/Doctrine/Instantiator/Instantiator.php",
+		"/E/htdocs/si_pengadaan/app/Http/Kernel.php",
+		"/E/htdocs/si_pengadaan/app/Http/Middleware/RedirectIfAuthenticated.php",
+		"/E/htdocs/si_pengadaan/app/Http/Middleware/VerifyCsrfToken.php",
+		"/C/Windows/System32/drivers/etc/hosts",
+		"/I/Installer/Microsoft Office/라이센스정보.txt",
+		"/I/ISO/Windows XP/Covers + Serial/Serial.txt",
+		"/E/htdocs/kist/wp-content/themes/sunrain/style-responsive.css",
+		"/C/Users/l1th1um/AppData/Local/Temp/scp54999/var/www/intra-revo/.env",
+		"/D/testing.sql",
+		"/D/Dropbox/STT Mandala/Praktikum Basis Data 2015/sakila-db/sakila-db/sakila-schema.sql",
+		"/D/Project/Irul/AEMPL/rozibid1_kist.sql",
+		"/E/htdocs/kist/wp-content/themes/sunrain-child/style.css",
+		"/E/htdocs/kist/wp-content/themes/sunrain-child/functions.php",
+		"/E/htdocs/integrasi-edukasi/wp-content/themes/flat-theme-child/style.css",
+		"/E/htdocs/integrasi-edukasi/wp-content/themes/flat-theme-child/functions.php",
+		"/E/htdocs/si_pengadaan/public/backend/default/js/bootstrap-editable.min.js",
+		"/E/htdocs/si_pengadaan/resources/views/dashboard/default/procurement/show.blade.php",
+		"/E/vagrant_trusty64/Vagrantfile",
+		"/E/htdocs/integrasi-edukasi/.htaccess"
 	],
 	"find":
 	{
@@ -494,6 +522,63 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"|no",
+			"keputusan Walikota",
+			"peraturan Walikota",
+			"perwal No.",
+			"peraturan Daerah",
+			"PERATURAN WALIKOTA BANDUNG",
+			"Peraturan Walikota No. ",
+			"Th.",
+			"Thn.",
+			"PERATuRan Daerah Kota Bandung",
+			"PERATuRan Daerah Kota Bandung No.",
+			"Peraturan Daerah No.",
+			"PERDA No.",
+			"PERATURAN DAERAH KOTA BANDUNG NOMOR",
+			"KEPUTUSAN WALIKOTA BANDUNG NOMOR",
+			"2011",
+			"Distarcip",
+			"|",
+			"Tahun  ",
+			"Tahun n ",
+			"|",
+			"Tahun",
+			"---{ ",
+			"maven",
+			"L2hvbWUvcm96aWJpZDEvcHVibGljX2h0bWwva2lzdC93cC1jb250ZW50L3RoZW1lcy9zdW5yYWluL25nZ2FsbGVyeS9hbGJ1bS1jb21wYWN0LnBocA==",
+			"album-compact",
+			"rozibid",
+			"rozie",
+			"DEFAULT CHARSET=utf8mb4",
+			")download",
+			"utfmb4",
+			"collate",
+			"COLLATE utf8mb4_unicode_ci",
+			"collate",
+			"COLLATE utf8mb4_unicode_ci ",
+			"COLLATE=utf8mb4_unicode_ci ",
+			"collate",
+			"rozie",
+			"WP_PLUGIN_URL",
+			"$tothitsgbr",
+			"mechanic-visitor-counter",
+			"integrasi-edukasi.org/v3",
+			"rozie.web.id",
+			"rozie.web.id/kist",
+			"$atts",
+			"max",
+			"wp_head",
+			"head'",
+			"nth",
+			"register_sidebar",
+			"the_excerpt",
+			"rozie.web.id",
+			":\\\\/\\\\/rozie.web.id\\\\/kist\\\\/",
+			"rozie.web.id",
+			"rozie.web.id/kist",
+			"<tr>\n			<td>10</td>\n			<td>Yong Gap Kwon</td>\n			<td></td>\n		</tr>",
+			"addHtml",
 			"ancy",
 			"fan",
 			"pstyle",
@@ -564,71 +649,38 @@
 			"rekapitulasi",
 			"\\\"([a-zA-Z0-9_]*)\\\"\\\"",
 			"\\\"([a-zA-Z0-9_])\\\"\\\"",
-			"\\\"[a-zA-Z0-9_]*\\\"\\\"",
-			"\\\"(\\w)+\\\"\\\"",
-			"\\\"[a-zA-Z0-9_]*\\\"\\\"",
-			"\\\"[a-zA-Z0-9_]*\\\"",
-			"\")",
-			"'",
-			"$assetPath",
-			"asset-path",
-			"session_is_registered(\"tingkats\")",
-			" session_is_registered(",
-			"session_is_registered(\"URLS\")",
-			"$SCRIPT_FILENAME",
-			"session_is_registered(\"namausers\")",
-			"session_is_registered(\"users\")",
-			"errlogin",
-			"err",
-			"getpanggilan",
-			"[JUDUL]",
-			"[ID]",
-			"[I]",
-			"[II]",
-			"III]",
-			"[IV]",
-			"[href]",
-			"[Judul]",
-			"short",
-			"tabellatar",
-			"error_reporting",
-			"phone num",
-			"phone number",
-			"phone nu",
-			",",
-			" ",
-			"SUNDAY",
-			"minute",
-			"gmdate",
-			"col-md-1 control-label",
-			"col-md-2",
-			".",
-			"can_see",
-			"statusdatang",
-			"statudatang",
-			"statusdatang",
-			"januari",
-			"menu",
-			"Robert John",
-			"auth/logout",
-			"RedirectIfAuthenticated",
-			"loginPath",
-			"width",
-			"Log Out",
-			"alizarin",
-			"alizarin col-md-4 front_side_left",
-			"the_post(",
-			"function the_post(",
-			"the_post(",
-			"tanggal",
-			"mainacti"
+			"\\\"[a-zA-Z0-9_]*\\\"\\\""
 		],
 		"highlight": true,
 		"in_selection": false,
-		"preserve_case": true,
+		"preserve_case": false,
 		"regex": false,
 		"replace_history":
 		[
+			"|Keputusan Walikota Bandung No",
+			"|Kepu Walikota Bandung No",
+			"|Keputusan Walikota Bandung No",
+			"|Peraturan Walikota Bandung No",
+			"|Peraturan Walikota Bandung N",
+			"Peraturan Walikota Bandung No",
+			"Keputusan Walikota",
+			"Peraturan Walikota",
+			"Peraturan Walikota Bandung No.",
+			"Peraturan Daerah",
+			"Peraturan Walikota Bandung",
+			"Peraturan Walikota Bandung No. ",
+			"Tahun ",
+			"Peraturan Daerah Kota Bandung",
+			"Peraturan Daerah Kota Bandung No.",
+			"Keputusan Walikota Bandung No. ",
+			"Distarcip",
+			"|Keputusan Walikota Bandung No. ",
+			"Tahun ",
+			"",
+			"localhost/integrasi-edukasi-v3",
+			"aempl.kist.re.kr/",
+			":\\\\/\\\\/localhost\\\\/kist\\\\/",
+			"localhost/kist",
 			"",
 			"\"",
 			"jabfung,grade",
@@ -684,29 +736,29 @@
 		"show_context": false,
 		"use_buffer2": true,
 		"whole_word": false,
-		"wrap": true
+		"wrap": false
 	},
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "config/app.php",
+					"file": "resources/views/dashboard/default/procurement/create.blade.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 7633,
+						"buffer_size": 13227,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7624,
-								7624
+								788,
+								788
 							]
 						],
 						"settings":
@@ -714,21 +766,16 @@
 							"BracketHighlighterBusy": false,
 							"bh_regions":
 							[
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
 								"bh_curly",
 								"bh_curly_center",
 								"bh_curly_open",
 								"bh_curly_close",
 								"bh_curly_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
 								"bh_regex",
 								"bh_regex_center",
 								"bh_regex_open",
@@ -739,181 +786,6 @@
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content"
-							],
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 2381.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "public/backend/default/js/bootstrap-editable.min.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 74169,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								74169
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content"
-							],
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "/E/htdocs/unidalogapi/index.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 7549,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3662,
-								3662
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
 								"bh_angle",
 								"bh_angle_center",
 								"bh_angle_open",
@@ -924,74 +796,16 @@
 								"bh_single_quote_open",
 								"bh_single_quote_close",
 								"bh_single_quote_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
 								"bh_default",
 								"bh_default_center",
 								"bh_default_open",
 								"bh_default_close",
 								"bh_default_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content"
-							],
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1455.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "vendor/phpoffice/phpword/samples/Sample_09_Tables.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4083,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
 								"bh_round",
 								"bh_round_center",
 								"bh_round_open",
@@ -1002,398 +816,21 @@
 								"bh_c_define_open",
 								"bh_c_define_close",
 								"bh_c_define_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content"
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content"
 							],
-							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"syntax": "Packages/Laravel Blade Highlighter/laravel-blade.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": -0.0,
-						"translation.y": 990.0,
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "/D/Course/Introduction to Cloud Computing/Week 1/Assignment/output.txt",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 128,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								128,
-								128
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"auto_name": "list",
-							"bh_regions":
-							[
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content"
-							],
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 17536,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								256,
-								280
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content"
-							],
-							"syntax": "Packages/C#/C#.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 180.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "/D/Documents/Visual Studio 2010/Projects/Artesis/Artesis/Program.cs",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1080,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content"
-							],
-							"syntax": "Packages/C#/C#.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 7,
-					"file": "/D/Dropbox/link.txt",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 23480,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								8257,
-								8330
-							]
-						],
-						"settings":
-						{
-							"BracketHighlighterBusy": false,
-							"bh_regions":
-							[
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
-								"bh_angle",
-								"bh_angle_center",
-								"bh_angle_open",
-								"bh_angle_close",
-								"bh_angle_content",
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content",
-								"bh_square",
-								"bh_square_center",
-								"bh_square_open",
-								"bh_square_close",
-								"bh_square_content",
-								"bh_single_quote",
-								"bh_single_quote_center",
-								"bh_single_quote_open",
-								"bh_single_quote_close",
-								"bh_single_quote_content",
-								"bh_unmatched",
-								"bh_unmatched_center",
-								"bh_unmatched_open",
-								"bh_unmatched_close",
-								"bh_unmatched_content",
-								"bh_c_define",
-								"bh_c_define_center",
-								"bh_c_define_open",
-								"bh_c_define_close",
-								"bh_c_define_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content"
-							],
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 3515.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
 					"type": "text"
 				}
 			]
@@ -1556,7 +993,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 257.0,
+	"side_bar_width": 296.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

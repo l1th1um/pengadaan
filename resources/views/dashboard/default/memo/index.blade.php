@@ -21,19 +21,20 @@
             <div class="x_panel">
                 <div class="x_title">
                     <h2>
-                        {{ trans('common.users') }}
+                        {{ trans('common.procurement_list') }}
                     </h2>
                     <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
                     <div class="col-lg-12">
-                        <table class="table table-striped responsive-utilities jambo_table" id="user_list">
+                        <table class="table table-striped responsive-utilities jambo_table" id="proc_list">
                             <thead>
                             <tr>
-                                <th>{{ trans('common.name') }}</th>
-                                <th>{{ trans('common.username') }}</th>
-                                <th width="20%">{{ trans('common.email') }}</th>
-                                <th width="20%">{{ trans('common.role') }}</th>
+                                <th>ID</th>
+                                <th>{{ trans('common.company_name') }}</th>
+                                <th width="25%">{{ trans('common.offering_letter_no') }}</th>
+                                <th width="20%">{{ trans('common.offering_letter_date') }}</th>
+                                <th width="150px">Status</th>
                                 <th width="100px"></th>
                             </tr>
                             </thead>
@@ -41,20 +42,23 @@
                                 @foreach($data as $row)
                                     <tr>
                                         <td>
-                                            <a href="{{route('dashboard.procurement.show', $row->id)}}" class="label label-info">
-                                                {{ $row->name }}
-                                            </a>
+                                            {{--@foreach($row->procurement_item as $item)
+                                                {{ $item->item_name }}
+                                            @endforeach--}}
                                         </td>
-                                        <td>{{ $row->username}}</td>
-                                        <td>{{ $row->email}}</td>
+                                        <td>{{ $row->memo_date }}</td>
                                         <td>
-                                            {{  $row->userRole->roles->display_name }}
+                                            {{--<a href="{{route('dashboard.procurement.show', $row->id)}}" class="label label-info">
+                                                {{ $row->offering_letter_no }}
+                                            </a>--}}
                                         </td>
+                                        <td>{{ localeDate($row->memo_date) }}</td>
+                                        <td>{{ $row->memo_status }}</td>
                                         <td class="center">
-                                            <a href="{{route('dashboard.users.edit', $row->id)}}">
+                                            <a href="{{route('dashboard.procurement.edit', $row->id)}}">
                                                 <img src="{{Theme::url('images/edit.png')}}">
                                             </a>
-                                            <a href="{{route('dashboard.users.destroy', $row->id)}}" data-method="delete" data-token="{{csrf_token()}}" data-confirm="{{ trans('common.are_you_sure') }}" style="padding-left : 10px">
+                                            <a href="{{route('dashboard.procurement.destroy', $row->id)}}" data-method="delete" data-token="{{csrf_token()}}" data-confirm="{{ trans('common.are_you_sure') }}" style="padding-left : 10px">
                                                 <img src="{{Theme::url('images/delete.png')}}">
                                             </a>
                                         </td>
@@ -80,9 +84,17 @@
     <script type="text/javascript">
         $(document).ready(function()
         {
-            /*User List*/
-            $('#user_list').DataTable({
-                "sPaginationType": "full_numbers",
+            /*Procurement List*/
+            $('#proc_list').DataTable({
+                "columns": [
+                    { "bSearchable": true, "bVisible": false},
+                    null,
+                    { "orderable": false },
+                    null,
+                    null,
+                    { "orderable": false }
+                ],
+                "aaSorting": []
             });
         })
     </script>

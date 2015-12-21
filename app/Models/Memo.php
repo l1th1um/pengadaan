@@ -1,0 +1,12 @@
+<?php namespace qilara\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Memo extends Model {
+
+    public function memo_item()
+    {
+        return $this->hasMany('qilara\Models\MemoItem','memo_id', 'id');
+    }
+
+}

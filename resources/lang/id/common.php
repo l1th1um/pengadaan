@@ -71,5 +71,9 @@ return [
     'date' => 'Tanggal',
     'purchase_order_saved' => 'Pesanan telah Disimpan',
     'invoice_saved' => 'Data Invoice telah Disimpan',
-    'error_occured' => 'Ada Kesalahan, Ulangi Beberapa Saat'
+    'error_occured' => 'Ada Kesalahan, Ulangi Beberapa Saat',
+    'memo' => 'Memo',
+    'create_memo' => 'Buat Memo',
+    'memo_list' => 'Daftar Memo',
+    'memo_saved' => 'Memo telah Disimpan'
 ];

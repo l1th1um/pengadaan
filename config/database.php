@@ -53,15 +53,27 @@ return [
 		],
 
 		'mysql' => [
-			'driver'    => 'mysql',
-			'host'      => env('DB_HOST', 'localhost'),
-			'database'  => env('DB_DATABASE', 'forge'),
-			'username'  => env('DB_USERNAME', 'forge'),
-			'password'  => env('DB_PASSWORD', ''),
-			'charset'   => 'utf8',
-			'collation' => 'utf8_unicode_ci',
-			'prefix'    => '',
-			'strict'    => false,
+					'driver'    => 'mysql',
+					'host'      => env('DB_HOST', 'localhost'),
+					'database'  => env('DB_DATABASE', 'forge'),
+					'username'  => env('DB_USERNAME', 'forge'),
+					'password'  => env('DB_PASSWORD', ''),
+					'charset'   => 'utf8',
+					'collation' => 'utf8_unicode_ci',
+					'prefix'    => '',
+					'strict'    => false,
+			],
+
+		'mysql_serpong' => [
+				'driver'    => 'mysql',
+				'host'      => '192.168.59.9',
+				'database'  => 'administrasi',
+				'username'  => 'root',
+				'password'  => 'rahasia',
+				'charset'   => 'utf8',
+				'collation' => 'utf8_unicode_ci',
+				'prefix'    => '',
+				'strict'    => false,
 		],
 
 		'pgsql' => [

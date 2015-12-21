@@ -10,6 +10,7 @@ use Hash;
 use Redirect;
 use Validator;
 use Auth;
+use DB;
 
 
 class UserController extends Controller {
@@ -217,5 +218,45 @@ class UserController extends Controller {
         }
 
         return $data;
+    }
+
+    public function exportFromIntra()
+    {
+        ini_set('max_execution_time', 300);
+
+        $data = \DB::connection('mysql_serpong')
+                  ->table('user')->select('ID','NAMA')
+                  ->where('LOKASI','=',1)->where('STATUSPEGAWAI','=',0)->get();
+
+        foreach ($data as $val)
+        {
+            $user = new User();
+            $user->name = $val->NAMA;
+            $user->username = $val->ID;
+            $user->email = $val->ID.'@lipi.go.id';
+            $user->password = Hash::make($val->ID);
+            $user->save();
+
+            $user_role = User::find($user->id);
+            $role = new RoleUser();
+            $role->role_id = 2;
+            $user_role->userRole()->save($role);
+
+            echo $val->NAMA. " : Sukses <br />";
+        }
+    }
+
+    public function insertNim()
+    {
+        //echo "Buat Export Nim";
+        $user_kimia = DB::table('user_kimia')->select('ID','NIP','NAMA')->where('LOKASI','=',1)->where('STATUSPEGAWAI','=',0)->get();
+
+        foreach ($user_kimia as $val)
+        {
+            echo $val->ID."<br />";
+            $user = User::where('username','=',$val->ID)->firstOrFail();
+            $user->nip = $val->NIP;
+            $user->save();
+        }
     }
 }

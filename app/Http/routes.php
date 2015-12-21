@@ -60,14 +60,17 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function()
         Route::get('/', ['uses' => 'ProcurementController@index', 'as' => 'procurement']);
         Route::get('add', ['uses' => 'ProcurementController@create', 'as' => 'create_procurement']);
         Route::post('add', ['uses' => 'ProcurementController@store', 'as' => 'add_procurement']);
-
         Route::resource('procurement', 'ProcurementController');
-
-
     });*/
+
+    //Route::get('memo/create', ['uses' => 'MemoController@create', 'as' => 'dashboard.memo.create']);
+    Route::resource('memo', 'MemoController');
 
     Route::get('profile', ['uses' => 'UserController@profile']);
     Route::resource('users', 'UserController');
+    //Route::get('exportIntra', ['uses' => 'UserController@exportFromIntra']);
+    Route::get('insertNim', ['uses' => 'UserController@insertNim']);
+
 
 	/*Route::group(['prefix' => 'users'], function()
 	{
