@@ -1,6 +1,7 @@
 <?php namespace qilara\Http\Controllers;
 
 
+use Illuminate\Support\Facades\Session;
 use qilara\Http\Controllers\Controller;
 use qilara\Models\User;
 use qilara\Models\Memo;
@@ -8,6 +9,10 @@ use qilara\Models\MemoItem;
 use Auth;
 use Request;
 use DB;
+use Redirect;
+use yajra\Datatables\Datatables;
+use Response;
+
 
 class MemoController extends Controller {
 
@@ -18,22 +23,37 @@ class MemoController extends Controller {
 	 */
 	public function index()
 	{
-		$data = Memo::with('memo_item')->orderBy('id', 'desc')->get();
+        /*$data = Memo::with('memo_item')->where('user_id','=',Auth::user()->id)->orderBy('id', 'desc')->get();
 
 		return view('memo.index', [
 				"title" => trans('common.procurement'),
 				"data" => $data
-		]);
-	}
+		]);*/
+        if (Auth::user()->hasRole('gudang'))
+        {
+            $data = Memo::with('users')->with('memo_item')->orderBy('id', 'desc')->get();
+            $page = 'memo.index_gudang';
+        }
+        else
+        {
+            $data = Memo::with('memo_item')->where('user_id','=',Auth::user()->id)->orderBy('id', 'desc')->get();
+            $page = 'memo.index';
+        }
 
-	/**
+        return view($page, [
+            "title" => trans('common.procurement'),
+            "data" => $data
+        ]);
+    }
+
+   	/**
 	 * Show the form for creating a new resource.
 	 *
 	 * @return Response
 	 */
 	public function create()
 	{
-        return view('memo.create', [
+		return view('memo.create', [
             "title" => trans('common.create_memo'),
             'date' => null
         ]);
@@ -46,10 +66,7 @@ class MemoController extends Controller {
 	 */
 	public function store()
 	{
-		/*echo "Masuk Ke Sini";
-		echo "<pre>";
-		print_r($_POST);
-		echo "</pre>";*/
+
 		$memo = new Memo();
 		$memo->memo_no = $this->generate_memo_no();
 		$memo->user_id = Auth::user()->id;
@@ -76,11 +93,10 @@ class MemoController extends Controller {
 			}
 		}
 
-		$this->printMemo($memo->id);
+        Session::flash('memo_id', $memo->id);
 
-		return Redirect::route('dashboard.procurement.index')
+		return Redirect::route('dashboard.memo.index')
 				->with('message', trans('common.memo_saved'));
-
 	}
 
 	/**
@@ -102,8 +118,45 @@ class MemoController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+        $memo = Memo::findOrFail($id);
+
+        $items = $this->jsArray($memo->memo_item);
+
+        return view('memo.create', [
+            "title" => trans('common.add_procurement'),
+            "memo" => $memo,
+            "items" => $items,
+            'date' => convertToDatepicker($memo->memo_date)
+        ]);
 	}
+
+    public function jsArray($data)
+    {
+        $str = '[';
+        foreach ($data as $val) {
+            $str .= '["' . $val->id . '","' . $val->item_name . '", "' . number_format($val->amount) . '", "' . $val->unit . '","' . $val->unit_price . '"],';
+        }
+
+        $str = substr($str, 0, -1) . "];";
+
+        return $str;
+    }
+
+    public function datatables($id)
+    {
+        $items = MemoItem::select('id','memo_id','item_name','amount','unit','catalog')->where('memo_id','=',$id)->get();
+
+        foreach ($items as $key => &$val)
+        {
+            $val->item_name = '<a href="javascript://" class="item_name" data-type="text" data-pk="'.$val->id.'" id="item_name" data-url="'.route('memo.datatables.edit', $id).'">'.$val->item_name.'</a>';
+            $val->catalog = '<a href="javascript://" class="item_name" data-type="text" data-pk="'.$val->id.'" id="unit_price" data-url="'.route('memo.datatables.edit', $id).'">'.$val->catalog.'</a>';
+            $val->amount = '<a href="javascript://" class="item_name" data-type="text" data-pk="'.$val->id.'" id="amount" data-url="'.route('memo.datatables.edit', $id).'">'.$val->amount.'</a>';
+            $val->unit = '<a href="javascript://" class="item_name" data-type="text" data-pk="'.$val->id.'" id="unit" data-url="'.route('memo.datatables.edit', $id).'">'.$val->unit.'</a>';
+			$val->notes = '<a href="javascript://" class="item_name" data-type="text" data-pk="'.$val->id.'" id="notes" data-url="'.route('memo.datatables.edit', $id).'">'.$val->notes.'</a>';
+        }
+
+        return Datatables::of($items)->make(true);
+    }
 
 	/**
 	 * Update the specified resource in storage.
@@ -113,7 +166,10 @@ class MemoController extends Controller {
 	 */
 	public function update($id)
 	{
-		//
+		Session::flash('memo_id', $id);
+
+		return Redirect::route('dashboard.memo.index')
+				->with('message', trans('common.memo_updated'));
 	}
 
 	/**
@@ -124,7 +180,45 @@ class MemoController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+        $memo = Memo::find($id);
+
+        $memo->memo_item()->delete();
+
+        $memo->delete();
+
+        return Redirect::back()->with('message', trans('common.memo_deleted'));
+	}
+
+	public function addItem($id)
+	{
+		$item = new MemoItem();
+		$item->memo_id = $id;
+		$item->catalog = Request::input('catalog');
+        $item->item_name = Request::input('item_name');
+		$item->amount = str_replace(",", "", Request::input('amount'));;
+		$item->unit = Request::input('unit');
+		$item->save();
+
+		return $item->id;
+	}
+
+	public function updateItem($id)
+	{
+		$item_id = Request::input('pk');
+		$name = Request::input('name');
+		$value = Request::input('value');
+
+		$item = MemoItem::where("id","=",$item_id)->where("memo_id","=",$id)->first();
+		$item->$name = $value;
+		$item->save();
+
+		return Response::make("", 200);
+	}
+
+	public function removeItem($id)
+	{
+		MemoItem::destroy(json_decode(Request::input('items'), true));
+		return 0;
 	}
 
 	public function printMemo($id)
@@ -173,7 +267,7 @@ class MemoController extends Controller {
 
 		$section->addText(htmlspecialchars("Nomor\t:\t".$data->memo_no), null, 'headerTabs');
 		$section->addText(htmlspecialchars("Tanggal\t:\t".localeDate($data->memo_date, false)), null, 'headerTabs');
-		$section->addText(htmlspecialchars("Kepada\t:\t"), null, 'headerTabs');
+		$section->addText(htmlspecialchars("Kepada\t:\tPejabat Pembuat Komitmen"), null, 'headerTabs');
 		$section->addText(htmlspecialchars("Dari\t:\t".$user->name), null, 'headerTabs');
 		$section->addText(htmlspecialchars("Perihal\t:\t"), null, 'headerTabs');
 		$section->addText(htmlspecialchars("Kegiatan/ Program/ Bidang\t:\t"), null, 'headerTabs');
@@ -246,7 +340,7 @@ class MemoController extends Controller {
 
 
 		$objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
-		$filename = "Memo ".str_replace("/","--",$data->memo_no).".docx";
+		$filename = "Memo".str_replace("/","--",$data->memo_no).".docx";
         ob_clean();
 
         $objWriter->save($filename);
@@ -283,4 +377,34 @@ class MemoController extends Controller {
 			return sprintf("%03d", ($memo_no->max_memo_no + 1)).$memo_code;
 		}
 	}
+
+    public function autocomplete_catalog()
+    {
+        $memo_item = MemoItem::select(DB::raw('distinct(catalog) as catalog'))
+                                ->orderBy('catalog','desc')->get();
+
+        return json_decode($memo_item);
+    }
+
+	public function processMemo($id)
+	{
+		$memo = Memo::with('users')->findOrFail($id);
+
+		return view('memo.process_memo', [
+				"title" => trans('common.memo_process'),
+				'memo' => $memo
+		]);
+	}
+
+	public function updateMemoStatus($id)
+	{
+
+		$memo = Memo::find($id);
+		$memo->memo_status = Request::input('status');
+		$memo->save();
+
+		return Redirect::route('dashboard.memo.index')
+				->with('message', trans('common.memo_saved'));
+	}
+
 }

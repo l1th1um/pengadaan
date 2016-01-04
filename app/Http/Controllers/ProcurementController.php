@@ -293,7 +293,6 @@ class ProcurementController extends Controller
     {
         $str = '[';
         foreach ($data as $val) {
-            //$str .= '["' . $val->id . '","' . $val->item_name . '", "' . number_format($val->amount) . '", "' . $val->unit . '","' . number_format($val->unit_price) . '"],';
             $str .= '["' . $val->id . '","' . $val->item_name . '", "' . number_format($val->amount) . '", "' . $val->unit . '","' . $val->unit_price . '"],';
         }
 
@@ -356,7 +355,6 @@ class ProcurementController extends Controller
 
         foreach ($items as $key => &$val)
         {
-            //$val->item_name = '<a href="javascript://" class="item_name" data-type="text" data-pk="'.$val->id.'" data-url="'.route('procurement.datatables.edit', array($id, $val->id)).'">'.$val->item_name.'</a>';
             $val->item_name = '<a href="javascript://" class="item_name" data-type="text" data-pk="'.$val->id.'" id="item_name" data-url="'.route('procurement.datatables.edit', $id).'">'.$val->item_name.'</a>';
             $val->amount = '<a href="javascript://" class="item_name" data-type="text" data-pk="'.$val->id.'" id="amount" data-url="'.route('procurement.datatables.edit', $id).'">'.$val->amount.'</a>';
             $val->unit = '<a href="javascript://" class="item_name" data-type="text" data-pk="'.$val->id.'" id="unit" data-url="'.route('procurement.datatables.edit', $id).'">'.$val->unit.'</a>';

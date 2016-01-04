@@ -3,6 +3,9 @@ var memoTable;
 var url = $('input[name="proc_url"]').val();
 var proc_id = $('input[name="proc_id"]').val()
 
+var memo_url = $('input[name="memo_url"]').val()
+var memo_id = $('input[name="memo_id"]').val()
+
 $(document).ready(function () {
     //+ "/addItem/" + $('input[name="proc_id"]').val();
     oTable = $('#item_table').DataTable({
@@ -29,6 +32,9 @@ $(document).ready(function () {
     } );
 
     memoTable = $('#item_memo_table').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: memo_url + "/datatables/" + memo_id,
         paging:   false,
         ordering: false,
         info:     false,
@@ -46,7 +52,7 @@ $(document).ready(function () {
             { data: 'unit', name: 'unit' },
             { data: 'unit_price', name: 'unit_price', sClass : 'right'}
         ]
-    } );
+    });
 
     $.fn.editable.defaults.mode = 'popup';
     $.fn.editable.defaults.ajaxOptions = {type: "PUT"};

@@ -69,8 +69,16 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function()
     Route::get('profile', ['uses' => 'UserController@profile']);
     Route::resource('users', 'UserController');
     //Route::get('exportIntra', ['uses' => 'UserController@exportFromIntra']);
-    Route::get('insertNim', ['uses' => 'UserController@insertNim']);
+    /*Route::get('insertNim', ['uses' => 'UserController@insertNim']);*/
 
+    Route::get('print_memo/{id}', ['uses' => 'MemoController@printMemo', 'as' => 'dashboard.memo.printMemo']);
+    Route::get('memo/datatables/{id}', ['uses' => 'MemoController@datatables', 'as' => 'memo.datatables']);
+    Route::put('memo/updateItem/{id}', ['uses' => 'MemoController@updateItem', 'as' => 'memo.datatables.edit']);
+    Route::post('memo/addItem/{id}', ['uses' => 'MemoController@addItem', 'as' => 'memo.datatables.add']);
+    Route::post('memo/removeItem/{id}', ['uses' => 'MemoController@removeItem', 'as' => 'memo.datatables.remove']);
+    Route::get('memo/autocomplete', ['uses' => 'MemoController@autocomplete_catalog', 'as' => 'dashboard.memo.autocomplete']);
+    Route::get('memo/process/{id}', ['uses' => 'MemoController@processMemo', 'as' => 'dashboard.memo.process']);
+    Route::post('memo/update_status/{id}', ['uses' => 'MemoController@updateMemoStatus', 'as' => 'dashboard.memo.update_status']);
 
 	/*Route::group(['prefix' => 'users'], function()
 	{

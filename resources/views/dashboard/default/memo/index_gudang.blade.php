@@ -38,7 +38,8 @@
                             <tr>
                                 <th>ID</th>
                                 <th>{{ trans('common.memo_no') }}</th>
-                                <th width="50%">{{ trans('common.memo_date') }}</th>
+                                <th width="25%">{{ trans('common.from') }}</th>
+                                <th width="25%">{{ trans('common.memo_date') }}</th>
                                 <th width="250px">Status</th>
                                 <th width="100px"></th>
                             </tr>
@@ -49,13 +50,15 @@
                                         <td>
                                             {{ $row->id }}
                                         </td>
-                                        <td>{{ $row->memo_no }}</td>
+                                        <td>
+                                            <a href="{{route('dashboard.memo.process', $row->id)}}">
+                                                {{ $row->memo_no }}
+                                            </a>
+                                        </td>
+                                        <td>{{ $row->users->name }}</td>
                                         <td>{{ localeDate($row->memo_date) }}</td>
                                         <td>{{ trans('common.memo_status')[$row->memo_status] }}</td>
                                         <td class="center">
-                                            <a href="{{route('dashboard.memo.edit', $row->id)}}">
-                                                <img src="{{Theme::url('images/edit.png')}}">
-                                            </a>
                                             <a href="{{route('dashboard.memo.destroy', $row->id)}}" data-method="delete" data-token="{{csrf_token()}}" data-confirm="{{ trans('common.are_you_sure') }}" style="padding-left : 10px">
                                                 <img src="{{Theme::url('images/delete.png')}}">
                                             </a>

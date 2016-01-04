@@ -7,6 +7,7 @@ class VerifyCsrfToken extends BaseVerifier {
 
     protected $except = [
         'procurement/updateItem/*',
+        'memo/updateItem/*',
     ];
 	/**
 	 * Handle an incoming request.
@@ -21,6 +22,9 @@ class VerifyCsrfToken extends BaseVerifier {
             'dashboard/procurement/updateItem/*',
             'dashboard/procurement/addItem/*',
             'dashboard/procurement/removeItem/*',
+            'dashboard/memo/updateItem/*',
+            'dashboard/memo/addItem/*',
+            'dashboard/memo/removeItem/*',
         );
 
         foreach ($skip as $key => $route) {

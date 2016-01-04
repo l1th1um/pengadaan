@@ -9,4 +9,8 @@ class Memo extends Model {
         return $this->hasMany('qilara\Models\MemoItem','memo_id', 'id');
     }
 
+    public function users()
+    {
+        return $this->belongsTo('qilara\Models\User', 'user_id', 'id' );
+    }
 }

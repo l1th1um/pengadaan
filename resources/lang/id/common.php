@@ -72,8 +72,17 @@ return [
     'purchase_order_saved' => 'Pesanan telah Disimpan',
     'invoice_saved' => 'Data Invoice telah Disimpan',
     'error_occured' => 'Ada Kesalahan, Ulangi Beberapa Saat',
+    'notes' => 'Keterangan',
     'memo' => 'Memo',
+    'catalog' => 'Katalog',
+    'memo_no' => 'No Memo',
+    'memo_date' => 'Tanggal Memo',
     'create_memo' => 'Buat Memo',
     'memo_list' => 'Daftar Memo',
-    'memo_saved' => 'Memo telah Disimpan'
+    'memo_saved' => 'Memo telah Disimpan',
+    'memo_status' => array('Belum Diproses', 'Sedang Proses', 'Sudah Selesai'),
+    'memo_deleted' => 'Memo telah Dihapus',
+    'memo_updated' => 'Memo telah Diupdate',
+    'memo_process' => 'Proses Memo',
+    'from' => 'Dari'
 ];
