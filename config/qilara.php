@@ -1,5 +1,5 @@
 <?php
 
 return [
-	'site_name' => "Qilara CMS"
+	'site_name' => "Sistem Informasi Pengadaan"
 ];

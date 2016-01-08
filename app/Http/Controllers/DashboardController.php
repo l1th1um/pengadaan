@@ -129,7 +129,7 @@ class DashboardController extends Controller {
     public function logout()
     {
     	\Auth::logout();
-    	return redirect('dashboard\login');
+    	return redirect('dashboard');
     }
 
     public function redirectPath()
