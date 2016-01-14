@@ -7,10 +7,10 @@
                 <a href="{{route('dashboard')}}"><i class="fa fa-home"></i> Home</span></a>
             </li>
             <li {!! parent_link('dashboard/procurement') !!}>
-            <a><i class="fa fa-book"></i> {{ trans('common.memo') }}</span></a>
+            <a><i class="fa fa-book"></i> {{ trans('common.memo')." & ".trans('common.item_request') }}</span></a>
             <ul class="nav child_menu">
                 <li><a href="{{route('dashboard.memo.create')}}">{{ trans('common.create_memo') }}</a></li>
-                <li><a href="{{route('dashboard.memo.index')}}">{{ trans('common.memo_list') }}</a></li>
+                <li><a href="{{route('dashboard.memo.index')}}">{{ trans('common.request_item_list') }}</a></li>
             </ul>
             </li>
             <li {!! parent_link('dashboard/procurement') !!}>

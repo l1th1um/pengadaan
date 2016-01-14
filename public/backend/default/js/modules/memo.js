@@ -12,29 +12,57 @@ $(document).ready(function () {
         ]
     });
 
-    memoTable = $('#item_memo_table').DataTable({
-        processing: false,
-        serverSide: true,
-        ajax: memo_url + "/datatables/" + memo_id,
-        paging:   false,
-        ordering: false,
-        info:     false,
-        searching : false,
-        columnDefs: [
-            {
-                "targets": [ 0 ],
-                "visible": false,
-            }
-        ],
-        columns: [
-            { data: 'id', name: 'id' },
-            { data: 'item_name', name: 'item_name' },
-            { data: 'catalog', name: 'catalog'},
-            { data: 'amount', name: 'amount' , sClass : 'right' },
-            { data: 'unit', name: 'unit' },
-            { data: 'notes', name: 'notes' },
-        ]
-    });
+    if (memo_id == 0)
+    {
+        memoTable = $('#item_memo_table').DataTable({
+            processing: false,
+            paging:   false,
+            ordering: false,
+            info:     false,
+            searching : false,
+            columnDefs: [
+                {
+                    "targets": [ 0 ],
+                    "visible": false,
+                }
+            ],
+            columns: [
+                { data: 'id', name: 'id' },
+                { data: 'item_name', name: 'item_name' },
+                { data: 'catalog', name: 'catalog'},
+                { data: 'amount', name: 'amount' , sClass : 'right' },
+                { data: 'unit', name: 'unit' },
+                { data: 'notes', name: 'notes' },
+            ]
+        });
+    }
+    else
+    {
+        memoTable = $('#item_memo_table').DataTable({
+            processing: false,
+            serverSide: true,
+            ajax: memo_url + "/datatables/" + memo_id,
+            paging:   false,
+            ordering: false,
+            info:     false,
+            searching : false,
+            columnDefs: [
+                {
+                    "targets": [ 0 ],
+                    "visible": false,
+                }
+            ],
+            columns: [
+                { data: 'id', name: 'id' },
+                { data: 'item_name', name: 'item_name' },
+                { data: 'catalog', name: 'catalog'},
+                { data: 'amount', name: 'amount' , sClass : 'right' },
+                { data: 'unit', name: 'unit' },
+                { data: 'notes', name: 'notes' },
+            ]
+        });
+    }
+
 
     $.fn.editable.defaults.mode = 'popup';
     $.fn.editable.defaults.ajaxOptions = {type: "PUT"};
@@ -99,6 +127,8 @@ $(document).ready(function () {
             }).draw();
         }
         $('#myModal').modal('hide');
+
+        $(this).find("input[type=text]").val("");
 
         return false;
     });

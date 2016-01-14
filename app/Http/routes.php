@@ -80,6 +80,11 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function()
     Route::get('memo/process/{id}', ['uses' => 'MemoController@processMemo', 'as' => 'dashboard.memo.process']);
     Route::post('memo/update_status/{id}', ['uses' => 'MemoController@updateMemoStatus', 'as' => 'dashboard.memo.update_status']);
 
+    Route::get('memo_item/{id}/status', ['uses' => 'MemoController@editItemStatus', 'as' => 'memo.item.status']);
+
+    Route::delete('memo_item/{id}', ['uses' => 'MemoController@itemDestroy', 'as' => 'memo.item.destroy']);
+
+
 	/*Route::group(['prefix' => 'users'], function()
 	{
         Route::resource('roles', 'RoleController');

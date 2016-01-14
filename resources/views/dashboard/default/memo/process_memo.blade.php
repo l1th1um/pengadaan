@@ -21,7 +21,7 @@
             <div class="x_panel">
                 <div class="x_title">
                     <h2>
-                        {{ trans('common.memo_process') }}
+                        {{ $title }}
                     </h2>
                     <div class="clearfix"></div>
                 </div>
@@ -45,7 +45,7 @@
                                     {{ trans('common.from') }}
                                 </label>
                                 <div class="col-md-10 col-xs-10">
-                                    {!! Form::text('memo_no', $memo->users->name, array('id' => 'inputName', 'class' => 'form-control', 'readonly' => true)) !!}
+                                    {!! Form::text('memo_no', $memo->name, array('id' => 'inputName', 'class' => 'form-control', 'readonly' => true)) !!}
                                 </div>
                             </div>
                             <div class="form-group">
@@ -58,33 +58,44 @@
                             </div>
                             <div class="form-group">
                                 <label for="inputName" class="col-md-2 control-label col-xs-2">
+                                    {{ trans('common.item_name') }}
+                                </label>
+                                <div class="col-md-10 col-xs-10">
+                                    {!! Form::text('item_name', $memo->item_name, array('id' => 'inputName', 'class' => 'form-control', 'readonly' => true)) !!}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputName" class="col-md-2 control-label col-xs-2">
+                                    {{ trans('common.catalog') }}
+                                </label>
+                                <div class="col-md-10 col-xs-10">
+                                    {!! Form::text('catalog', $memo->catalog, array('id' => 'inputName', 'class' => 'form-control', 'readonly' => true)) !!}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputName" class="col-md-2 control-label col-xs-2">
+                                    {{ trans('common.amount') }}
+                                </label>
+                                <div class="col-md-10 col-xs-10">
+                                    {!! Form::text('amount', $memo->amount." ". $memo->unit, array('id' => 'inputName', 'class' => 'form-control', 'readonly' => true)) !!}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputName" class="col-md-2 control-label col-xs-2">
+                                    {{ trans('common.notes') }}
+                                </label>
+                                <div class="col-md-10 col-xs-10">
+                                    {!! Form::text('notes', $memo->notes, array('id' => 'inputName', 'class' => 'form-control', 'readonly' => true)) !!}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputName" class="col-md-2 control-label col-xs-2">
                                     {{ trans('common.status') }}
                                 </label>
                                 <div class="col-md-10 col-xs-10">
-                                    {!! Form::select('status',trans('common.memo_status'),$memo->memo_status,array('class' => 'form-control')); !!}
+                                    {!! Form::select('status',trans('common.request_item_status'),$memo->status,array('class' => 'form-control')); !!}
                                 </div>
                             </div>
-
-                                <div class="form-group">
-                                    <hr />
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-md-offset-2 col-xs-offset-2 col-md-10 col-xs-10">
-                                        <table class="table table-striped responsive-utilities jambo_table" id="item_memo_table">
-                                            <thead>
-                                            <tr>
-                                                <th width="10px">id</th>
-                                                <th>{{ trans('common.item_name') }}</th>
-                                                <th>{{ trans('common.catalog') }}</th>
-                                                <th width="100px">{{ trans('common.amount') }}</th>
-                                                <th width="100px">{{ trans('common.unit') }}</th>
-                                                <th width="100px">{{ trans('common.notes') }}</th>
-                                            </tr>
-                                            </thead>
-                                        </table>
-                                    </div>
-                                </div>
-
                             <div class="form-actions pal">
                                 <div class="form-group mbn">
                                     <div class="col-md-2 col-xs-2 right">

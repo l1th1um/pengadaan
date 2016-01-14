@@ -37,11 +37,14 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>{{ trans('common.memo_no') }}</th>
-                                <th width="25%">{{ trans('common.from') }}</th>
-                                <th width="25%">{{ trans('common.memo_date') }}</th>
-                                <th width="250px">Status</th>
-                                <th width="100px"></th>
+                                <th width="200px">{{ trans('common.memo_no') }}</th>
+                                <th width="250px">{{ trans('common.from') }}</th>
+                                <th width="180px">{{ trans('common.memo_date') }}</th>
+                                <th>{{ trans('common.item_name') }}</th>
+                                <th>{{ trans('common.catalog') }}</th>
+                                <th width="100px">{{ trans('common.amount') }}</th>
+                                <th width="180px">{{ trans('common.status') }}</th>
+                                <th width="50px"></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -50,16 +53,15 @@
                                         <td>
                                             {{ $row->id }}
                                         </td>
-                                        <td>
-                                            <a href="{{route('dashboard.memo.process', $row->id)}}">
-                                                {{ $row->memo_no }}
-                                            </a>
-                                        </td>
-                                        <td>{{ $row->users->name }}</td>
+                                        <td>{{ $row->memo_no }}</td>
+                                        <td>{{ $row->name }}</td>
                                         <td>{{ localeDate($row->memo_date) }}</td>
-                                        <td>{{ trans('common.memo_status')[$row->memo_status] }}</td>
+                                        <td><a href="{{route('dashboard.memo.process', $row->id)}}">{{ $row->item_name }}</a></td>
+                                        <td>{{ $row->catalog }}</td>
+                                        <td>{{ $row->amount." ". $row->unit}}</td>
+                                        <td>{{ trans('common.request_item_status')[$row->status] }}</td>
                                         <td class="center">
-                                            <a href="{{route('dashboard.memo.destroy', $row->id)}}" data-method="delete" data-token="{{csrf_token()}}" data-confirm="{{ trans('common.are_you_sure') }}" style="padding-left : 10px">
+                                            <a href="{{route('memo.item.destroy', $row->id)}}" data-method="delete" data-token="{{csrf_token()}}" data-confirm="{{ trans('common.are_you_sure') }}" style="padding-left : 10px">
                                                 <img src="{{Theme::url('images/delete.png')}}">
                                             </a>
                                         </td>

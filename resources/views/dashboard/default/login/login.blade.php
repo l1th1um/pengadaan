@@ -21,7 +21,7 @@
                 {!! Form::open(array('action' => 'DashboardController@login', 'class' => 'form-horizontal', 'method' => 'post')) !!}
                     <h1>Login Form</h1>
                     <div>
-                        <input type="text" class="form-control" placeholder="Username or E-mail" required="" name="username" value="{{ old('username') }}" />
+                        <input type="text" class="form-control" placeholder="Username" required="" name="username" value="{{ old('username') }}" />
                     </div>
                     <div>
                         <input type="password" class="form-control" placeholder="Password" required="" name="password" />
@@ -36,7 +36,7 @@
                         <div class="clearfix"></div>
                         <br />
                         <div>
-                            <p>©2015 Qilara CMS</p>
+                            <p>©2016 Qilara CMS</p>
                         </div>
                     </div>
                 {!! Form::close() !!}

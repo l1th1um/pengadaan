@@ -31,12 +31,25 @@ class MemoController extends Controller {
 		]);*/
         if (Auth::user()->hasRole('gudang'))
         {
-            $data = Memo::with('users')->with('memo_item')->orderBy('id', 'desc')->get();
+            //$data = Memo::with('users')->with('memo_item')->orderBy('id', 'desc')->get();
+            $data = DB::table('memo_items')
+                ->select('memo_items.id','memo_id', 'memo_no', 'memo_date', 'item_name', 'catalog', 'amount', 'unit', 'notes','status','name')
+                ->join('memos', 'memos.id', '=', 'memo_items.memo_id')
+				->join('users', 'users.id', '=', 'memos.user_id')
+                ->orderBy("memo_id","desc")
+                ->get();
+
             $page = 'memo.index_gudang';
         }
         else
         {
-            $data = Memo::with('memo_item')->where('user_id','=',Auth::user()->id)->orderBy('id', 'desc')->get();
+            $data = DB::table('memo_items')
+                ->select('memo_items.id','memo_id', 'memo_no', 'memo_date', 'item_name', 'catalog', 'amount', 'unit', 'notes',"status")
+                ->join('memos', 'memos.id', '=', 'memo_items.memo_id')
+                ->where('memos.user_id', '=', Auth::user()->id)
+                ->orderBy("memo_id","desc")
+                ->get();
+
             $page = 'memo.index';
         }
 
@@ -66,37 +79,38 @@ class MemoController extends Controller {
 	 */
 	public function store()
 	{
+        if (strlen(Request::input('items')) < 3) {
+            return Redirect::back()->withErrors(trans('common.request_item_empty'));
+        }
+        else
+        {
+            $memo = new Memo();
+            $memo->memo_no = $this->generate_memo_no();
+            $memo->user_id = Auth::user()->id;
+            $memo->memo_date = date("Y-m-d");
+            $memo->save();
 
-		$memo = new Memo();
-		$memo->memo_no = $this->generate_memo_no();
-		$memo->user_id = Auth::user()->id;
-		$memo->memo_date = date("Y-m-d");
-		/*$memo->regarding = Request::input('regarding');*/
-		$memo->save();
+            $cur_memo = Memo::find($memo->id);
 
-		//$memo_item = new MemoItem();
+            if (!empty($_POST['items'])) {
+                $items = json_decode(Request::input('items'));
 
-		$cur_memo = Memo::find($memo->id);
+                foreach ($items as $keys => $val) {
+                    $memo_item = new MemoItem();
+                    $memo_item->item_name = $val->item_name;
+                    $memo_item->catalog = $val->catalog;
+                    $memo_item->amount = str_replace(",", "", $val->amount);
+                    $memo_item->unit = $val->unit;
+                    $memo_item->notes = $val->notes;
+                    $cur_memo->memo_item()->save($memo_item);
+                }
+            }
 
-		if (!empty($_POST['items'])) {
-			$items = json_decode(Request::input('items'));
-			echo "<pre>";
-			print_r($items);
-			echo "</pre>";
-			foreach ($items as $keys => $val) {
-				$memo_item = new MemoItem();
-				$memo_item->item_name = $val->item_name;
-				$memo_item->amount = str_replace(",", "", $val->amount);
-				$memo_item->unit = $val->unit;
-				$memo_item->unit_price = str_replace(",", "", $val->unit_price);
-				$cur_memo->memo_item()->save($memo_item);
-			}
-		}
+            Session::flash('memo_id', $memo->id);
 
-        Session::flash('memo_id', $memo->id);
-
-		return Redirect::route('dashboard.memo.index')
-				->with('message', trans('common.memo_saved'));
+            return Redirect::route('dashboard.memo.index')
+                ->with('message', trans('common.memo_saved'));
+        }
 	}
 
 	/**
@@ -144,18 +158,31 @@ class MemoController extends Controller {
 
     public function datatables($id)
     {
-        $items = MemoItem::select('id','memo_id','item_name','amount','unit','catalog')->where('memo_id','=',$id)->get();
+        if ($id != 0)
+		{
+			$items = MemoItem::select('id','memo_id','item_name','amount','unit','catalog')->where('memo_id','=',$id)->get();
 
-        foreach ($items as $key => &$val)
-        {
-            $val->item_name = '<a href="javascript://" class="item_name" data-type="text" data-pk="'.$val->id.'" id="item_name" data-url="'.route('memo.datatables.edit', $id).'">'.$val->item_name.'</a>';
-            $val->catalog = '<a href="javascript://" class="item_name" data-type="text" data-pk="'.$val->id.'" id="unit_price" data-url="'.route('memo.datatables.edit', $id).'">'.$val->catalog.'</a>';
-            $val->amount = '<a href="javascript://" class="item_name" data-type="text" data-pk="'.$val->id.'" id="amount" data-url="'.route('memo.datatables.edit', $id).'">'.$val->amount.'</a>';
-            $val->unit = '<a href="javascript://" class="item_name" data-type="text" data-pk="'.$val->id.'" id="unit" data-url="'.route('memo.datatables.edit', $id).'">'.$val->unit.'</a>';
-			$val->notes = '<a href="javascript://" class="item_name" data-type="text" data-pk="'.$val->id.'" id="notes" data-url="'.route('memo.datatables.edit', $id).'">'.$val->notes.'</a>';
-        }
+			foreach ($items as $key => &$val)
+			{
+				$val->item_name = '<a href="javascript://" class="item_name" data-type="text" data-pk="'.$val->id.'" id="item_name" data-url="'.route('memo.datatables.edit', $id).'">'.$val->item_name.'</a>';
+				$val->catalog = '<a href="javascript://" class="item_name" data-type="text" data-pk="'.$val->id.'" id="unit_price" data-url="'.route('memo.datatables.edit', $id).'">'.$val->catalog.'</a>';
+				$val->amount = '<a href="javascript://" class="item_name" data-type="text" data-pk="'.$val->id.'" id="amount" data-url="'.route('memo.datatables.edit', $id).'">'.$val->amount.'</a>';
+				$val->unit = '<a href="javascript://" class="item_name" data-type="text" data-pk="'.$val->id.'" id="unit" data-url="'.route('memo.datatables.edit', $id).'">'.$val->unit.'</a>';
+				$val->notes = '<a href="javascript://" class="item_name" data-type="text" data-pk="'.$val->id.'" id="notes" data-url="'.route('memo.datatables.edit', $id).'">'.$val->notes.'</a>';
+			}
 
-        return Datatables::of($items)->make(true);
+			return Datatables::of($items)->make(true);
+		}
+		else
+		{
+			echo '{
+				"sEcho": 1,
+				"iTotalRecords": "0",
+				"iTotalDisplayRecords": "0",
+				"aaData": []
+			}';
+
+		}
     }
 
 	/**
@@ -297,7 +324,7 @@ class MemoController extends Controller {
 			$table->addCell()->addText($row->item_name, null, 'styleCell');
 			$table->addCell()->addText(number_format($row->amount), null, 'styleRight');
 			$table->addCell()->addText($row->unit, null, 'styleCell');
-			$table->addCell()->addText($row->unit, null, 'styleCell');
+			$table->addCell()->addText($row->notes, null, 'styleCell');
 
 			$i++;
 		}
@@ -388,10 +415,16 @@ class MemoController extends Controller {
 
 	public function processMemo($id)
 	{
-		$memo = Memo::with('users')->findOrFail($id);
+		//$memo = MemoItem::with('memos')->findOrFail($id);
+		$memo = DB::table('memo_items')
+				->select('memo_items.id','memo_id', 'memo_no', 'memo_date', 'item_name', 'catalog', 'amount', 'unit', 'notes','status','name')
+				->join('memos', 'memos.id', '=', 'memo_items.memo_id')
+				->join('users', 'users.id', '=', 'memos.user_id')
+				->where('memo_items.id','=',$id)
+				->first();
 
 		return view('memo.process_memo', [
-				"title" => trans('common.memo_process'),
+				"title" => trans('common.item_request_process'),
 				'memo' => $memo
 		]);
 	}
@@ -399,12 +432,32 @@ class MemoController extends Controller {
 	public function updateMemoStatus($id)
 	{
 
-		$memo = Memo::find($id);
-		$memo->memo_status = Request::input('status');
+		$memo = MemoItem::find($id);
+		$memo->status = Request::input('status');
 		$memo->save();
 
 		return Redirect::route('dashboard.memo.index')
 				->with('message', trans('common.memo_saved'));
 	}
 
+    public function editItemStatus($id)
+    {
+        $item = MemoItem::with('memo')->findOrFail($id)->first();
+
+        return view('memo.item_details', [
+            "title" => trans('common.add_procurement'),
+            "item" => $item
+        ]);
+    }
+
+	public function itemDestroy($id)
+	{
+		$memo = MemoItem::find($id);
+
+		//$memo->memo_item()->delete();
+
+		$memo->delete();
+
+		return Redirect::back()->with('message', trans('common.memo_deleted'));
+	}
 }

@@ -27,7 +27,7 @@
             <div class="x_panel">
                 <div class="x_title">
                     <h2>
-                        {{ trans('common.memo_list') }}
+                        {{ trans('common.request_item_list') }}
                     </h2>
                     <div class="clearfix"></div>
                 </div>
@@ -37,31 +37,37 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>{{ trans('common.memo_no') }}</th>
-                                <th width="50%">{{ trans('common.memo_date') }}</th>
-                                <th width="250px">Status</th>
+                                <th width="120px">{{ trans('common.memo_no') }}</th>
+                                <th width="180px">{{ trans('common.memo_date') }}</th>
+                                <th>{{ trans('common.item_name') }}</th>
+                                <th>{{ trans('common.catalog') }}</th>
+                                <th width="150px">{{ trans('common.amount') }}</th>
+                                <th width="150px">Status</th>
                                 <th width="100px"></th>
                             </tr>
                             </thead>
                             <tbody>
-                                @foreach($data as $row)
-                                    <tr>
-                                        <td>
-                                            {{ $row->id }}
-                                        </td>
-                                        <td>{{ $row->memo_no }}</td>
-                                        <td>{{ localeDate($row->memo_date) }}</td>
-                                        <td>{{ trans('common.memo_status')[$row->memo_status] }}</td>
-                                        <td class="center">
-                                            <a href="{{route('dashboard.memo.edit', $row->id)}}">
-                                                <img src="{{Theme::url('images/edit.png')}}">
-                                            </a>
-                                            <a href="{{route('dashboard.memo.destroy', $row->id)}}" data-method="delete" data-token="{{csrf_token()}}" data-confirm="{{ trans('common.are_you_sure') }}" style="padding-left : 10px">
-                                                <img src="{{Theme::url('images/delete.png')}}">
-                                            </a>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                             @foreach($data as $row)
+                                <tr>
+                                    <td>
+                                        {{ $row->memo_id }}
+                                    </td>
+                                    <td>{{ $row->memo_no }}</td>
+                                    <td>{{ localeDate($row->memo_date) }}</td>
+                                    <td>{{ $row->item_name }}</td>
+                                    <td>{{ $row->catalog }}</td>
+                                    <td>{{ $row->amount." ". $row->unit}}</td>
+                                    <td>{{ trans('common.memo_status')[$row->status] }}</td>
+                                    <td class="center">
+                                        <a href="{{route('dashboard.memo.edit', $row->memo_id)}}">
+                                            <img src="{{Theme::url('images/edit.png')}}">
+                                        </a>
+                                        <a href="{{route('dashboard.memo.destroy', $row->memo_id)}}" data-method="delete" data-token="{{csrf_token()}}" data-confirm="{{ trans('common.are_you_sure_remove_request_item') }}" style="padding-left : 10px">
+                                            <img src="{{Theme::url('images/delete.png')}}">
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
 
