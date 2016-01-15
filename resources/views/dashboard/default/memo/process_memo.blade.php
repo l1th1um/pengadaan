@@ -88,22 +88,34 @@
                                     {!! Form::text('notes', $memo->notes, array('id' => 'inputName', 'class' => 'form-control', 'readonly' => true)) !!}
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="inputName" class="col-md-2 control-label col-xs-2">
-                                    {{ trans('common.status') }}
-                                </label>
-                                <div class="col-md-10 col-xs-10">
-                                    {!! Form::select('status',trans('common.request_item_status'),$memo->status,array('class' => 'form-control')); !!}
-                                </div>
-                            </div>
-                            <div class="form-actions pal">
-                                <div class="form-group mbn">
-                                    <div class="col-md-2 col-xs-2 right">
-                                        <input type="hidden" name="items">
-                                        <button type="submit" class="btn btn-primary">Submit</button>
+                            @if (Entrust::hasRole('gudang'))
+                                <div class="form-group">
+                                    <label for="inputName" class="col-md-2 control-label col-xs-2">
+                                        {{ trans('common.status') }}
+                                    </label>
+                                    <div class="col-md-10 col-xs-10">
+                                        {!! Form::select('status',trans('common.request_item_status'),$memo->status,array('class' => 'form-control')); !!}
                                     </div>
                                 </div>
-                            </div>
+                            @endif
+                            @if (Entrust::hasRole('pengadaan'))
+                                <div class="form-group">
+                                    <label for="inputName" class="col-md-2 control-label col-xs-2">
+                                        {{ trans('common.status') }}
+                                    </label>
+                                    <div class="col-md-10 col-xs-10">
+                                        {!! Form::select('procurement_status',trans('common.forward_procurement_status'),$memo->procurement_status,array('class' => 'form-control')); !!}
+                                    </div>
+                                </div>
+                                <div class="form-actions pal">
+                                    <div class="form-group mbn">
+                                        <div class="col-md-2 col-xs-2 right">
+                                            <input type="hidden" name="items">
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                         {!! Form::close() !!}
                     </div>

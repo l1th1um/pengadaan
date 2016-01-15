@@ -56,10 +56,19 @@
                                         <td>{{ $row->memo_no }}</td>
                                         <td>{{ $row->name }}</td>
                                         <td>{{ localeDate($row->memo_date) }}</td>
-                                        <td><a href="{{route('dashboard.memo.process', $row->id)}}">{{ $row->item_name }}</a></td>
+                                        <td><a href="{{route('dashboard.memo.process', $row->id)}}" class="label label-info">{{ $row->item_name }}</a></td>
                                         <td>{{ $row->catalog }}</td>
                                         <td>{{ $row->amount." ". $row->unit}}</td>
-                                        <td>{{ trans('common.request_item_status')[$row->status] }}</td>
+                                        <td>
+                                            <span class="label label-success">
+                                                {{ trans('common.request_item_status')[$row->status] }}
+                                            </span>
+                                            @if (!empty($row->procurement_status))
+                                                <span class="label label-warning">
+                                                {{ trans('common.forward_procurement_status')[$row->procurement_status] }}
+                                            </span>
+                                            @endif
+                                        </td>
                                         <td class="center">
                                             <a href="{{route('memo.item.destroy', $row->id)}}" data-method="delete" data-token="{{csrf_token()}}" data-confirm="{{ trans('common.are_you_sure') }}" style="padding-left : 10px">
                                                 <img src="{{Theme::url('images/delete.png')}}">

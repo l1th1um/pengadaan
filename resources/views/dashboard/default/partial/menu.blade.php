@@ -11,6 +11,9 @@
             <ul class="nav child_menu">
                 <li><a href="{{route('dashboard.memo.create')}}">{{ trans('common.create_memo') }}</a></li>
                 <li><a href="{{route('dashboard.memo.index')}}">{{ trans('common.request_item_list') }}</a></li>
+                @if (Entrust::hasRole('pengadaan'))
+                    <li><a href="{{route('memo.forwarded.index')}}">{{ trans('common.forward_procurement') }}</a></li>
+                @endif
             </ul>
             </li>
             <li {!! parent_link('dashboard/procurement') !!}>

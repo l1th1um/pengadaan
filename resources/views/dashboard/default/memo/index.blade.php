@@ -57,7 +57,16 @@
                                     <td>{{ $row->item_name }}</td>
                                     <td>{{ $row->catalog }}</td>
                                     <td>{{ $row->amount." ". $row->unit}}</td>
-                                    <td>{{ trans('common.memo_status')[$row->status] }}</td>
+                                    <td>
+                                        <span class="label label-success">
+                                            {{ trans('common.request_item_status')[$row->status] }}
+                                        </span>
+                                        @if (!empty($row->procurement_status))
+                                            <span class="label label-warning">
+                                                {{ trans('common.forward_procurement_status')[$row->procurement_status] }}
+                                            </span>
+                                        @endif
+                                    </td>
                                     <td class="center">
                                         <a href="{{route('dashboard.memo.edit', $row->memo_id)}}">
                                             <img src="{{Theme::url('images/edit.png')}}">

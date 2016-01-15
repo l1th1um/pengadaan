@@ -55,21 +55,12 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function()
     Route::post('procurement/uploadInvoice/{id}', ['uses' => 'ProcurementController@uploadInvoice']);
     Route::resource('procurement', 'ProcurementController');
 
-    /*Route::group(['prefix' => 'procurement'], function()
-    {
-        Route::get('/', ['uses' => 'ProcurementController@index', 'as' => 'procurement']);
-        Route::get('add', ['uses' => 'ProcurementController@create', 'as' => 'create_procurement']);
-        Route::post('add', ['uses' => 'ProcurementController@store', 'as' => 'add_procurement']);
-        Route::resource('procurement', 'ProcurementController');
-    });*/
-
-    //Route::get('memo/create', ['uses' => 'MemoController@create', 'as' => 'dashboard.memo.create']);
     Route::resource('memo', 'MemoController');
 
     Route::get('profile', ['uses' => 'UserController@profile']);
     Route::resource('users', 'UserController');
-    //Route::get('exportIntra', ['uses' => 'UserController@exportFromIntra']);
-    /*Route::get('insertNim', ['uses' => 'UserController@insertNim']);*/
+
+    Route::get('forwarded_memo_item', ['uses' => 'MemoController@forwarded_memo', 'as' => 'memo.forwarded.index']);
 
     Route::get('print_memo/{id}', ['uses' => 'MemoController@printMemo', 'as' => 'dashboard.memo.printMemo']);
     Route::get('memo/datatables/{id}', ['uses' => 'MemoController@datatables', 'as' => 'memo.datatables']);
@@ -84,21 +75,4 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function()
 
     Route::delete('memo_item/{id}', ['uses' => 'MemoController@itemDestroy', 'as' => 'memo.item.destroy']);
 
-
-	/*Route::group(['prefix' => 'users'], function()
-	{
-        Route::resource('roles', 'RoleController');
-        Route::resource('/', 'UserController');
-        Route::get('profile', ['uses' => 'UserController@profile']);
-    });*/
 });
-/*Route::group(['prefix' => 'roles', 'middleware' => 'role:kepegawaian'], function() {
-    Route::get('/', ['uses' => 'RoleController@index', 'as' => 'role_index']);
-    Route::post('/', ['uses' => 'RoleController@store']);
-});*/
-
-
-/*Event::listen('illuminate.query', function($query)
-{
-    var_dump($query);
-});*/

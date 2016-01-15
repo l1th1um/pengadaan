@@ -91,4 +91,6 @@ return [
     'request_item_empty' => 'Permintaan Barang Kosong',
     'request_item_status' => array('Belum Diproses', 'Barang Tersedia di Gudang', 'Permintaan Diteruskan ke Pengadaan', 'Barang Sudah Diterima'),
     'are_you_sure_remove_request_item' => 'Apakah Anda Yakin? Aksi ini akan menghapus semua barang di memo yang sama',
+    'forward_procurement' => 'Terusan Permintaan Barang',
+    'forward_procurement_status' => array('Belum Diproses', 'Proses Penawaran', 'Barang Sudah Digudang'),
 ];

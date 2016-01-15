@@ -33,7 +33,8 @@ class MemoController extends Controller {
         {
             //$data = Memo::with('users')->with('memo_item')->orderBy('id', 'desc')->get();
             $data = DB::table('memo_items')
-                ->select('memo_items.id','memo_id', 'memo_no', 'memo_date', 'item_name', 'catalog', 'amount', 'unit', 'notes','status','name')
+                ->select('memo_items.id','memo_id', 'memo_no', 'memo_date', 'item_name', 'catalog',
+						'amount', 'unit', 'notes','status','procurement_status','name')
                 ->join('memos', 'memos.id', '=', 'memo_items.memo_id')
 				->join('users', 'users.id', '=', 'memos.user_id')
                 ->orderBy("memo_id","desc")
@@ -44,7 +45,8 @@ class MemoController extends Controller {
         else
         {
             $data = DB::table('memo_items')
-                ->select('memo_items.id','memo_id', 'memo_no', 'memo_date', 'item_name', 'catalog', 'amount', 'unit', 'notes',"status")
+                ->select('memo_items.id','memo_id', 'memo_no', 'memo_date', 'item_name', 'catalog', 'amount',
+						'unit', 'notes','status','procurement_status')
                 ->join('memos', 'memos.id', '=', 'memo_items.memo_id')
                 ->where('memos.user_id', '=', Auth::user()->id)
                 ->orderBy("memo_id","desc")
@@ -417,7 +419,8 @@ class MemoController extends Controller {
 	{
 		//$memo = MemoItem::with('memos')->findOrFail($id);
 		$memo = DB::table('memo_items')
-				->select('memo_items.id','memo_id', 'memo_no', 'memo_date', 'item_name', 'catalog', 'amount', 'unit', 'notes','status','name')
+				->select('memo_items.id','memo_id', 'memo_no', 'memo_date', 'item_name', 'catalog', 'amount',
+						'unit', 'notes','status','procurement_status','name')
 				->join('memos', 'memos.id', '=', 'memo_items.memo_id')
 				->join('users', 'users.id', '=', 'memos.user_id')
 				->where('memo_items.id','=',$id)
@@ -433,11 +436,20 @@ class MemoController extends Controller {
 	{
 
 		$memo = MemoItem::find($id);
-		$memo->status = Request::input('status');
-		$memo->save();
+		if (Request::input('status')) {
+			$memo->status = Request::input('status');
+			$memo->save();
+			return Redirect::route('dashboard.memo.index')
+					->with('message', trans('common.memo_saved'));
+		}
+		if (Request::input('procurement_status')) {
+			$memo->procurement_status = Request::input('procurement_status');
+			$memo->save();
+			return Redirect::route('memo.forwarded.index')
+					->with('message', trans('common.memo_saved'));
+		}
 
-		return Redirect::route('dashboard.memo.index')
-				->with('message', trans('common.memo_saved'));
+
 	}
 
     public function editItemStatus($id)
@@ -459,5 +471,24 @@ class MemoController extends Controller {
 		$memo->delete();
 
 		return Redirect::back()->with('message', trans('common.memo_deleted'));
+	}
+
+	public function forwarded_memo()
+	{
+		$data = DB::table('memo_items')
+				->select('memo_items.id','memo_id', 'memo_no', 'memo_date', 'item_name',
+						 'catalog', 'amount', 'unit', 'notes','status','procurement_status','name')
+				->join('memos', 'memos.id', '=', 'memo_items.memo_id')
+				->join('users', 'users.id', '=', 'memos.user_id')
+				->where('status','=',2)
+				->orderBy("memo_id","desc")
+				->get();
+
+		$page = 'memo.index_gudang';
+
+		return view($page, [
+				"title" => trans('common.procurement'),
+				"data" => $data
+		]);
 	}
 }
