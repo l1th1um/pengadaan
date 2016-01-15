@@ -107,6 +107,7 @@
                                         {!! Form::select('procurement_status',trans('common.forward_procurement_status'),$memo->procurement_status,array('class' => 'form-control')); !!}
                                     </div>
                                 </div>
+                            @endif
                                 <div class="form-actions pal">
                                     <div class="form-group mbn">
                                         <div class="col-md-2 col-xs-2 right">
@@ -115,7 +116,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            @endif
+
                         </div>
                         {!! Form::close() !!}
                     </div>
