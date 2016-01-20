@@ -2,6 +2,7 @@
 
 use qilara\Http\Requests;
 use Illuminate\Http\Request;
+use qilara\Models\Announcement;
 use qilara\Models\User;
 use Hash;
 use Entrust;
@@ -29,8 +30,11 @@ class DashboardController extends Controller {
 	 */
 	public function index()
 	{
-        return view('dashboard', [
-            "title" => trans('common.home')
+        $announcement = Announcement::limit(4)->orderBy('id', 'desc')->get();
+
+		return view('dashboard', [
+            "title" => trans('common.home'),
+			"announcement" => $announcement
         ]);
 	}
 

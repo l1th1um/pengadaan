@@ -117,6 +117,18 @@ function localeDate($date, $display_time = true) {
     }
 }
 
+function getDay($date)
+{
+    return substr($date, 8, 2);
+}
+
+function getMonth($date)
+{
+    /*month_array_short*/
+    $month = intval(substr($date, 5, 2));
+    return trans('common.month_array_short')[$month];
+}
+
 
 function convertToDatepicker($date, $separator = '-', $return_separator = '/')
 {

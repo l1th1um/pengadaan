@@ -75,4 +75,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function()
 
     Route::delete('memo_item/{id}', ['uses' => 'MemoController@itemDestroy', 'as' => 'memo.item.destroy']);
 
+    Route::resource('announcement', 'AnnouncementController');
+    Route::resource('agenda', 'AgendaController');
+    Route::get('show_agenda',['uses' => 'AgendaController@showAgenda']);
+    Route::get('show_announcement/{id}',['uses' => 'AnnouncementController@showAnnouncement']);
 });

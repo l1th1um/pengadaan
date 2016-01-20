@@ -43,7 +43,7 @@
                                 <th>{{ trans('common.catalog') }}</th>
                                 <th width="150px">{{ trans('common.amount') }}</th>
                                 <th width="150px">Status</th>
-                                <th width="100px"></th>
+                                <th width="120px"></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -68,6 +68,9 @@
                                         @endif
                                     </td>
                                     <td class="center">
+                                        <a href="{{route('dashboard.memo.printMemo', $row->memo_id)}}" target="_blank">
+                                            <img src="{{Theme::url('images/print-icon.png')}}">
+                                        </a>
                                         <a href="{{route('dashboard.memo.edit', $row->memo_id)}}">
                                             <img src="{{Theme::url('images/edit.png')}}">
                                         </a>

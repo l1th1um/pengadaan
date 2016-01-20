@@ -6,6 +6,9 @@ return [
     'month_array' => array(1 => 'Januari', 'Februari', 'Maret', 'April',
                             'Mei', 'Juni', 'Juli', 'Agustus',
                             'September', 'Oktober', 'November', 'Desember'),
+    'month_array_short' => array(1 => 'Jan', 'Feb', 'Maret', 'April',
+        'Mei', 'Juni', 'Juli', 'Agst',
+        'Sep', 'Okt', 'Nov', 'Des'),
     'day_array' => array('Minggu', 'Senin', 'Selasa', 'Rabu',
                         'Kamis', 'Jumat', 'Sabtu'),
 
@@ -93,4 +96,17 @@ return [
     'are_you_sure_remove_request_item' => 'Apakah Anda Yakin? Aksi ini akan menghapus semua barang di memo yang sama',
     'forward_procurement' => 'Terusan Permintaan Barang',
     'forward_procurement_status' => array('Belum Diproses', 'Proses Penawaran', 'Barang Sudah Digudang'),
+    'announcement' => 'Pengumuman',
+    'add_announcement' => 'Tambahkan Pengumuman',
+    'announcement_list' => 'Daftar Pengumuman',
+    'title' => 'Judul',
+    'announcement_created' => 'Pengumuman telah Disimpan',
+    'announcement_updated' => 'Pengumuman telah Diupdate',
+    'announcement_deleted' => 'Pengumuman telah Dihapus',
+    'agenda' => 'Agenda',
+    'add_agenda' => 'Tambahkan Agenda',
+    'agenda_list' => 'Daftar Agenda',
+    'agenda_created' => 'Agenda telah Disimpan',
+    'agenda_updated' => 'Agenda telah Diupdate',
+    'agenda_deleted' => 'Agenda telah Dihapus'
 ];
