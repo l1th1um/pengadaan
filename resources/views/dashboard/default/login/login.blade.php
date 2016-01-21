@@ -80,7 +80,26 @@
             <div class="x_content">
                 <div class="row">
                     <div class="col-md-offset-3 col-xs-offset-3 col-md-9 col-xs-9">
-                        <div id="my-calendar"></div>
+                        @if ($agenda)
+                            <ul class="list-unstyled timeline widget">
+                            @foreach($agenda as $val)
+                                <li>
+                                    <div class="block">
+                                        <div class="block_content">
+                                            <h2 class="title">
+                                                <a>{{ localeDate($val->agenda_date) }}</a>
+                                            </h2>
+                                            <p class="excerpt">
+                                                {!! str_limit($val->title, 100) !!}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                            @endforeach
+                            </ul>
+                        @else
+                            Belum Ada Agenda
+                        @endif
                     </div>
                 </div>
 

@@ -3,6 +3,7 @@
 use qilara\Http\Requests;
 use Illuminate\Http\Request;
 use qilara\Models\Announcement;
+use qilara\Models\Agenda;
 use qilara\Models\User;
 use Hash;
 use Entrust;
@@ -31,10 +32,13 @@ class DashboardController extends Controller {
 	public function index()
 	{
         $announcement = Announcement::limit(4)->orderBy('id', 'desc')->get();
+		$agenda = Agenda::limit(4)->whereRaw('agenda_date >= now()')
+				->orderBy('agenda_date', 'asc')->get();
 
 		return view('dashboard', [
             "title" => trans('common.home'),
-			"announcement" => $announcement
+			"announcement" => $announcement,
+			"agenda" => $agenda
         ]);
 	}
 
@@ -105,10 +109,13 @@ class DashboardController extends Controller {
 	public function login()
 	{
 		$announcement = Announcement::limit(4)->orderBy('id', 'desc')->get();
+		$agenda = Agenda::limit(4)->whereRaw('agenda_date >= now()')
+							->orderBy('agenda_date', 'asc')->get();
 
 		return view('login.login', [
 				"title" => trans('common.home'),
-				"announcement" => $announcement
+				"announcement" => $announcement,
+				"agenda" => $agenda
 		]);
 	}
 
