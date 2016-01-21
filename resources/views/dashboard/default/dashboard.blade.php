@@ -56,9 +56,9 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Modal title</h4>
+                    <h4 class="modal-title2">Modal title</h4>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body2">
                     <p>One fine body&hellip;</p>
                 </div>
             </div><!-- /.modal-content -->
@@ -74,7 +74,7 @@
         $("#my-calendar").zabuto_calendar({
             today: true,
             ajax: {
-                url: "dashboard/show_agenda",
+                url: '{{ route('show_agenda') }}',
                 modal: true
             }
         });
@@ -82,11 +82,11 @@
         $('.announcement').click(function(){
             var id = $(this).attr("alt");
 
-            $.get( "dashboard/show_announcement/" + id, function( data ) {
+            $.get( "show_announcement/" + id, function( data ) {
                 var json = JSON.parse(data);
 
-                $('.modal-title').html(json.title);
-                $('.modal-body').html(json.content);
+                $('.modal-title2').html(json.title);
+                $('.modal-body2').html(json.content);
                 $('.announcement_modal').modal();
             });
         })

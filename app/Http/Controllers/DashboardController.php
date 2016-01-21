@@ -104,7 +104,12 @@ class DashboardController extends Controller {
 
 	public function login()
 	{
-        return view('login.login');
+		$announcement = Announcement::limit(4)->orderBy('id', 'desc')->get();
+
+		return view('login.login', [
+				"title" => trans('common.home'),
+				"announcement" => $announcement
+		]);
 	}
 
    public function postLogin(Request $request)
