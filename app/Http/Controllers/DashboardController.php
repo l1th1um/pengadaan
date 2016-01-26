@@ -10,6 +10,7 @@ use Entrust;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use DB;
 
 //use Illuminate\Database\Query\Builder;
 
@@ -111,11 +112,19 @@ class DashboardController extends Controller {
 		$announcement = Announcement::limit(4)->orderBy('id', 'desc')->get();
 		$agenda = Agenda::limit(4)->whereRaw('agenda_date >= now()')
 							->orderBy('agenda_date', 'asc')->get();
+		$memo = DB::table('memo_items')
+				->select('memo_items.id','memo_id', 'memo_no', 'memo_date', 'item_name', 'catalog',
+						'amount', 'unit', 'notes','status','procurement_status','name')
+				->join('memos', 'memos.id', '=', 'memo_items.memo_id')
+				->join('users', 'users.id', '=', 'memos.user_id')
+				->orderBy("memo_id","desc")
+				->get();
 
 		return view('login.login', [
 				"title" => trans('common.home'),
 				"announcement" => $announcement,
-				"agenda" => $agenda
+				"agenda" => $agenda,
+				"memo" => $memo
 		]);
 	}
 

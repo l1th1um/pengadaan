@@ -37,6 +37,22 @@
                             <input type="hidden" name="memo_url" value="{{  Route('dashboard.memo.index') }}"/>
                         <div class="form-body">
                             <div class="form-group">
+                                <label for="inputName" class="col-md-3 control-label col-xs-3">
+                                    {{ trans('common.research_coordinator') }}
+                                </label>
+                                <div class="col-md-4 col-xs-4">
+                                    {!! Form::select('coordinator', $coordinator, null, array('id' => 'inputName', 'class' => 'form-control')) !!}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputName" class="col-md-3 control-label col-xs-4">
+                                    {{ trans('common.ppk') }}
+                                </label>
+                                <div class="col-md-4 col-xs-4">
+                                    {!! Form::select('commitment_official', $commitment_official, null, array('id' => 'inputName', 'class' => 'form-control')) !!}
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <hr />
                             </div>
                             <div class="form-group">

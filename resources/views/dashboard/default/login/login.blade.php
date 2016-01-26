@@ -108,6 +108,61 @@
     </div>
 </div>
 
+<div class="row" style="padding : 0 30px">
+    <div class="col-md-12 col-xs-12">
+        <div class="x_panel tile">
+            <div class="x_title">
+                <h2>Memo</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="row">
+                    <table class="table table-striped responsive-utilities jambo_table" id="memo_list_login">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th width="200px">{{ trans('common.memo_no') }}</th>
+                            <th width="250px">{{ trans('common.from') }}</th>
+                            <th width="180px">{{ trans('common.memo_date') }}</th>
+                            <th>{{ trans('common.item_name') }}</th>
+                            <th>{{ trans('common.catalog') }}</th>
+                            <th width="100px">{{ trans('common.amount') }}</th>
+                            <th width="180px">{{ trans('common.status') }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($memo as $row)
+                            <tr>
+                                <td>
+                                    {{ $row->id }}
+                                </td>
+                                <td>{{ $row->memo_no }}</td>
+                                <td>{{ $row->name }}</td>
+                                <td>{{ localeDate($row->memo_date) }}</td>
+                                <td><a href="{{route('dashboard.memo.process', $row->id)}}" class="label label-info">{{ $row->item_name }}</a></td>
+                                <td>{{ $row->catalog }}</td>
+                                <td>{{ $row->amount." ". $row->unit}}</td>
+                                <td>
+                                            <span class="label label-success">
+                                                {{ trans('common.request_item_status')[$row->status] }}
+                                            </span>
+                                    @if (!empty($row->procurement_status))
+                                        <span class="label label-warning">
+                                                {{ trans('common.forward_procurement_status')[$row->procurement_status] }}
+                                            </span>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <div class="modal fade announcement_modal" tabindex="-1" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -129,6 +184,12 @@
 {!! Theme::js('js/bootstrap.min.js') !!}
 {!! Theme::css('css/zabuto_calendar.min.css')!!}
 {!! Theme::js('js/zabuto_calendar.min.js')!!}
+
+{!! Theme::css('css/datatables/tools/css/dataTables.tableTools.css')!!}
+{!! Theme::js('js/datatables/js/jquery.dataTables.min.js')!!}
+
+{!! Theme::js('js/modules/memo.js')!!}
+
 <script type="application/javascript">
     $(document).ready(function () {
         $("#my-calendar").zabuto_calendar({

@@ -2,6 +2,8 @@
 
 use qilara\Http\Controllers\Controller;
 
+use qilara\Models\AdditionalRole;
+use qilara\Models\Permission;
 use qilara\Models\Role;
 use qilara\Models\RoleUser;
 use qilara\Models\User;
@@ -22,7 +24,7 @@ class UserController extends Controller {
 	 */
 	public function index()
 	{
-        $data = User::with('userRole.roles')->orderBy('id', 'desc')->get();
+        $data = User::with('userRole.roles')->with('additionalRole')->orderBy('id', 'desc')->get();
 
         return view('users.index', [
             "title" => trans('common.users'),
@@ -40,7 +42,8 @@ class UserController extends Controller {
         return view('users.create', [
             "title" => trans('common.add_user'),
             'role' => $this->listRole(),
-            'selected_role' => null
+            'selected_role' => null,
+            'add_role' => $this->listAdditionalRole()
         ]);
 	}
 
@@ -69,6 +72,7 @@ class UserController extends Controller {
             $user->username = Request::input('username');
             $user->email = Request::input('email');
             $user->password = Hash::make(Request::input('password'));
+            $user->add_role = Request::input('add_role');
             $user->save();
 
             $user_role = User::find($user->id);
@@ -107,7 +111,8 @@ class UserController extends Controller {
             "title" => trans('common.users'),
             'user' => $user,
             'role' => $this->listRole(),
-            'selected_role' => $user->userRole->role_id
+            'selected_role' => $user->userRole->role_id,
+            'add_role' => $this->listAdditionalRole()
         ]);
 	}
 
@@ -136,6 +141,7 @@ class UserController extends Controller {
             $user->name = Request::input('name');
             $user->username = Request::input('username');
             $user->email = Request::input('email');
+            $user->add_role = Request::input('add_role');
 
             if (Request::has('password'))
                 $user->password = Hash::make(Request::input('password'));
@@ -220,17 +226,30 @@ class UserController extends Controller {
         return $data;
     }
 
+    public function listAdditionalRole()
+    {
+        $data = array(0 => "");
+        foreach (AdditionalRole::all() as $val)
+        {
+            $data[$val->id] = $val->display_name;
+        }
+
+        return $data;
+    }
+
     public function exportFromIntra()
     {
         ini_set('max_execution_time', 300);
 
         $data = \DB::connection('mysql_serpong')
-                  ->table('user')->select('ID','NAMA')
-                  ->where('LOKASI','=',1)->where('STATUSPEGAWAI','=',0)->get();
+                  ->table('user')->select('ID','NAMA', 'NIP')
+                  ->where('STATUSPEGAWAI','=',0)->get();
 
         foreach ($data as $val)
         {
+            if (User::where('nip'))
             $user = new User();
+            $user->nip = $val->NIP;
             $user->name = $val->NAMA;
             $user->username = $val->ID;
             $user->email = $val->ID.'@lipi.go.id';

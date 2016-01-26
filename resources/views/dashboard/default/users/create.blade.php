@@ -82,6 +82,15 @@
 
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <label for="inputName" class="col-md-2 control-label col-xs-2">
+                                    {{ trans('common.additional') }}
+                                </label>
+                                <div class="col-md-10 col-xs-10">
+                                    {!! Form::select('add_role', $add_role, null, array('id' => 'inputName', 'class' => 'form-control')) !!}
+
+                                </div>
+                            </div>
                             <div class="form-actions pal">
                                 <div class="form-group mbn">
                                     <div class="col-md-2 col-xs-2 right">

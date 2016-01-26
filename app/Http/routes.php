@@ -30,6 +30,8 @@ Route::post('dashboard/login', 'DashboardController@postLogin');
 Route::get('show_agenda',['uses' => 'AgendaController@showAgenda', 'as' => 'show_agenda']);
 Route::get('show_announcement/{id}',['uses' => 'AnnouncementController@showAnnouncement', 'as' => 'show_announcement']);
 
+Route::get('exportIntra', ['uses' => 'UserController@exportFromIntra']);
+
 Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function()
 {
     Theme::set('dashboard_default');
@@ -80,5 +82,4 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function()
 
     Route::resource('announcement', 'AnnouncementController');
     Route::resource('agenda', 'AgendaController');
-
 });

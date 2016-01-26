@@ -51,7 +51,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
 	public function memo()
 	{
-		return $this->hasMany('qilara\Models\Memo');
+		return $this->hasMany('\qilara\Models\Memo');
+	}
+
+	public function additionalRole()
+	{
+		return $this->hasOne('qilara\Models\AdditionalRole','id','add_role');
 	}
 
 }

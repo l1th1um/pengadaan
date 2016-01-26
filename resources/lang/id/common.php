@@ -108,5 +108,8 @@ return [
     'agenda_list' => 'Daftar Agenda',
     'agenda_created' => 'Agenda telah Disimpan',
     'agenda_updated' => 'Agenda telah Diupdate',
-    'agenda_deleted' => 'Agenda telah Dihapus'
+    'agenda_deleted' => 'Agenda telah Dihapus',
+    'additional' => 'Tambahan',
+    'research_coordinator' => 'Koordinator Keltian',
+    'ppk' => 'Pejabat Pembuat Komitmen'
 ];

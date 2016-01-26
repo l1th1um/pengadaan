@@ -63,6 +63,16 @@ $(document).ready(function () {
         });
     }
 
+    $('#memo_list_login').DataTable({
+        "sPaginationType": "full_numbers",
+        'ordering' : false,
+        "iDisplayLength": 5,
+        "aLengthMenu": [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        "columnDefs": [
+            { "visible": false, "targets": 0 }
+        ]
+    });
+
 
     $.fn.editable.defaults.mode = 'popup';
     $.fn.editable.defaults.ajaxOptions = {type: "PUT"};

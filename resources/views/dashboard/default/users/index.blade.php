@@ -34,6 +34,7 @@
                                 <th>{{ trans('common.username') }}</th>
                                 <th width="20%">{{ trans('common.email') }}</th>
                                 <th width="20%">{{ trans('common.role') }}</th>
+                                <th width="200px">{{ trans('common.additional') }}</th>
                                 <th width="100px"></th>
                             </tr>
                             </thead>
@@ -49,6 +50,11 @@
                                         <td>{{ $row->email}}</td>
                                         <td>
                                             {{  $row->userRole->roles->display_name }}
+                                        </td>
+                                        <td>
+                                            @if ($row->additionalRole)
+                                                {{ $row->additionalRole->display_name }}
+                                            @endif
                                         </td>
                                         <td class="center">
                                             <a href="{{route('dashboard.users.edit', $row->id)}}">

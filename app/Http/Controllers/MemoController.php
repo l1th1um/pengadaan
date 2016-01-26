@@ -70,7 +70,9 @@ class MemoController extends Controller {
 	{
 		return view('memo.create', [
             "title" => trans('common.create_memo'),
-            'date' => null
+            'date' => null,
+			'coordinator' => $this->listAdditionalRole(2),
+			'commitment_official' => $this->listAdditionalRole(1)
         ]);
 	}
 
@@ -90,6 +92,8 @@ class MemoController extends Controller {
             $memo->memo_no = $this->generate_memo_no();
             $memo->user_id = Auth::user()->id;
             $memo->memo_date = date("Y-m-d");
+			$memo->coordinator = Request::input('coordinator');
+			$memo->commitment_official= Request::input('commitment_official');
             $memo->save();
 
             $cur_memo = Memo::find($memo->id);
@@ -142,7 +146,9 @@ class MemoController extends Controller {
             "title" => trans('common.add_procurement'),
             "memo" => $memo,
             "items" => $items,
-            'date' => convertToDatepicker($memo->memo_date)
+            'date' => convertToDatepicker($memo->memo_date),
+			'coordinator' => $this->listAdditionalRole(2),
+			'commitment_official' => $this->listAdditionalRole(1)
         ]);
 	}
 
@@ -195,6 +201,11 @@ class MemoController extends Controller {
 	 */
 	public function update($id)
 	{
+		$memo = Memo::findorFail($id);
+		$memo->coordinator = Request::input('coordinator');
+		$memo->commitment_official= Request::input('commitment_official');
+		$memo->save();
+
 		Session::flash('memo_id', $id);
 
 		return Redirect::route('dashboard.memo.index')
@@ -267,8 +278,23 @@ class MemoController extends Controller {
 
 		$titleStyle = array('bold' => true, 'align' => 'center', 'size' => 14);
 
-		$data = Memo::with('memo_item')->findOrFail($id);
-		$user = User::find($data->user_id)->first();
+		/*$data = Memo::with('memo_item')->findOrFail($id);
+		$user = User::find($data->user_id)->first();*/
+
+        $data = DB::table('memos AS m')
+                ->select('m.id', 'memo_no', 'memo_date', 'regarding', 'memo_status',
+                         'u1.nip AS user_nip', 'u2.nip AS coordinator_nip', 'u3.nip AS commitment_nip',
+			             'u1.name AS user_name', 'u2.name AS coordinator_name', 'u3.name AS commitment_name',
+                         'a1.display_name AS coordinator_type', 'a2.display_name AS official_type')
+                ->join('users AS u1', 'u1.id', '=', 'm.user_id')
+                ->join('users AS u2', 'u2.id', '=', 'm.coordinator')
+                ->join('users AS u3', 'u3.id', '=', 'm.commitment_official')
+                ->join('additional_roles AS a1', 'a1.id', '=', 'u2.add_role')
+                ->join('additional_roles AS a2', 'a2.id', '=', 'u3.add_role')
+                ->where('m.id','=',$id)
+                ->first();
+
+        $item = MemoItem::where('memo_id','=',$id)->get();
 
 		$phpWord->setDefaultParagraphStyle(
 				array('spaceAfter' => 0,
@@ -297,7 +323,7 @@ class MemoController extends Controller {
 		$section->addText(htmlspecialchars("Nomor\t:\t".$data->memo_no), null, 'headerTabs');
 		$section->addText(htmlspecialchars("Tanggal\t:\t".localeDate($data->memo_date, false)), null, 'headerTabs');
 		$section->addText(htmlspecialchars("Kepada\t:\tPejabat Pembuat Komitmen"), null, 'headerTabs');
-		$section->addText(htmlspecialchars("Dari\t:\t".$user->name), null, 'headerTabs');
+		$section->addText(htmlspecialchars("Dari\t:\t".$data->user_name), null, 'headerTabs');
 		$section->addText(htmlspecialchars("Perihal\t:\t"), null, 'headerTabs');
 		$section->addText(htmlspecialchars("Kegiatan/ Program/ Bidang\t:\t"), null, 'headerTabs');
 
@@ -319,7 +345,7 @@ class MemoController extends Controller {
 
 		$i = 1;
 
-		foreach($data->memo_item as $row) {
+		foreach($item as $row) {
 			$table->addRow();
 			$table->addCell()->addText($i, null, 'styleCenter');
 			$table->addCell()->addText($row->item_name, null, 'styleCell');
@@ -338,18 +364,26 @@ class MemoController extends Controller {
 						'tabs' => array(
 								new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(1)),
 								new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(10))
-						)
+						),
+						'spaceAfter' => 0, 'spaceBefore' => 0, 'lineHeight' => 1
 				)
 		);
 
 		$section->addText('');
 		$section->addText(htmlspecialchars("\t\tSerpong, ".localeDate($data->memo_date, false)), null, 'ttd1Tabs');
-		$section->addText(htmlspecialchars("\tPeneliti,\tKoordinator Keltian,"), null, 'ttd1Tabs');
+		$section->addText(htmlspecialchars("\tPeneliti,\tKoordinator Keltian"), null, 'ttd1Tabs');
+		$section->addText(htmlspecialchars("\t\t".substr($data->coordinator_type,20)), null, 'ttd1Tabs');
 		$section->addText('');
 		$section->addText('');
 		$section->addText('');
-		$section->addText(htmlspecialchars("\t".Auth::user()->name."\t"), null, 'ttd1Tabs');
-		$section->addText(htmlspecialchars("\tNIP. ".Auth::user()->nim."\t"), null, 'ttd1Tabs');
+		/*$section->addText(htmlspecialchars("\t".Auth::user()->name."\t"), null, 'ttd1Tabs');*/
+		$textrun = $section->createTextRun('ttd1Tabs');
+		$textrun->addText(htmlspecialchars("\t"));
+		$textrun->addText($data->user_name, "underline");
+        $textrun->addText(htmlspecialchars("\t"));
+        $textrun->addText($data->coordinator_name, "underline");
+
+		$section->addText(htmlspecialchars("\tNIP. ".$data->user_nip."\tNIP.".$data->coordinator_nip), null, 'ttd1Tabs');
 
 		$section->addText('');
 
@@ -358,14 +392,20 @@ class MemoController extends Controller {
 				array(
 						'tabs' => array(
 								new \PhpOffice\PhpWord\Style\Tab('left', \PhpOffice\PhpWord\Shared\Converter::cmToTwip(5.5))
-						)
+						),
+                    'spaceAfter' => 0, 'spaceBefore' => 0, 'lineHeight' => 1
 				)
 		);
 
-		$section->addText(htmlspecialchars("\tPejabat Pembuat Komitmen,"), null, 'ttd2Tabs');
+		$section->addText(htmlspecialchars("\t Pejabat Pembuat Komitmen"), null, 'ttd2Tabs');
+		$section->addText(htmlspecialchars("\t".substr($data->official_type, 24).","), null, 'ttd2Tabs');
 		$section->addText('');
 		$section->addText('');
 		$section->addText('');
+        $textrun = $section->createTextRun('ttd2Tabs');
+        $textrun->addText(htmlspecialchars("\t"));
+        $textrun->addText($data->commitment_name, "underline");
+        $section->addText(htmlspecialchars("\tNIP. ".$data->commitment_nip), null, 'ttd2Tabs');
 
 
 		$objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
@@ -490,5 +530,22 @@ class MemoController extends Controller {
 				"title" => trans('common.procurement'),
 				"data" => $data
 		]);
+	}
+
+	public function listAdditionalRole($parent = 1)
+	{
+		$data = array();
+		$user = DB::table('users')
+				->select('users.id','users.name')
+				->join('additional_roles', 'additional_roles.id', '=', 'users.add_role')
+				->where('parent','=',$parent)
+				->get();
+
+		foreach ($user as $val)
+		{
+			$data[$val->id] = $val->name;
+		}
+
+		return $data;
 	}
 }
