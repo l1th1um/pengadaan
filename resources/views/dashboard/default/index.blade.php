@@ -12,7 +12,7 @@
                 <div class="left_col scroll-view">
 
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="{{route('dashboard')}}" class="site_title"><i class="icomoon-lipi"></i> <span>Qilara CMS</span></a>
+                        <a href="{{route('dashboard')}}" class="site_title"><i class="icomoon-lipi"></i> <span>Puslit Kimia</span></a>
                     </div>
                     <div class="clearfix"></div>
 
