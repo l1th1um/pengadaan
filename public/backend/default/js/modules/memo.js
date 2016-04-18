@@ -74,9 +74,10 @@ $(document).ready(function () {
     });
 
 
-    $.fn.editable.defaults.mode = 'popup';
-    $.fn.editable.defaults.ajaxOptions = {type: "PUT"};
-
+    if(jQuery().editable) {
+        $.fn.editable.defaults.mode = 'popup';
+        $.fn.editable.defaults.ajaxOptions = {type: "PUT"};
+    }
     $(document).on('click', '.item_name', function(){
         $('.item_name').editable(
             {
@@ -183,11 +184,13 @@ $(document).ready(function () {
         }
     });
 
-    $('#autocomplete').autocomplete({
-        serviceUrl: '/autocomplete',
-        onSelect: function (suggestion) {
-            alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
-        }
-    });
+    if(jQuery().autocomplete) {
+        $('#autocomplete').autocomplete({
+            serviceUrl: '/autocomplete',
+            onSelect: function (suggestion) {
+                alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
+            }
+        });
+    }
 
 });
